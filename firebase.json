@@ -12,7 +12,7 @@
     ]
   },
   "hosting": {
-    "public": "public",
+    "public": "concerto/build",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
+import SlideIn from '../Utilities/SlideIn';
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -49,19 +50,16 @@ class SignInScreen extends React.Component {
     render() {
         if (!this.state.isSignedIn) {
             return (
-                <div>
+                <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false">
                     <h1>My App</h1>
                     <p>Please sign-in:</p>
                     <FirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
-                </div>
+                </SlideIn>
             );
         }
         return (
-            <div>
-                <h1>My App</h1>
-                <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-                <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-            </div>
+            
+            <div loggedIn={this.state.isSignedIn}></div>
         );
     }
 }

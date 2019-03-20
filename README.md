@@ -8,6 +8,7 @@ An app for keeping track of your concert history.
 * Ability to rank concerts
 * Ability to favorite concerts
 * Add personal pictures, videos to the concert
+* Create a list of upcoming tickets, add details/concert ticket
 
 ## To Do List
 * 

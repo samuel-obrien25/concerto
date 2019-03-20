@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
-import NavDrawer from './Components/Menu/NavDrawer';
 import SignInScreen from './Screens/SignInScreen';
+
+import NavDrawer from './Components/Menu/NavDrawer';
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
 
@@ -25,8 +26,8 @@ function App() {
   } else {
     return (
       <main>
-        <SplashScreen logginIn={false} />
         <SignInScreen />
+        <SplashScreen loggedIn={false} />
       </main>
     )
   }

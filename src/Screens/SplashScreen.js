@@ -3,6 +3,7 @@ import SlideIn from '../Utilities/SlideIn';
 import SlideOut from '../Utilities/SlideOut';
 
 import styled from 'styled-components';
+import SignInScreen from './SignInScreen';
 
 //#region Styles
 const StyledSplashScreen = styled.section`
@@ -16,20 +17,16 @@ const StyledSplashScreen = styled.section`
 // #endregion
 function SplashScreen(props){
 
-    setTimeout(() => {
-        window.localStorage.setItem('data', true);
-    }, 1000);
-
-    if(props.isDataLoaded){
+    if(props.loggedIn){
         return (
             <SlideOut animDelay="0s" animDuration=".75s" animFillMode="forwards" isForText="false" >
-                <StyledSplashScreen isDataLoaded = {props.isDataLoaded} />
+                <StyledSplashScreen loggedIn = {props.loggedIn} />
             </SlideOut>
         );
     } else {
         return (
             <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false" >
-                <StyledSplashScreen isDataLoaded={props.isDataLoaded} />
+                <StyledSplashScreen loggedIn = { props.loggedIn } />
             </SlideIn>
         );
      }
