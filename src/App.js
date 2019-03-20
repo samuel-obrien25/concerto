@@ -1,31 +1,35 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
 import NavDrawer from './Components/Menu/NavDrawer';
+import SignInScreen from './Screens/SignInScreen';
+import { FirebaseAuth } from 'react-firebaseui';
+import firebase from 'firebase';
 
 function App() {
-  //Global State
-  const [globalData, setGlobalData] = useState(null);
+  const [activeUser, setActiveUser] = useState(null)
+  const user = firebase.auth().currentUser;
 
-  useEffect(() => {
-    const userDataStore = window.localStorage.getItem('dataStore');
-    
-    try {
-      if(userDataStore.length < 1) throw new Error("user data store undefined");
+  useEffect( () => {
+    if(user){
+      setActiveUser(user);
     }
-    catch(error) {
-      console.log(error);
-    }
-    finally {
-      console.log(userDataStore);
-    }
-  });
-  
-  return (
-    <div>
-      <SplashScreen />
-      <NavDrawer />
-    </div>
-  );
+  }
+);
+  if (activeUser) {
+    return (
+      <main>
+        <SplashScreen loggedIn={true} />
+        <NavDrawer userData = {activeUser} />
+      </main>
+    );
+  } else {
+    return (
+      <main>
+        <SplashScreen logginIn={false} />
+        <SignInScreen />
+      </main>
+    )
+  }
 }
 
 
