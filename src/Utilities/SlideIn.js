@@ -26,8 +26,9 @@ function SlideIn(props) {
         text-align: ${props => props.isForText ? "center" : "left"};
         top:0;
         left: 0;
-        height: 100%;
+        height: auto;
         width: 100%;
+        margin: auto;
     `;
 // #endregion STYLES
 
