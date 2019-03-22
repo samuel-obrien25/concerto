@@ -4,8 +4,8 @@ import SignInScreen from './Screens/SignInScreen';
 import NavDrawer from './Components/Menu/NavDrawer';
 
 import styled from 'styled-components';
-import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
+import Icon from './Components/Icons/Icon';
 
 const StyledMain = styled.main`
     position: absolute;
@@ -29,6 +29,7 @@ function App() {
     return (
       <StyledMain>
         <SplashScreen loggedIn={true} >
+          <Icon />
         <NavDrawer userData = {activeUser} />
         </SplashScreen>
       </StyledMain>
@@ -37,6 +38,7 @@ function App() {
     return (
       <StyledMain>
         <SplashScreen loggedIn={false} >
+          <Icon />
           <SignInScreen />
         </SplashScreen>
       </StyledMain>
