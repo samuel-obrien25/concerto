@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
 import SignInScreen from './Screens/SignInScreen';
-import NavDrawer from './Components/Menu/NavDrawer';
 
 import styled from 'styled-components';
 import firebase from 'firebase';
+import { FirebaseAuth } from 'react-firebaseui';
 import Icon from './Components/Icons/Icon';
+import Headline from './Components/Text/Headline';
 
 const StyledMain = styled.main`
     position: absolute;
@@ -15,36 +16,29 @@ const StyledMain = styled.main`
     height: 100%;
     overflow: hidden;
 `;
+
 function App() {
-  const [activeUser, setActiveUser] = useState(null)
+  const [activeUser, setActiveUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const user = firebase.auth().currentUser;
 
-  useEffect( () => {
+  useEffect(() => {
     if(user){
       setActiveUser(user);
+      setIsLoggedIn(true)
     }
   }
 );
-  if (activeUser) {
-    return (
-      <StyledMain>
-        <SplashScreen loggedIn={true} >
-          <Icon />
-        <NavDrawer userData = {activeUser} />
-        </SplashScreen>
-      </StyledMain>
-    );
-  } else {
-    return (
-      <StyledMain>
-        <SplashScreen loggedIn={false} >
-          <Icon />
-          <SignInScreen />
-        </SplashScreen>
-      </StyledMain>
-    )
-  }
-}
 
+  return (
+    <StyledMain>
+      <SplashScreen loggedIn = { isLoggedIn }>
+        <Headline text = { user } />
+        <Icon />
+        <SignInScreen activeUser = { activeUser }/>
+      </SplashScreen>
+    </StyledMain>
+  )
+}
 
 export default App;

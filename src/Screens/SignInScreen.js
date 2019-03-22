@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const StyledSignInScreen = styled.div`
     width: auto;
-    height: auto;
+    height: 400px;
     padding: 100px;
     display: flex;
     flex-direction: column;
@@ -68,17 +68,16 @@ class SignInScreen extends React.Component {
     render() {
         if (!this.state.isSignedIn) {
             return (
-                <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false">
-                    <StyledSignInScreen>
-                    <h1>My App</h1>
-                    <p>Please sign-in:</p>
-                    <FirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" isForText="false">
+                    <StyledSignInScreen isSignedIn = {this.state.isSignedIn}>
+                        <h1>My App</h1>
+                        <p>Please sign-in:</p>
+                        <FirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
                     </StyledSignInScreen>
                 </SlideIn>
             );
         }
         return (
-            
             <div loggedIn={this.state.isSignedIn}></div>
         );
     }
