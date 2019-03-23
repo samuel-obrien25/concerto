@@ -1,26 +1,48 @@
 import React from 'react';
 import SlideIn from '../../Utilities/SlideIn';
+import SlideOut from '../../Utilities/SlideOut';
 import styled from 'styled-components';
+// #region STYLES
 
-
-function Headline(props) {
-
-    // #region STYLES
-    const StyledH1 = styled.h1`
+const StyledHeadline = styled.h1`
+        position: relative;
+        color: rgba(255,255,255,.6);
+        text-align:center;
+        width: auto;
+        font-size: 12vw;
+        display: flex;
         font-family: sans-serif;
-        font-size: 32px;
+        letter-spacing: 0px;
         margin: auto;
-        color: rgba(255,255,255,.85);
     `;
-    // #endregion STYLES
+// #endregion STYLES
 
 
+class Headline extends React.Component {
+    state = {
+        SlideInOut: this.props.slideInOut
+    }
+    
+    render(){
+        const { location, text, slideInOut } = this.props;
 
-    return (
-        <SlideIn animDuration="300ms" animFillMode="forwards" animDelay="500ms" isForText={true}>
-            <StyledH1>{props.text}</StyledH1>
-        </SlideIn>
-    );
+        const inputString = text;
+        const separatedString = inputString.split("");
+        const mappedChars = separatedString.map((char, index) => {
+
+            if(this.state.SlideInOut === "in"){
+                return <SlideIn key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="300ms" isForText={true}>{char}</SlideIn>;
+            } else {
+                return <SlideOut key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="900ms" isForText={true}>{char}</SlideOut>;
+            }
+        })
+
+        return (
+            <StyledHeadline style={location} slideInOut={slideInOut}>
+                {mappedChars}
+            </StyledHeadline>
+        );
+    }
 }
 
 export default Headline;

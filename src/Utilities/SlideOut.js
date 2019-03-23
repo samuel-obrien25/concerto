@@ -12,6 +12,7 @@ function SlideOut(props) {
         to {
             transform: ${props.animStyle === "fullScreen" ? "translateY(-100vh)" : "translateY(-100px)"};
             opacity: 0;
+            display: none;
         }
     `;
 
@@ -25,8 +26,8 @@ function SlideOut(props) {
         position: ${props => props.isForText ? "relative" : "absolute"};
         top:0;
         left: 0;
-        height: 100%;
-        width: 100%;
+        height: auto;
+        width: auto;
     `;
     // #endregion STYLES
 

@@ -2,18 +2,21 @@ import React from 'react';
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
 import SlideIn from '../Utilities/SlideIn';
+import SlideOut from '../Utilities/SlideOut';
 import styled from 'styled-components';
 
 // #region STYLES
 
 const StyledSignInScreen = styled.div`
-    width: auto;
-    height: 400px;
-    padding: 100px;
+    width: 50vw;
+    height: auto;
+    padding: 75px;
     display: flex;
     flex-direction: column;
     margin: auto;
     position: relative;
+    left: 0;
+    right: 0;
     z-index: 9000;
     background-color: rgba(255,255,255,.9);
     box-shadow: 0px 2px 4px 2px rgba(0,0,0,.32);
@@ -78,8 +81,13 @@ class SignInScreen extends React.Component {
             );
         }
         return (
-            <div loggedIn={this.state.isSignedIn}></div>
-        );
+            <SlideOut animDelay="1.5s" animDuration=".75s" animFillMode="forwards" isForText="false">
+                <StyledSignInScreen isSignedIn = {this.state.isSignedIn}>
+                    <h1>Welcome, {firebase.auth().currentUser.displayName}!</h1>
+                    <p>Thanks for signing in.</p>
+                </StyledSignInScreen>
+            </SlideOut>
+);
     }
 }
 export default SignInScreen

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import SlideIn from '../Utilities/SlideIn';
 import SlideOut from '../Utilities/SlideOut';
+import Icon from '../Components/Icons/Icon';
+import Headline from '../Components/Text/Headline';
+import SignInScreen from '../Screens/SignInScreen';
 
 import styled from 'styled-components';
-import SignInScreen from './SignInScreen';
 
 //#region Styles
 const StyledSplashScreen = styled.section`
@@ -18,20 +20,37 @@ const StyledSplashScreen = styled.section`
 
 // #endregion
 function SplashScreen(props){
+    const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
 
-    if(props.loggedIn){
+    useEffect(() => {
+        if(props.isSignedIn){
+            setIsSignedIn(true);
+        } else {
+            setIsSignedIn(false);
+        }
+    })
+
+    if(isSignedIn){
         return (
             <SlideOut animDelay="0s" animDuration=".75s" animFillMode="forwards" isForText="false" >
-                <StyledSplashScreen loggedIn = {props.loggedIn}>
-                    {props.children}
+                <StyledSplashScreen isSignedIn = {props.isSignedIn}>
+                    <SlideOut animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="true">
+                        <Headline text="TEXT" slideInOut="out"/>
+                    </SlideOut>
+                    <SignInScreen isSignedIn = {props.isSignedIn} />
+                    <Icon/>
                 </StyledSplashScreen>
             </SlideOut>
         );
     } else {
         return (
             <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false" >
-                <StyledSplashScreen loggedIn = { props.loggedIn } >
-                    {props.children}
+                <StyledSplashScreen isSignedIn = {props.isSignedIn}>
+                    <SlideIn animDelay=".2s" animDuration="2s" animFillMode="forwards" isForText="true">
+                        <Headline text="TEXT" slideInOut="in"/>
+                    </SlideIn>
+                    <SignInScreen isSignedIn = {props.isSignedIn} />
+                    <Icon/>
                 </StyledSplashScreen>
             </SlideIn>
         );

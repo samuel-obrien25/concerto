@@ -62,6 +62,7 @@ const StyledIcon = styled.div`
     margin: auto;
     width: 80%;
     height: 80%;
+    transform-origin: center center;
     display: flex;
         && * {
         margin: auto;

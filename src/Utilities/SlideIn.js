@@ -12,6 +12,7 @@ function SlideIn(props) {
         to {
             transform: translateY(0px);
             opacity: 1;
+            display: none;
         }
     `;
 
