@@ -13,7 +13,7 @@ const StyledNavDrawer = styled.section`
     transition: .3s ease-in-out;
 `;
 
-function NavDrawer () {
+function NavDrawer (props) {
 
     const [isVisible, setIsVisible] = useState(false);
 

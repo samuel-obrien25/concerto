@@ -18,7 +18,7 @@ const StyledHeadline = styled.h1`
 // #endregion STYLES
 
 
-class Headline extends React.Component {
+class AppTitle extends React.Component {
     state = {
         SlideInOut: this.props.slideInOut
     }
@@ -45,4 +45,4 @@ class Headline extends React.Component {
     }
 }
 
-export default Headline;
+export default AppTitle;

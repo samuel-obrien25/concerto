@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import SlideIn from '../Utilities/SlideIn';
 import SlideOut from '../Utilities/SlideOut';
 import Icon from '../Components/Icons/Icon';
-import Headline from '../Components/Text/Headline';
 import SignInScreen from '../Screens/SignInScreen';
 
 import styled from 'styled-components';
+import AppTitle from '../Components/Text/AppTitle';
 
 //#region Styles
 const StyledSplashScreen = styled.section`
@@ -32,10 +32,10 @@ function SplashScreen(props){
 
     if(isSignedIn){
         return (
-            <SlideOut animDelay="0s" animDuration=".75s" animFillMode="forwards" isForText="false" >
+            <SlideOut animDelay="2s" animDuration=".75s" animFillMode="forwards" isForText="false" >
                 <StyledSplashScreen isSignedIn = {props.isSignedIn}>
                     <SlideOut animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="true">
-                        <Headline text="TEXT" slideInOut="out"/>
+                        <AppTitle text="TEXT" slideInOut="out"/>
                     </SlideOut>
                     <SignInScreen isSignedIn = {props.isSignedIn} />
                     <Icon/>
@@ -47,7 +47,7 @@ function SplashScreen(props){
             <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false" >
                 <StyledSplashScreen isSignedIn = {props.isSignedIn}>
                     <SlideIn animDelay=".2s" animDuration="2s" animFillMode="forwards" isForText="true">
-                        <Headline text="TEXT" slideInOut="in"/>
+                        <AppTitle text="TEXT" slideInOut="in"/>
                     </SlideIn>
                     <SignInScreen isSignedIn = {props.isSignedIn} />
                     <Icon/>

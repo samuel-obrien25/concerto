@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
+import Dashboard from './Screens/Dashboard';
 
 import styled from 'styled-components';
 import firebase from 'firebase';
+import { FirebaseAuth } from 'react-firebaseui';
 
 const StyledMain = styled.main`
     position: absolute;
@@ -16,25 +18,32 @@ const StyledMain = styled.main`
 function App(props) {
   const [activeUser, setActiveUser] = useState(null);
   const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
-  const user = firebase.auth().currentUser;
 
   useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
         setActiveUser(user);
-        setIsSignedIn(props.isSignedIn);
+        setIsSignedIn(true);
+      } else {
+      return
+      }
+    });
     }
   );
+
+  
 
 if(isSignedIn) {
   return (
     <StyledMain>
-        <SplashScreen isSignedIn = {props.isSignedIn} />
+        <SplashScreen isSignedIn = { isSignedIn } />
+        <Dashboard activeUser = { activeUser } />
     </StyledMain>
-
   )
 }else {
   return (
     <StyledMain>
-        <SplashScreen isSignedIn = {props.isSignedIn} />
+        <SplashScreen isSignedIn = { isSignedIn } />
     </StyledMain>
   )
 }
