@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import SlideIn from '../Utilities/SlideIn';
-import SlideOut from '../Utilities/SlideOut';
-import firebase from 'firebase';
+import React from 'react';
+import Slide from '../Utilities/Slide';
 
 import styled from 'styled-components';
 import NavDrawer from '../Components/Menu/NavDrawer';
@@ -20,17 +18,18 @@ const StyledDashboard = styled.section`
 
 // #endregion
 function Dashboard(props) {
-    const [activeUserData, setActiveUserData] = useState(props.activeUser)
+    //This holds current user's data recieved from App.js.
+    const activeUserData = props.activeUserData;
 
     return (
-        <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false" >
+        <Slide inOut="in" animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText="false" >
             <StyledDashboard>
                 <NavDrawer name={activeUserData.displayName} />
-                <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" >
+                <Slide inOut="in" animDelay=".2s" animDuration="1s" animFillMode="forwards" >
                     <ProfileButton userImage={activeUserData.photoURL} />
-                </SlideIn>
+                </Slide>
             </StyledDashboard>
-        </SlideIn>
+        </Slide>
 
     );
 }

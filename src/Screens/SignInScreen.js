@@ -1,8 +1,7 @@
 import React from 'react';
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
-import SlideIn from '../Utilities/SlideIn';
-import SlideOut from '../Utilities/SlideOut';
+import Slide from '../Utilities/Slide';
 import styled from 'styled-components';
 
 // #region STYLES
@@ -71,22 +70,20 @@ class SignInScreen extends React.Component {
     render() {
         if (!this.state.isSignedIn) {
             return (
-                <SlideIn animDelay="0s" animDuration="1s" animFillMode="forwards" isForText="false">
+                <Slide animDelay="0s" animDuration="1s" animFillMode="forwards" inOut="in" isForText="false">
                     <StyledSignInScreen isSignedIn = { this.state.isSignedIn }>
                         <h1>My App</h1>
                         <p>Please sign-in:</p>
                         <FirebaseAuth uiConfig= { this.uiConfig } firebaseAuth = { firebase.auth() } />
                     </StyledSignInScreen>
-                </SlideIn>
+                </Slide>
             );
         }
         return (
-            <SlideOut animDelay="1.5s" animDuration=".75s" animFillMode="forwards" isForText="false">
-                <StyledSignInScreen isSignedIn = { true }>
+            <Slide animDelay="1.5s" animDuration=".75s" animFillMode="forwards" inOut="out" isForText="false">
                     <h1>Welcome, {firebase.auth().currentUser.displayName}!</h1>
                     <p>Thanks for signing in.</p>
-                </StyledSignInScreen>
-            </SlideOut>
+            </Slide>
 );
     }
 }

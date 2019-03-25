@@ -4,8 +4,7 @@ import Dashboard from './Screens/Dashboard';
 
 import styled from 'styled-components';
 import firebase from 'firebase';
-import { FirebaseAuth } from 'react-firebaseui';
-
+// #region styles
 const StyledMain = styled.main`
     position: absolute;
     top:0;
@@ -14,22 +13,26 @@ const StyledMain = styled.main`
     height: 100%;
     overflow: hidden;
 `;
+// #endregion styles
 
 function App(props) {
+  //State placeholder for signed in user data
   const [activeUser, setActiveUser] = useState(null);
+  //State placeholder for logic that checks if the user is logged in
   const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
 
   useEffect(() => {
+    //Observer that checks if user is signed in
     firebase.auth().onAuthStateChanged(function (user) {
+      //if User is signed in...
       if (user) {
+        // Sets the active user's data to activeUser
         setActiveUser(user);
+        // Sets the isSignedIn state to true
         setIsSignedIn(true);
-      } else {
-      return
-      }
+      } else { return }
     });
-    }
-  );
+  });
 
   
 
@@ -40,7 +43,7 @@ if(isSignedIn) {
         <Dashboard activeUser = { activeUser } />
     </StyledMain>
   )
-}else {
+} else {
   return (
     <StyledMain>
         <SplashScreen isSignedIn = { isSignedIn } />

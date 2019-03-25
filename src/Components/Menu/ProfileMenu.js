@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import MenuList from '../Lists/MenuList';
 import firebase from 'firebase';
-import { FirebaseAuth } from 'react-firebaseui';
 
 const StyledProfileMenu = styled.div`
     width: 200px;

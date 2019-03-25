@@ -1,6 +1,5 @@
 import React from 'react';
-import SlideIn from '../../Utilities/SlideIn';
-import SlideOut from '../../Utilities/SlideOut';
+import Slide from '../../Utilities/Slide';
 import styled from 'styled-components';
 // #region STYLES
 
@@ -31,9 +30,9 @@ class AppTitle extends React.Component {
         const mappedChars = separatedString.map((char, index) => {
 
             if(this.state.SlideInOut === "in"){
-                return <SlideIn key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="300ms" isForText={true}>{char}</SlideIn>;
+                return <Slide key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="300ms" inOut="in" isForText={true}>{char}</Slide>;
             } else {
-                return <SlideOut key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="900ms" isForText={true}>{char}</SlideOut>;
+                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="900ms" inOut="out" isForText={true}>{char}</Slide>;
             }
         })
 
