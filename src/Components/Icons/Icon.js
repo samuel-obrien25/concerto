@@ -7,6 +7,7 @@ import { ReactComponent as Microphone } from './assets/microphone.svg';
 import { ReactComponent as Panflute } from './assets/panflute.svg';
 import { ReactComponent as Xylophone } from './assets/xylophone.svg';
 
+// #region styles
 const iconBurst = keyframes`
   0%{
     opacity: 0;
@@ -69,17 +70,22 @@ const StyledIcon = styled.div`
     }
 
 `;
-
+// #endregion styles
 function Icon() {
+    //Add any new icons to this array so they show up in loading animation
     const iconArray = [<Eguitar />, <Harp />, <Microphone />, <Panflute />, <Xylophone />];
     
     const [activeIcon, setActiveIcon] = useState(iconArray[0]);
-
+    //Function to change the icon every 3 seconds (in conjunction with the "Burst" animation timing)
     useEffect(() => {
-        setTimeout(() => {
-            setActiveIcon(iconArray[Math.floor(Math.random() * iconArray.length)]);
+        let iconTimer = setTimeout(() => {
+            setActiveIcon(iconArray[Math.floor(Math.random() * iconArray.length)]); 
         }, 3000);
-    });
+        //Cleanup
+        return () => {
+            clearTimeout(iconTimer);
+        }
+    }, []);
 
     return(
         <StyledIconContainer>

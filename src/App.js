@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
 import Dashboard from './Screens/Dashboard';
-
 import styled from 'styled-components';
 import firebase from 'firebase';
 // #region styles
@@ -40,7 +39,7 @@ if(isSignedIn) {
   return (
     <StyledMain>
         <SplashScreen isSignedIn = { isSignedIn } />
-        <Dashboard activeUser = { activeUser } />
+        <Dashboard activeUserData = { activeUser } />
     </StyledMain>
   )
 } else {

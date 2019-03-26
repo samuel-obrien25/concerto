@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import MenuList from '../Lists/MenuList';
 import firebase from 'firebase';
 
 const StyledProfileMenu = styled.div`
     width: 200px;
     height: 150px;
     background-color: #fff;
-    border-radius: 15px;
+    border-radius: 5px;
     box-shadow: 0px 2px 6px rgba(0,0,0,.25);
     transform: ${props => props.isActive ? "scale(1)" : "scale(0)"};
     transition: .25s ease-in-out;
@@ -15,6 +14,34 @@ const StyledProfileMenu = styled.div`
     position: fixed;
     top: 60px;
     right: 40px;
+    overflow: hidden;
+    display: flex;
+
+    & * {
+        margin: auto;
+    }
+`;
+
+const StyledProfileList = styled.ul`
+    padding-left: 0px;
+    display: flex;
+    width: 90%;
+    height: 100%;
+
+    & li {
+        border-radius: 10px;
+        transition: .25s ease-in-out;
+        list-style: none;
+        padding: 10px;
+        width: 100%;
+        margin: auto;
+        margin-top: 10px;
+
+        :hover{
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    }
 `;
 
 function ProfileMenu(props) {
@@ -27,9 +54,9 @@ function ProfileMenu(props) {
     return (
         <div>
             <StyledProfileMenu isActive = {props.isActive} >
-                <MenuList > 
+                <StyledProfileList > 
                     <li onClick = { signOut }>Sign Out</li>
-                </MenuList>
+                </StyledProfileList>
             </StyledProfileMenu>
         </div>
     );

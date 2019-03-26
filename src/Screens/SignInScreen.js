@@ -70,7 +70,7 @@ class SignInScreen extends React.Component {
     render() {
         if (!this.state.isSignedIn) {
             return (
-                <Slide animDelay="0s" animDuration="1s" animFillMode="forwards" inOut="in" isForText="false">
+                <Slide animDelay="0s" animDuration="1s" animFillMode="forwards" inOut="in" isForText = { false }>
                     <StyledSignInScreen isSignedIn = { this.state.isSignedIn }>
                         <h1>My App</h1>
                         <p>Please sign-in:</p>
@@ -80,7 +80,7 @@ class SignInScreen extends React.Component {
             );
         }
         return (
-            <Slide animDelay="1.5s" animDuration=".75s" animFillMode="forwards" inOut="out" isForText="false">
+            <Slide animDelay="1.5s" animDuration=".75s" animFillMode="forwards" inOut="out" isForText = { false }>
                     <h1>Welcome, {firebase.auth().currentUser.displayName}!</h1>
                     <p>Thanks for signing in.</p>
             </Slide>

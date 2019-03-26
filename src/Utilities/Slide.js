@@ -1,8 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
 
 function Slide(props) {
+// #region PROPTYPES
+    Slide.propTypes = {
+        animDelay: PropTypes.string,
+        animDuration: PropTypes.string.isRequired,
+        animFillMode: PropTypes.string,
+        animStyle: PropTypes.string,
+        inOut: PropTypes.string.isRequired,
+        isForText: PropTypes.bool
+    }
+// #endregion
 
 // #region STYLES
     const SlideIn = (props) => keyframes`
@@ -74,4 +85,6 @@ function Slide(props) {
             );
         }
     }
+
+    
 export default Slide;
