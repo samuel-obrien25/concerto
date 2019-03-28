@@ -1,6 +1,6 @@
 import React from 'react';
-import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
+import { FirebaseAuth } from 'react-firebaseui';
 import Slide from '../Utilities/Slide';
 import styled from 'styled-components';
 
@@ -67,6 +67,7 @@ class SignInScreen extends React.Component {
         this.unregisterAuthObserver();
     }
 
+
     render() {
         if (!this.state.isSignedIn) {
             return (
@@ -81,7 +82,7 @@ class SignInScreen extends React.Component {
         }
         return (
             <Slide animDelay="1.5s" animDuration=".75s" animFillMode="forwards" inOut="out" isForText = { false }>
-                    <h1>Welcome, {firebase.auth().currentUser.displayName}!</h1>
+                <h1>Welcome, {firebase.auth().currentUser.displayName }!</h1>
                     <p>Thanks for signing in.</p>
             </Slide>
 );

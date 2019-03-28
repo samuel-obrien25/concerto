@@ -44,7 +44,7 @@ const ProfileButton = (props) => {
     return (
         <StyledProfileButtonWrapper>
             <StyledProfileButton userImage = { props.userImage } onClick = { toggleButtonState }/>
-            <ProfileMenu isActive = { isActive }/>
+            <ProfileMenu isActive={isActive} handleCloseTrigger={toggleButtonState}/>
         </StyledProfileButtonWrapper>
     );
 }

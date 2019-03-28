@@ -11,8 +11,10 @@ const StyledNavDrawer = styled.section`
     width: 400px;
     height: 100vh;
     transform: ${props => props.isActive ? 'auto' : 'translateX(-100%)'};
-    transition: .3s ease-in-out;
+    transition: .4s ease-in-out;
     overflow: hidden;
+    z-index: 9000;
+    box-shadow: ${props => props.isActive ? '0px 0px 18px rgba(0, 0, 0, .15)' : 'auto'};
 `;
 
 const StyledNavHeader = styled.div`
@@ -20,6 +22,8 @@ const StyledNavHeader = styled.div`
     height: auto;
     display: flex;
     flex-direction: column;
+    margin-left: 5%;
+    margin-top: 100px;
 `;
 
 const StyledNavH2 = styled.h2`
@@ -63,6 +67,16 @@ const StyledNavMenu = styled.ul`
 
 `;
 
+const StyledCloseTrigger = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 8000;
+    transform: ${props => props.isVisible ? "scale(1)" : "scale(0)"};
+`;
+
 function NavDrawer (props) {
 
     const [isVisible, setIsVisible] = useState(false);
@@ -88,6 +102,7 @@ function NavDrawer (props) {
                     <li data-value="allConcerts"><MusicNote /><span>All Concerts</span></li>
                 </StyledNavMenu>
             </StyledNavDrawer>
+            <StyledCloseTrigger isVisible = { isVisible } onClick={() => setIsVisible(!isVisible)}/>
         </div>
     );
 }

@@ -15,6 +15,7 @@ const StyledSplashScreen = styled.section`
     background:linear-gradient(to top left, #FDC830, #F37335);
     display: flex;
     flex-direction: column;
+    z-index: 9000;
 `;
 
 // #endregion
@@ -26,9 +27,9 @@ function SplashScreen(props){
     });
 
         return (
-            <Slide inOut = {isSignedIn ? "in" : "out"} animDelay="2s" animDuration=".75s" animFillMode="forwards" isForText={ false } >
+            <Slide inOut = {isSignedIn ? "in" : "out"} animDelay="2s" animDuration=".75s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
                 <StyledSplashScreen isSignedIn = {props.isSignedIn}>
-                    <Slide inOut = {isSignedIn ? "out" : "in"} animDelay="0s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText= { true }>
+                    <Slide inOut = {isSignedIn ? "out" : "in"} animDelay="0s" animDuration="2s" animFillMode="forwards" animStyle="fullScreen" isForText= { true }>
                         <AppTitle text="TEXT" slideInOut="out"/>
                     </Slide>
                     <SignInScreen isSignedIn = {props.isSignedIn} />

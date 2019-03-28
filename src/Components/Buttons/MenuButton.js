@@ -20,7 +20,7 @@ const StyledMenuButtonBottom = styled(StyledMenuButtonTop)`
 `
 const StyledMenuButtonWrapper = styled.section`
     position: fixed;
-    z-index: 9000;
+    z-index: 9100;
     top: 25px;
     left: 25px;
     width: 40px;

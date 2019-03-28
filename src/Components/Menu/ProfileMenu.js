@@ -16,10 +16,21 @@ const StyledProfileMenu = styled.div`
     right: 40px;
     overflow: hidden;
     display: flex;
+    z-index: 9000;
 
     & * {
         margin: auto;
     }
+`;
+
+const StyledTrigger = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 8000;
+    transform: ${props => props.isActive ? "scale(1)" : "scale(0)"};
 `;
 
 const StyledProfileList = styled.ul`
@@ -58,6 +69,7 @@ function ProfileMenu(props) {
                     <li onClick = { signOut }>Sign Out</li>
                 </StyledProfileList>
             </StyledProfileMenu>
+            <StyledTrigger onClick = { props.handleCloseTrigger } isActive = {props.isActive}/>
         </div>
     );
 }

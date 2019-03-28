@@ -19,6 +19,8 @@ function App(props) {
   const [activeUser, setActiveUser] = useState(null);
   //State placeholder for logic that checks if the user is logged in
   const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
+  //State placeholder for Database reference
+  const [activeDatabase, setActiveDatabase] = useState(null);
 
   useEffect(() => {
     //Observer that checks if user is signed in
@@ -29,17 +31,17 @@ function App(props) {
         setActiveUser(user);
         // Sets the isSignedIn state to true
         setIsSignedIn(true);
+        // Sets the activeDatabase to the database
+        setActiveDatabase(firebase.database());
       } else { return }
     });
   });
-
-  
 
 if(isSignedIn) {
   return (
     <StyledMain>
         <SplashScreen isSignedIn = { isSignedIn } />
-        <Dashboard activeUserData = { activeUser } />
+        <Dashboard activeUserData = { activeUser } activeDatabase = { activeDatabase }/>
     </StyledMain>
   )
 } else {
