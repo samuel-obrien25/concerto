@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
+import Card from '../Cards/Card';
 
 const StyledForm = styled.form`
     position: relative;
@@ -21,23 +22,27 @@ function ListCreator(props) {
 
     //function for writing new lists to the database
     function writeUserLists(userId, listName) {
+
         //For reference: database = firebase.database()
         const database = props.activeDatabase;
-        let databaseBranchLength = database.ref('users/' + userId + '/list').once('value').then(function(snapshot) {
-            return (snapshot.val().lists.length())
-        });
 
-        database.ref('users/' + userId + '/list' + databaseBranchLength).set({
-            listName: listName,
-        }, function (error) {
-            if (error) { console.log("Error: ", error) };
-        });
+        const listData = {
+            listName: listName
+        }
+
+        const newListKey = database.ref().child('list').push().key;
+
+        const updates = {};
+        updates['users/' + userId + '/lists/list' + newListKey] = listData;
+
+        return database.ref().update(updates);
+
     };
 
 
     //Function for handling input
     function handleInput(event) {
-        //For reference: user data = firebase.auth().currentUser
+        //For reference: userData = firebase.auth().currentUser
         const userData = props.activeUserData;
         console.log("userdata: ", userData);
         
