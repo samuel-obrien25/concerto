@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Card from '../Cards/Card';
+
 import styled from 'styled-components';
 import firebase from 'firebase';
 
@@ -15,8 +17,7 @@ function AllLists(props) {
 
     useEffect(() => {
         retrievedLists.on('value', function (snapshot) {
-            const mappedLists = snapshot.val().listName;
-            console.log(mappedLists);
+            const mappedLists = snapshot.val().listName.map(lists => <Card key={lists.length()} cardData={lists.listName} /> );
         })
     })
 
