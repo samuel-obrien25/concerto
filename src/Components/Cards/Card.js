@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Slide from '../Utilities/Slide';
+import Slide from '../../Utilities/Slide';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ function Card(props) {
     return (
         <Slide inOut="in" animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} >
             <StyledCard cardData = {props.cardData}>
-                <h2>{props.cardData.listTitle}</h2>
+                <h2></h2>
             </StyledCard>
         </Slide>
 

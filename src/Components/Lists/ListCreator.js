@@ -14,12 +14,7 @@ const StyledForm = styled.form`
 `;
 
 function ListCreator(props) {
-
-    //function for retreiving lists from the databse
-    function getUserLists(){
-        //....
-    }
-
+    
     //function for writing new lists to the database
     function writeUserLists(userId, listName) {
 
