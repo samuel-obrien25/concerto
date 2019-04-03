@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Slide from '../../Utilities/Slide';
 import PropTypes from 'prop-types';
 
@@ -17,16 +17,18 @@ const StyledCard = styled.div`
 function Card(props) {
 
     // #region PROPTYPES
+    Slide.propTypes = {
+        animDelay: PropTypes.string,
+    }
 
-    // #endregion PROPTYPES
+// #endregion
 
     return (
         <Slide inOut="in" animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} >
             <StyledCard cardData = {props.cardData}>
-                <h2></h2>
+                <h2>null</h2>
             </StyledCard>
         </Slide>
-
     );
 }
 export default Card;

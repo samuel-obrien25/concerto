@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 //#region STYLES
 const StyledMenuButtonTop = styled.div`
@@ -50,10 +51,13 @@ const MenuButton = (props) => {
             />
 
         </StyledMenuButtonWrapper>
-
-
     );
 }
 
+// #region PROPTYPES
+MenuButton.propTypes = {
+    isActive: PropTypes.bool
+}
+// #endregion
 
 export default MenuButton;

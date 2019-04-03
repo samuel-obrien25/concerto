@@ -23,19 +23,25 @@ function SplashScreen(props){
     const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
 
     useEffect(() => {
-        props.isSignedIn ? setIsSignedIn(true) : setIsSignedIn(false);
+        handleSignInStatusChange()
     });
 
-        return (
-            <Slide inOut = {isSignedIn ? "in" : "out"} animDelay="2s" animDuration=".75s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
-                <StyledSplashScreen isSignedIn = {props.isSignedIn}>
-                    <Slide inOut = {isSignedIn ? "out" : "in"} animDelay="0s" animDuration="2s" animFillMode="forwards" animStyle="fullScreen" isForText= { true }>
-                        <AppTitle text="TEXT" slideInOut="out"/>
-                    </Slide>
-                    <SignInScreen isSignedIn = {props.isSignedIn} />
-                    <Icon/>
-                </StyledSplashScreen>
-            </Slide>
-        );
+    function handleSignInStatusChange() {
+        setTimeout(() => {
+            props.isSignedIn ? setIsSignedIn(true) : setIsSignedIn(false);
+        }, 5000);
     }
+
+    return (
+        <Slide inOut = {isSignedIn ? "in" : "out"} animDelay="2s" animDuration=".75s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
+            <StyledSplashScreen isSignedIn = {props.isSignedIn}>
+                <Slide inOut = {isSignedIn ? "out" : "in"} animDelay="0s" animDuration="2s" animFillMode="forwards" isForText= { false }>
+                    <AppTitle text="CONCERTO" inOut={isSignedIn ? "out" : "in"}/>
+                </Slide>
+                <SignInScreen isSignedIn = {isSignedIn} />
+                <Icon/>
+            </StyledSplashScreen>
+        </Slide>
+    );
+}
 export default SplashScreen;

@@ -22,7 +22,6 @@ function App(props) {
   //State placeholder for Database reference
   const [activeDatabase, setActiveDatabase] = useState(null);
 
-  useEffect(() => {
     //Observer that checks if user is signed in
     firebase.auth().onAuthStateChanged(function (user) {
       //if User is signed in...
@@ -35,22 +34,13 @@ function App(props) {
         setActiveDatabase(firebase.database());
       } else { return }
     });
-  });
 
-if(isSignedIn) {
   return (
     <StyledMain>
-        <SplashScreen isSignedIn = { isSignedIn } />
-        <Dashboard activeUserData = { activeUser } activeDatabase = { activeDatabase }/>
-    </StyledMain>
-  )
-} else {
-  return (
-    <StyledMain>
-        <SplashScreen isSignedIn = { isSignedIn } />
+      <SplashScreen isSignedIn = { isSignedIn } />
+      <Dashboard activeUserData={isSignedIn ? activeUser : 'null'} 
+                 activeDatabase={isSignedIn ? activeDatabase : 'null'}/>
     </StyledMain>
   )
 }
-}
-
 export default App;

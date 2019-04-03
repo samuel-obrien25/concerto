@@ -3,6 +3,8 @@ import MenuButton from '../Buttons/MenuButton';
 import styled from 'styled-components';
 import { ReactComponent as MusicNote } from '../Icons/assets/musicNote.svg';
 
+
+//#region STYLES
 const StyledNavDrawer = styled.section`
     background-color: #fff;
     position: fixed;
@@ -76,6 +78,7 @@ const StyledCloseTrigger = styled.div`
     z-index: 8000;
     transform: ${props => props.isVisible ? "scale(1)" : "scale(0)"};
 `;
+//#endregion
 
 function NavDrawer (props) {
 

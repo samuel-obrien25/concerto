@@ -30,9 +30,9 @@ class AppTitle extends React.Component {
         const mappedChars = separatedString.map((char, index) => {
 
             if(this.state.SlideInOut === "in"){
-                return <Slide key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="300ms" inOut="in" isForText={true}>{char}</Slide>;
+                return <Slide key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="0" inOut="in" isForText={true}>{char}</Slide>;
             } else {
-                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="900ms" inOut="out" isForText={true}>{char}</Slide>;
+                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0" inOut="out" isForText={true}>{char}</Slide>;
             }
         })
 

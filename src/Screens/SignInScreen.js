@@ -21,6 +21,21 @@ const StyledSignInScreen = styled.div`
     box-shadow: 0px 2px 4px 2px rgba(0,0,0,.32);
     border-radius: 20px;
 `;
+
+const StyledWelcomeScreen = styled.div`
+    width: 100%;
+    height: auto;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    & *{
+        font-family: sans-serif;
+        color: rgba(255,255,255,.6);
+        margin: auto;
+    }
+`;
 // #endregion
 
 const config = {
@@ -82,8 +97,10 @@ class SignInScreen extends React.Component {
         }
         return (
             <Slide animDelay="1.5s" animDuration=".75s" animFillMode="forwards" inOut="out" isForText = { false }>
-                <h1>Welcome, {firebase.auth().currentUser.displayName }!</h1>
+                <StyledWelcomeScreen>
+                    <h1>Welcome, {firebase.auth().currentUser.displayName}!</h1>
                     <p>Thanks for signing in.</p>
+                </StyledWelcomeScreen>
             </Slide>
 );
     }

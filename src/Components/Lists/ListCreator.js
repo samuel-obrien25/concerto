@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
-import Card from '../Cards/Card';
 
 const StyledForm = styled.form`
     position: relative;
