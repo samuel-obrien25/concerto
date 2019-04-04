@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import firebase from 'firebase';
 
 const StyledForm = styled.form`
     position: relative;
@@ -17,8 +18,8 @@ function ListCreator(props) {
     function writeUserLists(userId, listName) {
 
         //For reference: database = firebase.database()
-        const database = props.activeDatabase;
-
+        const database = firebase.database();
+        
         const listData = {
             listName: listName
         }

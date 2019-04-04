@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
 import ListCreator from './ListCreator';
 import AllLists from './AllLists';
 import firebase from 'firebase';
@@ -23,16 +22,14 @@ const StyledListOverviewWrapper = styled.section`
 //#endregion
 
 function ListOverview(props) {
-    const userData = props.activeUserData;
-    const database = firebase.database();
 
     const [clicked, setClicked] = useState(false);
 
     return (
         <StyledListOverviewWrapper >
             <NewListButton isVisible = {clicked} handleClick={() => { setClicked(!clicked) }} />
-            <ListCreator isVisible = {clicked} activeUserData={userData}  />
-            <AllLists activeUserData={userData} activeDatabase={database}/>
+            <ListCreator isVisible = {clicked} activeUserData={props.activeUserData}  />
+            <AllLists activeUserData={props.activeUserData} activeDatabase={props.activeDatabase}/>
         </StyledListOverviewWrapper>
     )
 }

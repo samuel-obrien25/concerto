@@ -17,8 +17,10 @@ const StyledMain = styled.main`
 function App(props) {
   //State placeholder for signed in user data
   const [activeUser, setActiveUser] = useState(null);
+
   //State placeholder for logic that checks if the user is logged in
   const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
+
   //State placeholder for Database reference
   const [activeDatabase, setActiveDatabase] = useState(null);
 
@@ -34,13 +36,18 @@ function App(props) {
         setActiveDatabase(firebase.database());
       } else { return }
     });
-
-  return (
-    <StyledMain>
-      <SplashScreen isSignedIn = { isSignedIn } />
-      <Dashboard activeUserData={isSignedIn ? activeUser : 'null'} 
-                 activeDatabase={isSignedIn ? activeDatabase : 'null'}/>
-    </StyledMain>
-  )
+    if(isSignedIn){
+      return (
+        <StyledMain>
+          <Dashboard activeUserData= { activeUser } activeDatabase= { activeDatabase }/>
+        </StyledMain>
+      )
+    } else{
+      return (
+        <StyledMain>
+          <SplashScreen isSignedIn = { isSignedIn } />
+        </StyledMain>
+        )
+    }
 }
 export default App;

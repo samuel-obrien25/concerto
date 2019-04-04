@@ -32,11 +32,24 @@ function SplashScreen(props){
         }, 5000);
     }
 
+    if(isSignedIn){
+        return (
+            <Slide inOut = "out" animDelay="0s" animDuration="5s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
+                        <StyledSplashScreen>
+                <Slide inOut = "out" animDelay="0s" animDuration="2s" animFillMode="forwards" isForText= { false }>
+                    <AppTitle text="CONCERTO" inOut="out"/>
+                </Slide>
+                <Icon/>
+            </StyledSplashScreen>
+            </Slide>
+        )
+    }
+
     return (
-        <Slide inOut = {isSignedIn ? "in" : "out"} animDelay="2s" animDuration=".75s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
+        <Slide inOut = "in" animDelay="2s" animDuration=".75s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
             <StyledSplashScreen isSignedIn = {props.isSignedIn}>
-                <Slide inOut = {isSignedIn ? "out" : "in"} animDelay="0s" animDuration="2s" animFillMode="forwards" isForText= { false }>
-                    <AppTitle text="CONCERTO" inOut={isSignedIn ? "out" : "in"}/>
+                <Slide inOut = "in" animDelay="0s" animDuration="2s" animFillMode="forwards" isForText= { false }>
+                    <AppTitle text="CONCERTO" inOut="in"/>
                 </Slide>
                 <SignInScreen isSignedIn = {isSignedIn} />
                 <Icon/>

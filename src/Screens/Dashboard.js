@@ -31,18 +31,16 @@ function Dashboard(props) {
     // const [activeNavItem, setActiveNavItem] = useState(null);
     
     //This holds current user's data recieved from App.js.
-    const activeUserData = props.activeUserData;
-    const activeDatabase = props.activeDatabase;
-    
+
     return (
-        <Slide inOut="in" animDelay="2s" animDuration="1s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
-            <StyledDashboard activeDatabase = { activeDatabase }>
-                <NavDrawer name={activeUserData.displayName} />
+        <Slide inOut="in" animDelay="2s" animDuration=".5s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
+            <StyledDashboard activeDatabase = { props.activeDatabase }>
+                <NavDrawer name={props.activeUserData.displayName} />
                 <Slide inOut="in" animDelay=".2s" animDuration="1s" animFillMode="forwards" >
-                    <ProfileButton userImage={activeUserData.photoURL} />
+                    <ProfileButton userImage={props.activeUserData.photoURL} />
                 </Slide>
                 <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below, or add a new one:" />
-                <ListOverview activeUserData = { activeUserData } activeDatabase = { activeDatabase }/>
+                <ListOverview activeUserData = { props.activeUserData } activeDatabase = { props.activeDatabase }/>
             </StyledDashboard>
         </Slide>
 

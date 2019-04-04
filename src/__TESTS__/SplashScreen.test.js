@@ -9,3 +9,7 @@ configure({ adapter: new Adapter() });
 it('renders without crashing', () => {
 shallow(<SplashScreen />);
 });
+
+it('accepts isSignedIn prop', () => {
+    shallow(<SplashScreen isSignedIn={true}/>);
+});

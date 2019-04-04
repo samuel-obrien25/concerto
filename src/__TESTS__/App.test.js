@@ -9,3 +9,5 @@ configure({ adapter: new Adapter() });
 it('renders without crashing', () => {
   shallow(<App />);
 });
+
+
