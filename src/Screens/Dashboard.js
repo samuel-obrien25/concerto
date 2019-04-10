@@ -32,6 +32,9 @@ function Dashboard(props) {
     
     //This holds current user's data recieved from App.js.
 
+    console.log('app.js --> dashboard.js activeUserData', props.activeUserData);
+    console.log('app.js --> dashboard.js activeDatabase', props.activeDatabase);
+
     return (
         <Slide inOut="in" animDelay="2s" animDuration=".5s" animFillMode="forwards" animStyle="fullScreen" isForText={ false } >
             <StyledDashboard activeDatabase = { props.activeDatabase }>

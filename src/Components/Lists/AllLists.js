@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import firebase from 'firebase';
 
-class AllLists extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeUserData: '',
-            activeUserLists: ''
-        }
-    }
+function AllLists(props) {
 
-    
-    handleDataTransfer() {
+    //Store props.userLists in a const
+    const [userLists, getUserLists] = useState();
+    const [mappedLists, setMappedLists] = useState();
+
+    //The issue is here. Why so many re-renders?
+    console.log('listOverview.js --> AllLists.js activeUserData', props.activeUserData);
+    console.log('listOverview.js --> AllLists.js activeDatabase', props.activeDatabase);
+
+
+    useEffect(() => {
+        getUserLists(props.activeUserData)
+
+        console.log('check', userLists);
+        console.log('mappedLists', mappedLists);
+        
+    },[props.activeUserData]);
+
+    //Function for getting all lists from database
+    function handleDataTransfer() {
         const returnArr = [];
-        const userData = this.state.activeUserData;
+        const userData = firebase.auth().currentUser;
         const userListsRef = firebase.database().ref('users/' + userData.uid + '/lists');
 
 
@@ -25,31 +35,16 @@ class AllLists extends React.Component{
             });
         });
 
-        console.log("returnArr", returnArr);
+        getUserLists(returnArr);
 
-        this.setState({
-            activeUserLists: returnArr
-        });
+        return setMappedLists(() => {
+            returnArr.map((list, index) => {
+                return <li key={index}>{list.listName}</li>;
+            })
+        })
     }
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                activeUserData: this.props.activeUserData,
-            }, () => {
-                this.handleDataTransfer();
-                console.log("returnArr2", this.state.activeUserLists);
-            });
-        }, 2000);
-    }
-
-        render(){
-
-            return (
-                <ul>
-                    {this.state.activeUserLists}
-                </ul>
-            )
-        };
-    }
-        export default AllLists
+           return (
+            <ul>{mappedLists}</ul>
+           )
+}
+export default AllLists

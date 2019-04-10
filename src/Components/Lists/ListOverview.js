@@ -24,6 +24,8 @@ const StyledListOverviewWrapper = styled.section`
 function ListOverview(props) {
 
     const [clicked, setClicked] = useState(false);
+    console.log('dashboard.js --> listOverview.js activeUserData', props.activeUserData);
+    console.log('dashboard.js --> listOverview.js activeDatabase', props.activeDatabase);
 
     return (
         <StyledListOverviewWrapper >
