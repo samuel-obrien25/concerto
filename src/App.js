@@ -3,6 +3,7 @@ import SplashScreen from './Screens/SplashScreen';
 import Dashboard from './Screens/Dashboard';
 import styled from 'styled-components';
 import firebase from 'firebase';
+import SignInScreen from './Screens/SignInScreen';
 // #region styles
 const StyledMain = styled.main`
     position: absolute;
@@ -46,6 +47,7 @@ function App(props) {
       return (
         <StyledMain>
           <SplashScreen isSignedIn = { isSignedIn } />
+          <SignInScreen isSignedIn = { isSignedIn } />
         </StyledMain>
         )
     }

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Slide from '../../Utilities/Slide';
 import PropTypes from 'prop-types';
-import 
 import styled from 'styled-components';
 
 //#region Styles

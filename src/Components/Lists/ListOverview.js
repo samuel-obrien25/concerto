@@ -24,14 +24,17 @@ const StyledListOverviewWrapper = styled.section`
 function ListOverview(props) {
 
     const [clicked, setClicked] = useState(false);
-    console.log('dashboard.js --> listOverview.js activeUserData', props.activeUserData);
-    console.log('dashboard.js --> listOverview.js activeDatabase', props.activeDatabase);
+    const [stupidWorkaround, callStupidWorkaround] = useState(0);
+
+    setTimeout(() => {
+        callStupidWorkaround(1);
+    }, 5000);
 
     return (
         <StyledListOverviewWrapper >
             <NewListButton isVisible = {clicked} handleClick={() => { setClicked(!clicked) }} />
             <ListCreator isVisible = {clicked} activeUserData={props.activeUserData}  />
-            <AllLists activeUserData={props.activeUserData} activeDatabase={props.activeDatabase}/>
+            <AllLists makeMeReset={stupidWorkaround} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase}/>
         </StyledListOverviewWrapper>
     )
 }

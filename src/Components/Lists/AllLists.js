@@ -1,50 +1,49 @@
 import React, { useEffect, useState, useRef } from 'react';
 import firebase from 'firebase';
+import List from '../Lists/List';
+
 
 function AllLists(props) {
 
     //Store props.userLists in a const
-    const [userLists, getUserLists] = useState();
-    const [mappedLists, setMappedLists] = useState();
+    const [rawLists, setRawLists] = useState();
 
     //The issue is here. Why so many re-renders?
-    console.log('listOverview.js --> AllLists.js activeUserData', props.activeUserData);
-    console.log('listOverview.js --> AllLists.js activeDatabase', props.activeDatabase);
-
+    let activeUserData = props.activeUserData,
+        activeDatabase = firebase.database();
 
     useEffect(() => {
-        getUserLists(props.activeUserData)
+        setRawLists(() => {
+            let returnArr = [],
+                userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
 
-        console.log('check', userLists);
-        console.log('mappedLists', mappedLists);
-        
-    },[props.activeUserData]);
-
-    //Function for getting all lists from database
-    function handleDataTransfer() {
-        const returnArr = [];
-        const userData = firebase.auth().currentUser;
-        const userListsRef = firebase.database().ref('users/' + userData.uid + '/lists');
-
-
-        userListsRef.on('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                const item = childSnapshot.val();
-                item.key = childSnapshot.key;
-                returnArr.push(item);
+            userListsRef.on('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    const item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+                    returnArr.push(item);
+                });
             });
+            return returnArr;
         });
+    }, []);
 
-        getUserLists(returnArr);
-
-        return setMappedLists(() => {
-            returnArr.map((list, index) => {
-                return <li key={index}>{list.listName}</li>;
-            })
-        })
+    //Function returning mapped rawLists from the firebase database
+    function mapLists(arr) {
+        let processedLists = arr.map((list, index) => {
+            return <div id={index}>{list.listName}</div>;
+        });
+        return processedLists;
     }
-           return (
-            <ul>{mappedLists}</ul>
-           )
+
+    console.log(rawLists);
+    if(rawLists){
+        return (
+            <List listData = {rawLists} />
+        )
+    } else {
+        return null
+    }
+
 }
 export default AllLists
