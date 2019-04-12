@@ -1,6 +1,6 @@
 import React from 'react';
-import Slide from '../../Utilities/Slide';
 import styled from 'styled-components';
+
 // #region STYLES
 const StyledTextWrapper = styled.div`
         margin: auto;
@@ -17,6 +17,11 @@ const StyledH2 = styled.h2`
         font-family: sans-serif;
         letter-spacing: 0px;
         margin: auto;
+
+        @media (min-width: 700px) {
+            font-size: 42px;
+        }
+
     `;
 
 const StyledH3 = styled.h3`
@@ -29,6 +34,11 @@ const StyledH3 = styled.h3`
         font-family: sans-serif;
         letter-spacing: 0px;
         margin: auto;
+
+        @media (min-width: 700px) {
+            font-size: 32px;
+        }
+
 `;
 // #endregion STYLES
 

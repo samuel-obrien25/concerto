@@ -12,6 +12,7 @@ const StyledProfileButtonWrapper = styled.div`
     position: fixed;
     top: 25px;
     right: 25px;
+    z-index: 7000;
 `;
 
 const StyledProfileButton = styled.div`

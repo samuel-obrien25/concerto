@@ -7,10 +7,10 @@ import { ReactComponent as MusicNote } from '../Icons/assets/musicNote.svg';
 //#region STYLES
 const StyledNavDrawer = styled.section`
     background-color: #fff;
-    position: fixed;
+    position: absolute;
     top:0;
     left:0;
-    width: 400px;
+    width: 300px;
     height: 100vh;
     transform: ${props => props.isActive ? 'auto' : 'translateX(-100%)'};
     transition: .4s ease-in-out;
@@ -66,7 +66,6 @@ const StyledNavMenu = styled.ul`
             cursor: pointer;
         }
     }
-
 `;
 
 const StyledCloseTrigger = styled.div`
@@ -76,7 +75,8 @@ const StyledCloseTrigger = styled.div`
     width: 100vw;
     height: 100vh;
     z-index: 8000;
-    transform: ${props => props.isVisible ? "scale(1)" : "scale(0)"};
+    transform: ${props => props.isVisible ? 'auto' : 'translateX(-100%)'};
+    background-color: rgba(0,0,0,.2);
 `;
 //#endregion
 

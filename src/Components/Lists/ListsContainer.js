@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
-import List from '../Lists/List';
+import List from './List';
+import Loading from '../../Utilities/Loading';
 
 
 function AllLists(props) {
@@ -28,21 +29,12 @@ function AllLists(props) {
         });
     }, []);
 
-    //Function returning mapped rawLists from the firebase database
-    function mapLists(arr) {
-        let processedLists = arr.map((list, index) => {
-            return <div id={index}>{list.listName}</div>;
-        });
-        return processedLists;
-    }
-
-    console.log(rawLists);
-    if(rawLists){
+    if(props.isLoaded){
         return (
-            <List listData = {rawLists} />
+                <List listData={rawLists} />
         )
     } else {
-        return null
+        return <Loading />
     }
 
 }

@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ListCreator from './ListCreator';
-import AllLists from './AllLists';
-import firebase from 'firebase';
+import ListsContainer from './ListsContainer';
 import NewListButton from '../Buttons/NewListButton';
 
 //#region styles
@@ -24,17 +23,17 @@ const StyledListOverviewWrapper = styled.section`
 function ListOverview(props) {
 
     const [clicked, setClicked] = useState(false);
-    const [stupidWorkaround, callStupidWorkaround] = useState(0);
+    const [listsLoaded, setListsLoaded] = useState(false);
 
     setTimeout(() => {
-        callStupidWorkaround(1);
-    }, 5000);
+        setListsLoaded(true);
+    }, 4000);
 
     return (
         <StyledListOverviewWrapper >
             <NewListButton isVisible = {clicked} handleClick={() => { setClicked(!clicked) }} />
-            <ListCreator isVisible = {clicked} activeUserData={props.activeUserData}  />
-            <AllLists makeMeReset={stupidWorkaround} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase}/>
+            <ListCreator isVisible = {clicked} activeUserData={props.activeUserData} />
+                <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase}/>
         </StyledListOverviewWrapper>
     )
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Slide from '../../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -16,13 +16,14 @@ const StyledCard = styled.div`
 function Card(props) {
 
 
+function getLengthOfLists() {
 
+}
 
     return (
-        <Slide inOut="in" animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} >
-            <StyledCard>
+        <Slide inOut="in" animDelay=".s" animDuration="1s" animFillMode="forwards" isForText={false} >
+            <StyledCard id={props.index} className={props.className}>
                 <h2>{props.listName}</h2>
-
             </StyledCard>
         </Slide>
     );

@@ -52,6 +52,7 @@ function Slide(props) {
         height: auto;
         width: 100%;
         margin: auto;
+        z-index: 9000;
     `;
 
     const StyledSlideOut = styled.div`

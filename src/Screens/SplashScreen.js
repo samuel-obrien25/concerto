@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Slide from '../Utilities/Slide';
 import Icon from '../Components/Icons/Icon';
-import SignInScreen from '../Screens/SignInScreen';
 
 import styled from 'styled-components';
 import AppTitle from '../Components/Text/AppTitle';
@@ -20,15 +19,8 @@ const StyledSplashScreen = styled.section`
 
 // #endregion
 function SplashScreen(props) {
-    const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
 
-    const handleSignInStatusChange = () => {
-        setTimeout(() => {
-            props.isSignedIn ? setIsSignedIn(true) : setIsSignedIn(false);
-        }, 5000);
-    }
-
-    if (isSignedIn) {
+    if (props.isSignedIn) {
         return (
             <Slide inOut="out" animDelay="0s" animDuration="5s" animFillMode="forwards" animStyle="fullScreen" isForText={false} >
                 <StyledSplashScreen>

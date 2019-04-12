@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import styled, { keyframes } from 'styled-components';
+import ListDragIcon from "../Icons/ListDragIcon";
 
 
 // a little function to help us with reordering the result
@@ -12,26 +13,40 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-const grid = 8;
+const slide = (props) => keyframes`
+        0% {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        100% {
+            opacity: 1;
+            transform: auto;
+        }
+    `;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
 
-    // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey",
+const StyledContainer = styled.div`
+    background-color:linear-gradient(to top left, #FDC830, #F37335);
+    animation: ${slide} 300ms forwards ease-in-out;
+`;
 
-    // styles we need to apply on draggables
-    ...draggableStyle
-});
+const StyledDiv = styled.div`
+    background-color: #fff;
+    position: relative;
+    margin: 10px 2px !important;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,.2);
+    width: 200px;
+    height: 50px;
+    display: flex;
+    padding: 10px;
+    :hover{
+        box-shadow: 0px 2px 6px 0px rgba(0,0,0,.3);
+    }
+`;
 
-const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
-    padding: grid,
-    width: 250
-});
+const StyledListName = styled.h3`
+    font-weight: 400;
+`;
 
 class List extends Component {
     constructor(props) {
@@ -56,6 +71,10 @@ class List extends Component {
 
         this.setState({
             items
+        }, 
+        //Change List Value in Firebase
+        () => {
+
         });
     }
 
@@ -64,34 +83,35 @@ class List extends Component {
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <Droppable droppableId="droppable">
-                    {(provided, snapshot) => (
-                        <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                        >
-                            {this.state.items.map((item, index) => (
-                                <Draggable key={item.key} draggableId={item.key} index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            {item.listName}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
+                <StyledContainer>
+                    <Droppable droppableId="droppable">
+                        {(provided) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                <h2>LISTS</h2>
+
+                                {this.state.items.map((item, index) => (
+                                    <Draggable key={item.key} draggableId={item.key} index={index}>
+                                        {(provided) => (
+                                            <StyledDiv
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                onClick
+                                            >
+                                            <ListDragIcon />
+                                                <StyledListName>{item.listName}</StyledListName>
+                                            </StyledDiv>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </StyledContainer>
             </DragDropContext>
         );
     }

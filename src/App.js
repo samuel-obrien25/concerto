@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SplashScreen from './Screens/SplashScreen';
 import Dashboard from './Screens/Dashboard';
 import styled from 'styled-components';
