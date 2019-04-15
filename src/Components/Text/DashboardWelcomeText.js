@@ -45,10 +45,10 @@ const StyledH3 = styled.h3`
 
 function DashboardWelcomeText(props) {
         return (
-            <StyledTextWrapper>
-                <StyledH2>{props.h2text}</StyledH2>
-                <StyledH3>{props.h3text}</StyledH3>
-            </StyledTextWrapper>
+                <StyledTextWrapper>
+                        <StyledH2>{props.h2text}</StyledH2>
+                        <StyledH3>{props.h3text}</StyledH3>
+                </StyledTextWrapper>
         );
     }
 

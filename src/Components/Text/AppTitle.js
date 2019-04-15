@@ -18,26 +18,23 @@ const StyledHeadline = styled.h1`
 
 
 class AppTitle extends React.Component {
-    state = {
-        SlideInOut: this.props.slideInOut
-    }
-    
+
     render(){
-        const { location, text, slideInOut } = this.props;
+        const { text, slideInOut } = this.props;
 
         const inputString = text;
         const separatedString = inputString.split("");
         const mappedChars = separatedString.map((char, index) => {
 
-            if(this.state.SlideInOut === "in"){
+            if (slideInOut === "in"){
                 return <Slide key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="0" inOut="in" isForText={true}>{char}</Slide>;
             } else {
-                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0" inOut="out" isForText={true}>{char}</Slide>;
+                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0s" inOut="out" isForText={true}>{char}</Slide>;
             }
         })
 
         return (
-            <StyledHeadline style={location} slideInOut={slideInOut}>
+            <StyledHeadline>
                 {mappedChars}
             </StyledHeadline>
         );

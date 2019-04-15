@@ -12,7 +12,6 @@ const StyledAddIcon = styled(AddIcon)`
     border-radius: 10px;
     fill: rgba(0,0,0,.6);
     transition: .15s ease-in-out;
-    transform: ${props => props.isVisible ? 'scale(0)' : 'scale(1)'};
 
     :hover {
         fill: rgba(0,0,0,.85);
@@ -24,7 +23,7 @@ const StyledAddIcon = styled(AddIcon)`
 function NewListButton(props) {
 
     return (
-            <StyledAddIcon isVisible={props.isVisible} onClick={props.handleClick} />
+            <StyledAddIcon onClick={props.handleClick} />
     )
 }
 

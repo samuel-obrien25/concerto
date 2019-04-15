@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
-import SplashScreen from './Screens/SplashScreen';
-import Dashboard from './Screens/Dashboard';
-import styled from 'styled-components';
 import firebase from 'firebase';
-import SignInScreen from './Screens/SignInScreen';
-// #region styles
-const StyledMain = styled.main`
-    position: absolute;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-`;
-// #endregion styles
+import ScreenHandler from './Screens/ScreenHandler';
 
 function App(props) {
   //State placeholder for signed in user data
   const [activeUser, setActiveUser] = useState(null);
 
   //State placeholder for logic that checks if the user is logged in
-  const [isSignedIn, setIsSignedIn] = useState(props.isSignedIn);
+  const [isSignedIn, setIsSignedIn] = useState();
 
   //State placeholder for Database reference
   const [activeDatabase, setActiveDatabase] = useState(null);
@@ -37,19 +24,9 @@ function App(props) {
         setActiveDatabase(firebase.database());
       } else { return }
     });
-    if(isSignedIn){
-      return (
-        <StyledMain>
-          <Dashboard activeUserData= { activeUser } activeDatabase= { activeDatabase }/>
-        </StyledMain>
-      )
-    } else{
-      return (
-        <StyledMain>
-          <SplashScreen isSignedIn = { isSignedIn } />
-          <SignInScreen isSignedIn = { isSignedIn } />
-        </StyledMain>
-        )
-    }
+
+    return (
+      <ScreenHandler activeDatabase = {activeDatabase} activeUser = {activeUser} isSignedIn = { isSignedIn }/>
+    )
 }
 export default App;

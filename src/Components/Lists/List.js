@@ -99,7 +99,6 @@ class List extends Component {
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
-                                                onClick
                                             >
                                             <ListDragIcon />
                                                 <StyledListName>{item.listName}</StyledListName>

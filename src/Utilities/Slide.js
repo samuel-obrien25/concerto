@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
 
 function Slide(props) {
+
+    const [destroy, setDestroy] = useState(false);
+
 // #region PROPTYPES
     Slide.propTypes = {
         animDelay: PropTypes.string,
@@ -11,7 +14,8 @@ function Slide(props) {
         animFillMode: PropTypes.string,
         animStyle: PropTypes.string,
         inOut: PropTypes.string.isRequired,
-        isForText: PropTypes.bool
+        isForText: PropTypes.bool,
+        unmount: PropTypes.bool
     }
 // #endregion
 
@@ -38,8 +42,8 @@ function Slide(props) {
     `;
 
 
-    const StyledSlideIn = styled.div`
-        animation: ${SlideIn};
+    const StyledSlide = styled.div`
+        animation: ${props => props.inOut === "in" ? SlideIn : SlideOut};
         animation-delay: ${props => props.animDelay};
         animation-fill-mode: ${props => props.animFillMode};
         animation-duration: ${props => props.animDuration};
@@ -55,35 +59,32 @@ function Slide(props) {
         z-index: 9000;
     `;
 
-    const StyledSlideOut = styled.div`
-        animation: ${SlideOut};
-        animation-delay: ${props => props.animDelay};
-        animation-fill-mode: ${props => props.animFillMode};
-        animation-duration: ${props => props.animDuration};
-        opacity: 1;
-        display: flex;
-        position: ${props => props.isForText ? "relative" : "absolute"};
-        top:0;
-        left: 0;
-        height: auto;
-        width: auto;
-    `;
     // #endregion STYLES
 
-        const { animDelay, animDuration, animFillMode, animStyle, inOut, isForText } = props;
+        const { animDelay, animDuration, animFillMode, animStyle, unmount, inOut, isForText } = props;
 
-        if(inOut === "in"){
+        function destroyChild() {
+            if(unmount) {
+                setTimeout(() => {
+                    setDestroy(true);
+                }, 2000);
+            }
+        }
+
+        setTimeout(() => {
+            destroyChild();
+        }, 2000);
+
+        if(!destroy){
             return (
-                <StyledSlideIn isForText={isForText} animDelay={animDelay} animFillMode={animFillMode} animDuration={animDuration} animStyle={animStyle}>
+                <StyledSlide inOut = {inOut} isForText={isForText} animDelay={animDelay} animFillMode={animFillMode} animDuration={animDuration} animStyle={animStyle} unmount={unmount}>
                     {props.children}
-                </StyledSlideIn>
+                </StyledSlide>
             );
-        } else {
-            return (
-                <StyledSlideOut animDelay={animDelay} animFillMode={animFillMode} animDuration={animDuration} isForText={isForText}>
-                    {props.children}
-                </StyledSlideOut>
-            );
+        
+        }
+        if(destroy) {
+            return null;
         }
     }
 

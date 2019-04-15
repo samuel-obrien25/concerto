@@ -1,5 +1,4 @@
 import React from 'react';
-import Slide from '../Utilities/Slide';
 import Icon from '../Components/Icons/Icon';
 
 import styled from 'styled-components';
@@ -20,28 +19,15 @@ const StyledSplashScreen = styled.section`
 // #endregion
 function SplashScreen(props) {
 
-    if (props.isSignedIn) {
+    
+    const {isSignedIn} = props;
+
         return (
-            <Slide inOut="out" animDelay="0s" animDuration="5s" animFillMode="forwards" animStyle="fullScreen" isForText={false} >
-                <StyledSplashScreen>
-                    <Slide inOut="out" animDelay="0s" animDuration="2s" animFillMode="forwards" isForText={false}>
-                        <AppTitle text="CONCERTO" inOut="out" />
-                    </Slide>
+                <StyledSplashScreen isSignedIn={isSignedIn}>
+                    <AppTitle text="CONCERTO" inOut={isSignedIn ? "in" : "out"} />
                     <Icon />
+                    {props.children}
                 </StyledSplashScreen>
-            </Slide>
         )
     }
-
-    return (
-        <Slide inOut="in" animDelay="2s" animDuration=".75s" animFillMode="forwards" animStyle="fullScreen" isForText={false} >
-            <StyledSplashScreen isSignedIn={props.isSignedIn}>
-                <Slide inOut="in" animDelay="0s" animDuration="2s" animFillMode="forwards" isForText={false}>
-                    <AppTitle text="CONCERTO" inOut="in" />
-                </Slide>
-                <Icon />
-            </StyledSplashScreen>
-        </Slide>
-    );
-}
 export default SplashScreen;
