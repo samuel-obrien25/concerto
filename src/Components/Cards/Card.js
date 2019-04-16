@@ -10,22 +10,15 @@ const StyledCard = styled.div`
     width: 200px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+    margin: auto;
 `;
 
 // #endregion
 function Card(props) {
-
-
-function getLengthOfLists() {
-
-}
-
     return (
-        <Slide inOut="in" animDelay=".s" animDuration="1s" animFillMode="forwards" isForText={false} >
-            <StyledCard id={props.index} className={props.className}>
-                <h2>{props.listName}</h2>
-            </StyledCard>
-        </Slide>
+        <StyledCard>
+            <h2>{props.listTitle}</h2>
+        </StyledCard>
     );
 }
 

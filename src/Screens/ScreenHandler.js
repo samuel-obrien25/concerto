@@ -16,10 +16,7 @@ function ScreenHandler(props) {
             if (isSignedIn) {
                 console.log('check');
                 signInScreen = null;
-                setTimeout(() => {
                     setIsSplashActive(false);
-                }, 2000)
-
             } else {
                 signInScreen = <SignInScreen />
             }
@@ -34,18 +31,20 @@ function ScreenHandler(props) {
             <Slide inOut='in' animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true}>
                    <Dashboard activeUserData={activeUser} activeDatabase={activeDatabase} />
             </Slide>;
-            if(isSplashActive) return null
-            else return dashboard;
+            
+            if(isSplashActive){
+                return null
+            } else {
+                return dashboard;
+            }
     }
-
-//Why is this re-rendering FIVE TIMES
-
-console.log(authCatchUp());
 
     return (
         <div>
             <Slide inOut={isSplashActive ? "in" : "out"} animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true}>
-                <SplashScreen>{ authCatchUp() }</SplashScreen>
+                <SplashScreen>{ setTimeout(() => {
+                    authCatchUp()
+                }, 1000) }</SplashScreen>
             </Slide>
            {handleDashboard()}
         </div>

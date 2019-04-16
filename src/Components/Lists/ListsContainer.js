@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
-import List from './List';
+import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
+import Slide from '../../Utilities/Slide';
 
+import styled from 'styled-components';
+
+const StyledListsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 100vw;
+    margin: auto;
+    overflow: scroll;
+`;
 
 function AllLists(props) {
 
@@ -30,8 +41,17 @@ function AllLists(props) {
     }, []);
 
     if(props.isLoaded){
-        return (
-                <List listData={rawLists} />
+        const mappedLists = rawLists.map((list, index) => {
+            return (
+                <Slide key={index} inOut="in" animDelay={index * 300 + 's'} animDuration="300ms" animFillMode="forwards" isForText={false} >
+                    <Card key={index} listTitle={list.listName} />
+                </Slide>
+            )
+        });
+                return (
+            <StyledListsContainer>
+                {mappedLists}
+            </StyledListsContainer>
         )
     } else {
         return <Loading />

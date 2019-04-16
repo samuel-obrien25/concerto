@@ -33,7 +33,7 @@ function ListOverview(props) {
         <StyledListOverviewWrapper >
             <NewListButton isVisible = {clicked} handleClick={() => { setClicked(!clicked) }} />
             <ListCreator isVisible = {clicked} activeUserData={props.activeUserData} />
-                <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase}/>
+                <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData}/>
         </StyledListOverviewWrapper>
     )
 }
