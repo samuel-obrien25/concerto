@@ -22,7 +22,7 @@ function Slide(props) {
 // #region STYLES
     const SlideIn = (props) => keyframes`
         from {
-            transform: ${props.animStyle === "fullScreen" ? "translateY(100vh)" : "translateY(50px)"};
+            transform: ${props.animStyle === "fullscreen" ? "translateY(100vh)" : "translateY(50px)"};
         }
         to {
             transform: translateY(0px);
@@ -35,7 +35,7 @@ function Slide(props) {
             transform: translateY(0px);
         }
         to {
-            transform: ${props.animStyle === "fullScreen" ? "translateY(-100vh)" : "translateY(-100px)"};
+            transform: ${props.animStyle === "fullscreen" ? "translateY(-100vh)" : "translateY(-100px)"};
             opacity: 0;
             display: none;
         }
