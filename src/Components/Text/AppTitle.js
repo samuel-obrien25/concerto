@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const StyledHeadline = styled.h1`
         position: relative;
-        color: rgba(255,255,255,.6);
+        color: rgba(255,255,255,.75);
         text-align:center;
         width: auto;
         font-size: 12vw;
@@ -27,7 +27,7 @@ class AppTitle extends React.Component {
         const mappedChars = separatedString.map((char, index) => {
 
             if (slideInOut === "in"){
-                return <Slide key={index} animDuration={index * 150 + 'ms'} animFillMode="forwards" animDelay="0" inOut="in" isForText={true}>{char}</Slide>;
+                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0" inOut="in" isForText={true}>{char}</Slide>;
             } else {
                 return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0s" inOut="out" isForText={true}>{char}</Slide>;
             }
