@@ -59,7 +59,7 @@ function ProfileMenu(props) {
 
     const signOut = () => {
         firebase.auth().signOut();
-        window.reload();
+        window.location.reload(false);
     }
 
     return (

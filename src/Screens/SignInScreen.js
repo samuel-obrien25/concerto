@@ -9,18 +9,14 @@ import styled from 'styled-components';
 const StyledSignInScreen = styled.div`
     width: 50vw;
     height: auto;
-    padding: 75px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     margin: auto;
+    margin-top: 60%;
     position: relative;
-    left: 0;
-    right: 0;
     z-index: 9000;
-    background-color: rgba(255,255,255,.9);
-    box-shadow: 0px 2px 4px 2px rgba(0,0,0,.32);
-    border-radius: 20px;
-`;
+    `;
 // #endregion
 
 const config = {
@@ -75,8 +71,7 @@ class SignInScreen extends React.Component {
         return (
             <Slide animDelay="0s" animDuration="1s" animFillMode="forwards" inOut="in" isForText={false}>
                 <StyledSignInScreen isSignedIn={this.state.isSignedIn}>
-                    <h1>My App</h1>
-                    <p>Please sign-in:</p>
+                    <p>Please sign up, or login below:</p>
                     <FirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
                 </StyledSignInScreen>
             </Slide>

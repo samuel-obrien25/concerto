@@ -8,22 +8,23 @@ function ScreenHandler(props) {
     const [isSplashActive, setIsSplashActive] = useState(true);
     const {activeDatabase, activeUser, isSignedIn} = props;
 
-    //function that waits 5 seconds to let data catch up from Firebase.
-    //Then checks if user props.isSignedIn === true.
+    //Checks if user props.isSignedIn === true.
     //If true, render null
     //If not, render SignInScreen.js
     function authCatchUp(){
         let signInScreen;
-        setTimeout(() => {
-            if(isSignedIn){
+            if (isSignedIn) {
+                console.log('check');
                 signInScreen = null;
-                setIsSplashActive(false);
+                setTimeout(() => {
+                    setIsSplashActive(false);
+                }, 2000)
+
             } else {
-                signInScreen = <SignInScreen isSignedIn={isSignedIn} />
+                signInScreen = <SignInScreen />
             }
             return signInScreen;
-        }, 5000);
-    }
+    };
 
     //Function that handles the logic for displaying the Dashboard.js.
     //If isSplashActive state === true, return null.
@@ -39,12 +40,12 @@ function ScreenHandler(props) {
 
 //Why is this re-rendering FIVE TIMES
 
-console.log(isSignedIn);
+console.log(authCatchUp());
 
     return (
         <div>
             <Slide inOut={isSplashActive ? "in" : "out"} animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true}>
-                <SplashScreen> {authCatchUp()}</SplashScreen>
+                <SplashScreen>{ authCatchUp() }</SplashScreen>
             </Slide>
            {handleDashboard()}
         </div>
