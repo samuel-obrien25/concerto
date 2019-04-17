@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const StyledListsContainer = styled.div`
     display: flex;
     min-width: 100%;
-    height: 250px;
+    height: 400px;
     width: auto;
     overflow-x: auto;
     transition: .2s ease-in-out;

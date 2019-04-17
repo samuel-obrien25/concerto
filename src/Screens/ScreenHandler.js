@@ -44,7 +44,7 @@ function ScreenHandler(props) {
 
     return (
         <div>
-            <Slide inOut={isSplashActive ? "in" : "out"} animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true}>
+            <Slide inOut={isSplashActive ? "in" : "out"} animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true} unmount={isSplashActive ? false : true}>
                 <SplashScreen>
                     <div>{authCatchUp()}</div>
                 </SplashScreen>

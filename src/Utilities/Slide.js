@@ -25,17 +25,17 @@ function Slide(props) {
             transform: ${props.animStyle === "fullscreen" ? "translateY(100vh)" : "translateY(50px)"};
         }
         to {
-            transform: translateY(0px);
+            transform: auto;
             opacity: 1;
             display: none;
         }
     `;
     const SlideOut = (props) => keyframes`
         from {
-            transform: translateY(0px);
+            transform: ${props.animStyle === "fullscreen" ? "translateY(-100vh)" : "translateY(-100px)"};
         }
         to {
-            transform: ${props.animStyle === "fullscreen" ? "translateY(-100vh)" : "translateY(-100px)"};
+            transform: auto;
             opacity: 0;
             display: none;
         }
@@ -53,7 +53,7 @@ function Slide(props) {
         text-align: ${props => props.isForText ? "center" : "left"};
         top:0;
         left: 0;
-        height: auto;
+        height: ${props => props.forFixed ? '100vh' : 'auto'};
         width: 100%;
         margin: auto;
         z-index: 9000;
@@ -61,7 +61,7 @@ function Slide(props) {
 
     // #endregion STYLES
 
-        const { animDelay, animDuration, animFillMode, animStyle, unmount, inOut, isForText } = props;
+        const { animDelay, animDuration, animFillMode, animStyle, unmount, inOut, isForText, forFixed } = props;
 
         function destroyChild() {
             if(unmount) {
@@ -77,7 +77,7 @@ function Slide(props) {
 
         if(!destroy){
             return (
-                <StyledSlide inOut = {inOut} isForText={isForText} animDelay={animDelay} animFillMode={animFillMode} animDuration={animDuration} animStyle={animStyle} unmount={unmount}>
+                <StyledSlide inOut = {inOut} isForText={isForText} animDelay={animDelay} animFillMode={animFillMode} animDuration={animDuration} animStyle={animStyle} unmount={unmount} forFixed={forFixed}>
                     {props.children}
                 </StyledSlide>
             );

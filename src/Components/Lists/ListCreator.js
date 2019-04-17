@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import firebase from 'firebase';
 
 const StyledForm = styled.form`
-    position: relative;
-    margin: auto;
+    position: absolute;
+    margin: 25px auto;
     transition: .3s ease-in-out;
     overflow: hidden;
     padding: 50px;
     border-radius: 10px;
     transform: ${props => props.isVisible ? 'scale(1)' : 'scale(0)'};
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
 `;
 
 function ListCreator(props) {

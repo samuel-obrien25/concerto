@@ -4,8 +4,8 @@ import styled from 'styled-components';
 // #region STYLES
 const StyledTextWrapper = styled.div`
         margin: auto;
-        margin-bottom: 0;
         text-align: center;
+        padding-top: 100px;
 `;
 const StyledH2 = styled.h2`
         position: relative;

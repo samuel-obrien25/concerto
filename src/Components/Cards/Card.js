@@ -6,8 +6,8 @@ import styled from 'styled-components';
 //#region Styles
 const StyledCard = styled.div`
     background-color: #fff;
-    height: 200px;
-    min-width: 200px;
+    height: 350px;
+    min-width: 250px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0,0,0,.2);
     margin: 10px;
