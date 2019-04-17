@@ -41,14 +41,14 @@ const StyledAddIcon = styled(AddIcon)`
 `;
 
 const IconLabel = styled.span`
-    padding: 10px 20px;
+    padding: 10px 25px;
     background-color: #fff;
-    color: rgba(0,0,0,.75);
+    color: rgba(0,0,0,.65);
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
     display: ${props => props.isExpanded ? 'block' : 'none'};
     margin-right: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 `;
 
 
@@ -57,16 +57,16 @@ const ListIconWrap = styled.div`
     bottom:0;
     right:0;
     margin: auto;
-    margin-right: 0px;
-    width: 50px;
-    height: 50px;
+    margin-right: 5px;
+    width: 40px;
+    height: 40px;
     padding: 10px;
     border-radius: 50%;
     display: flex;
     transition: .25s ease-in-out;
     background-color: red;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? "scale(1) translateY(-85px)" : "scale(0)"};
+    transform: ${props => props.isExpanded ? "scale(1) translateY(-90px)" : "scale(0)"};
     :hover {
         box-shadow: 0px 2px 16px rgba(0,0,0,.65);
     }
@@ -85,9 +85,9 @@ const MicIconWrap = styled.div`
     bottom:0;
     right:0;
     margin: auto;
-    margin-right: 0px;
-    width: 50px;
-    height: 50px;
+    margin-right: 5px;
+    width: 40px;
+    height: 40px;
     padding: 10px;
     border-radius: 50%;
     display: flex;
@@ -127,7 +127,7 @@ function Fab(props) {
     if(props.fabType === 'newConcert'){
         return (
             <IconWrapper>
-                <IconLabel isActive = {props.isExpanded}>Add Concert</IconLabel>
+                <IconLabel isExpanded = {props.isExpanded}>Add Concert</IconLabel>
                     <MicIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledMicIcon/>
                     </MicIconWrap>
@@ -137,7 +137,7 @@ function Fab(props) {
     if(props.fabType === 'newList'){
         return (
             <IconWrapper>
-                <IconLabel isActive = {props.isExpanded}>Add List</IconLabel>
+                <IconLabel isExpanded = {props.isExpanded}>Add List</IconLabel>
                     <ListIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledListIcon/>
                     </ListIconWrap>
