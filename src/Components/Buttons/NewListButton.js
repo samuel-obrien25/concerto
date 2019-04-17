@@ -5,7 +5,7 @@ import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
 //#region styles
 const StyledAddIcon = styled(AddIcon)`
     position: relative;
-    margin: 0 auto;
+    margin: auto;
     width: 75px;
     height: 75px;
     border: 2px solid rgba(0,0,0,.6);

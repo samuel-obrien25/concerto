@@ -46,6 +46,7 @@ const StyledIconContainer = styled.div`
     height: auto;
     width: auto;
     margin: auto;
+    text-align: center;
 `;
 
 const StyledIconBurst = styled.div`

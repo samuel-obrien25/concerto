@@ -7,10 +7,10 @@ import styled from 'styled-components';
 const StyledCard = styled.div`
     background-color: #fff;
     height: 200px;
-    width: 200px;
+    min-width: 200px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0,0,0,.2);
-    margin: auto;
+    margin: 10px;
     display: flex;
     overflow: hidden;
     position: relative;

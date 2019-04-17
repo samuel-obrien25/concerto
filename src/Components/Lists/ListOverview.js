@@ -5,17 +5,14 @@ import ListsContainer from './ListsContainer';
 import NewListButton from '../Buttons/NewListButton';
 
 //#region styles
-const StyledListOverviewWrapper = styled.section`
+
+const StyledSection = styled.section`
     position: relative;
     transition: .3s ease-in-out;
-    overflow: hidden;
     margin: auto;
     display: flex;
     flex-direction: column;
-    & *{
-        margin: auto;
-        text-align: left;
-    }
+    width: 100vw;
 `;
 
 //#endregion
@@ -30,11 +27,11 @@ function ListOverview(props) {
     }, 4000);
 
     return (
-        <StyledListOverviewWrapper >
-            <NewListButton isVisible = {clicked} handleClick={() => { setClicked(!clicked) }} />
-            <ListCreator isVisible = {clicked} activeUserData={props.activeUserData} />
-                <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData}/>
-        </StyledListOverviewWrapper>
+        <StyledSection>
+            <NewListButton isVisible={clicked} handleClick={() => { setClicked(!clicked) }} />
+            <ListCreator isVisible={clicked} activeUserData={props.activeUserData} />
+            <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData} />
+        </StyledSection>
     )
 }
 

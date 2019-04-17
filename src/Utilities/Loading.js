@@ -22,6 +22,7 @@ function Loading(props) {
         flex-direction: row;
         width: 50px;
         height: 50px;
+        margin: auto;
     `;
 
     const StyledLoading = styled.div`
