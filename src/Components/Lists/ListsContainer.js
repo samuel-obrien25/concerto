@@ -9,10 +9,11 @@ import styled from 'styled-components';
 const StyledListsContainer = styled.div`
     display: flex;
     flex-direction: row;
-    height: auto;
+    height: 250px;
     width: 100vw;
     margin: auto;
     overflow: scroll;
+    transition: .2s ease-in-out;
 `;
 
 function AllLists(props) {
@@ -43,9 +44,7 @@ function AllLists(props) {
     if(props.isLoaded){
         const mappedLists = rawLists.map((list, index) => {
             return (
-                <Slide key={index} inOut="in" animDelay={index * 300 + 's'} animDuration="300ms" animFillMode="forwards" isForText={false} >
                     <Card key={index} listTitle={list.listName} />
-                </Slide>
             )
         });
                 return (

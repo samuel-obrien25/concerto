@@ -25,8 +25,9 @@ function SplashScreen(props) {
         return (
                 <StyledSplashScreen isSignedIn={isSignedIn}>
                     <AppTitle text="CONCERTO" slideInOut={isSignedIn ? "out" : "in"} />
-                    <Icon />
                     {props.children}
+                <Icon />
+
                 </StyledSplashScreen>
         )
     }
