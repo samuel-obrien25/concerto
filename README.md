@@ -1,5 +1,5 @@
 ## Concerto
-An app for keeping track of your concert history.
+An app for keeping track of your concert history.\
 Check out the latest build: https://concerto-27f7d.firebaseapp.com/
 
 ## Feature Roadmap
