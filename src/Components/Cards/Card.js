@@ -2,6 +2,7 @@ import React from 'react';
 import Slide from '../../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 
 //#region Styles
 const StyledCard = styled.div`
@@ -15,7 +16,8 @@ const StyledCard = styled.div`
 `;
 const StyledListTitleContainer = styled.div`
     padding: 15px;
-
+    position: relative;
+    
     & h2, h3{
         text-align: left;
         margin: 0;
@@ -45,11 +47,13 @@ const StyledActionContainer = styled.div`
 
 // #endregion
 function Card(props) {
+
     return (
-        <StyledCard>
+        <StyledCard activeList = {props.activeList}>
             <StyledListTitleContainer>
                 <h2>{props.listTitle}</h2>
                 <h3>0 concerts</h3>
+                <ThreeDotMenu activeList = {props.activeList}/>
             </StyledListTitleContainer>
             <StyledCardImage/>
             <StyledActionContainer>
