@@ -19,17 +19,10 @@ function ActionMenu(props) {
         setIsExpanded(!isExpanded);
     }
 
-    const handleNewConcert = () => {
-        window.alert('newConcert')
-    }
-
-    const handleNewList = () => {
-        window.alert('newList')
-    }
         return (
             <StyledActionMenuWrapper>
-                <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
-                <Fab fabType='newList' handleClick={handleNewList} isExpanded={isExpanded} />
+                <Fab fabType='newConcert' handleClick={props.handleNewConcert} isExpanded={isExpanded} />
+                <Fab fabType='newList' handleClick={props.handleNewList} isExpanded={isExpanded} />
                 <Fab fabType='open' handleClick={handleOpen} isExpanded={isExpanded} />
             </StyledActionMenuWrapper>
         )
