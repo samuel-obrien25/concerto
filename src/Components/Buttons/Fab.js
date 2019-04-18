@@ -26,7 +26,7 @@ const AddIconWrap = styled.div`
     transition: .25s ease-in-out;
     background-color: orange;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? "rotate(45deg)" : "auto"};
+    transform: ${props => props.isExpanded ? "rotate(-45deg)" : "auto"};
     :hover {
         box-shadow: 0px 2px 16px rgba(0,0,0,.65);
     }
