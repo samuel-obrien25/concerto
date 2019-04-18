@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
-import { ReactComponent as ListIcon } from '../Icons/assets/list.svg';
 import { ReactComponent as MicIcon } from '../Icons/assets/microphone.svg';
 
 //#region styles
@@ -9,27 +8,48 @@ import { ReactComponent as MicIcon } from '../Icons/assets/microphone.svg';
 const IconWrapper = styled.div`
     display: flex;
     margin: auto;
-    width: auto;
+    width: 250px;
+    height: 100px;
 `;
 
-const AddIconWrap = styled.div`
-    position: absolute;
-    bottom:0;
-    right:0;
+const IconLabel = styled.span`
+    padding: 10px 25px;
+    background-color: #fff;
+    color: rgba(0,0,0,.65);
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,.45);
+    transition: .25s ease-in-out;
+    transform: ${props => props.isExpanded ? 'scale(1)' : 'scale(0)'};
+    opacity: ${props => props.isExpanded ? '1' : '0'};
+    transform-origin:top right;
     margin: auto;
     margin-right: 0px;
-    width: 50px;
-    height: 50px;
+`;
+
+const IconContainer = styled.div`
+    position: relative;
+    margin: auto;
+    margin-right:0;
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
     padding: 10px;
-    display: flex;
     border-radius: 50%;
-    transition: .25s ease-in-out;
-    background-color: orange;
+    display: flex;
+    transition: .2s ease-in-out;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? "rotate(-45deg)" : "auto"};
+    transform: ${props => props.isExpanded ? "scale(1)" : "scale(0)"};
+    opacity: ${props => props.isExpanded ? '1' : '0'};
+
     :hover {
         box-shadow: 0px 2px 16px rgba(0,0,0,.65);
     }
+`;
+
+const AddIconWrap = styled(IconContainer)`
+    background-color: green;
+    transform: ${props => props.isExpanded ? "rotate(-45deg) scale(1.25)" : "scale(1.25)"};
+    opacity: 1;
 `;
 
 const StyledAddIcon = styled(AddIcon)`
@@ -40,39 +60,12 @@ const StyledAddIcon = styled(AddIcon)`
     transform: scale(.85);
 `;
 
-const IconLabel = styled.span`
-    padding: 10px 25px;
-    background-color: #fff;
-    color: rgba(0,0,0,.65);
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    display: ${props => props.isExpanded ? 'block' : 'none'};
-    margin-right: 100px;
-    margin-bottom: 15px;
-`;
-
-
-const ListIconWrap = styled.div`
-    position: absolute;
-    bottom:0;
-    right:0;
-    margin: auto;
-    margin-right: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    border-radius: 50%;
-    display: flex;
-    transition: .25s ease-in-out;
+const ListIconWrap = styled(IconContainer)`
     background-color: red;
-    box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? "scale(1) translateY(-90px)" : "scale(0)"};
-    :hover {
-        box-shadow: 0px 2px 16px rgba(0,0,0,.65);
-    }
+    transition-delay: ${props => props.isExpanded ? '.1s' : '.2s'};
 `;
 
-const StyledListIcon = styled(ListIcon)`
+const StyledListIcon = styled(AddIcon)`
     fill: #fff;
     margin: auto;
     width: 100%;
@@ -80,24 +73,9 @@ const StyledListIcon = styled(ListIcon)`
     transform: scale(.85);
 `;
 
-const MicIconWrap = styled.div`
-    position: absolute;
-    bottom:0;
-    right:0;
-    margin: auto;
-    margin-right: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    border-radius: 50%;
-    display: flex;
-    transition: .25s ease-in-out;
-    background-color: black;
-    box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? "scale(1) translateY(-170px)" : "scale(0)"};
-    :hover {
-        box-shadow: 0px 2px 16px rgba(0,0,0,.65);
-    }
+const MicIconWrap = styled(IconContainer)`
+    background-color: orange;
+    transition-delay: ${props => props.isExpanded ? '.2s' : '.1s'};
 `;
 
 const StyledMicIcon = styled(MicIcon)`
@@ -106,6 +84,7 @@ const StyledMicIcon = styled(MicIcon)`
     width: 100%;
     height: 100%;
     transform: scale(.85);
+    
 `;
 
 
@@ -116,7 +95,7 @@ function Fab(props) {
 
     if(props.fabType === 'open'){
         return (
-            <IconWrapper>
+            <IconWrapper isExpanded = {props.isExpanded}>
                 <IconLabel isExpanded={props.isExpanded}>Close</IconLabel>
                     <AddIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledAddIcon />
@@ -126,7 +105,7 @@ function Fab(props) {
     }
     if(props.fabType === 'newConcert'){
         return (
-            <IconWrapper>
+            <IconWrapper isExpanded = {props.isExpanded}>
                 <IconLabel isExpanded = {props.isExpanded}>Add Concert</IconLabel>
                     <MicIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledMicIcon/>
@@ -136,7 +115,7 @@ function Fab(props) {
     }
     if(props.fabType === 'newList'){
         return (
-            <IconWrapper>
+            <IconWrapper isExpanded = {props.isExpanded}>
                 <IconLabel isExpanded = {props.isExpanded}>Add List</IconLabel>
                     <ListIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledListIcon/>

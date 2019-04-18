@@ -1,6 +1,4 @@
 import React from 'react';
-import Slide from '../../Utilities/Slide';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 
