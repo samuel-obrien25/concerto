@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
-import Slide from '../../Utilities/Slide';
 
 import styled from 'styled-components';
 
 const StyledListsContainer = styled.div`
     display: flex;
-    min-width: 100%;
-    height: 400px;
-    width: auto;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    width: 100%;
+    height:100%;
     transition: .2s ease-in-out;
+    overflow: auto;
+    padding: 0px 20px;
+    margin-left: -20px;
 `;
 
 function ListContainer(props) {
@@ -43,7 +44,7 @@ function ListContainer(props) {
     if(props.isLoaded){
         const mappedLists = rawLists.map((list, index) => {
             return (
-                    <Card key={index} listTitle={list.listName} />
+                <Card key={index} listTitle={list.listName} />
             )
         });
                 return (

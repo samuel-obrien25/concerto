@@ -51,7 +51,7 @@ function Dashboard(props) {
                     <Slide inOut="in" animDelay=".25s" animDuration="1s" animFillMode="forwards" >
                         <ProfileButton userImage={props.activeUserData.photoURL} />
                     </Slide>
-                    <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below, or add a new one:" />
+                    <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below:" />
                     <ListOverview activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
                 </StyledDashboard>
             </Slide>

@@ -6,7 +6,6 @@ body, html {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-height: 100vh;
 }
 
 code {

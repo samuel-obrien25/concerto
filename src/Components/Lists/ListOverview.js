@@ -10,7 +10,8 @@ const StyledSection = styled.section`
     margin: auto;
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 100%;
+    overflow: hidden;
 `;
 
 //#endregion

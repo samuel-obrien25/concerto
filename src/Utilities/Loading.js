@@ -23,6 +23,7 @@ function Loading(props) {
         width: 50px;
         height: 50px;
         margin: auto;
+        overflow: visible;
     `;
 
     const StyledLoading = styled.div`

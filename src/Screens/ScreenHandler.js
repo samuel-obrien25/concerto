@@ -3,7 +3,16 @@ import SplashScreen from './SplashScreen';
 import Dashboard from './Dashboard';
 import SignInScreen from './SignInScreen';
 import Slide from '../Utilities/Slide';
+import styled from 'styled-components';
 
+const StyledScreenHandler = styled.main`
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+`;
 function ScreenHandler(props) {
     const [isSplashActive, setIsSplashActive] = useState(true);
     const {activeDatabase, activeUser, isSignedIn} = props;
@@ -43,14 +52,14 @@ function ScreenHandler(props) {
     }
 
     return (
-        <div>
+        <StyledScreenHandler>
             <Slide inOut={isSplashActive ? "in" : "out"} animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true} unmount={isSplashActive ? false : true}>
                 <SplashScreen>
                     <div>{authCatchUp()}</div>
                 </SplashScreen>
             </Slide>
            {handleDashboard()}
-        </div>
+        </StyledScreenHandler>
     )
 }
 export default ScreenHandler;
