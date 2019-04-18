@@ -61,7 +61,7 @@ function CardOverflowMenu(props) {
     const deleteList = () => {
         const result = window.confirm("Are you sure you would like to permanently delete this list?");
         const user = firebase.auth().currentUser.uid;
-        const activeList = props.activeList
+        const activeList = props.activeList;
         const listRecipe = firebase.database().ref('users/' + user + '/lists/' + activeList.key);
 
         if(result){
