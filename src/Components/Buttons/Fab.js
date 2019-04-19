@@ -87,8 +87,6 @@ const StyledMicIcon = styled(MicIcon)`
     
 `;
 
-
-
 //#endregion
 
 function Fab(props) {

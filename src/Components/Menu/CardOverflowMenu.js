@@ -12,8 +12,8 @@ const StyledCardOverflowMenu = styled.div`
     transition: .25s ease-in-out;
     transform-origin: top right;
     position: absolute;
-    top: 30px;
-    right: 10px;
+    top: 40px;
+    right: 25px;
     overflow: hidden;
     display: flex;
     z-index: 9000;

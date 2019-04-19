@@ -46,9 +46,7 @@ function ListCreator(props) {
     //Function for handling input
     function handleInput(event) {
         //For reference: userData = firebase.auth().currentUser
-        const userData = props.activeUserData;
-        console.log("userdata: ", userData);
-        
+        const userData = props.activeUserData;        
         const listName = document.getElementById('listTitle').value;
         let   sanitizedListName;
 

@@ -33,8 +33,6 @@ function ScreenHandler(props) {
             return signInScreen;
     };
 
-    console.log(authCatchUp());
-
     //Function that handles the logic for displaying the Dashboard.js.
     //If isSplashActive state === true, return null.
     //Else, return Dashboard.js

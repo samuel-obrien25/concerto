@@ -43,7 +43,6 @@ function ListContainer(props) {
 
     if(props.isLoaded){
         const mappedLists = rawLists.map((list, index) => {
-            console.log(list);
             return (
                 <Card key={index} listTitle={list.listName} activeList={list}/>
             )

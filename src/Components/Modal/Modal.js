@@ -2,13 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import firebase from 'firebase';
 
-function Modal(props) {
-
     const StyledModalWrapper = styled.div`
         width: 100vw;
         height: 100vh;
         background-color: rgba(0,0,0,.5);
         display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: .25s ease-in-out;
+        opacity: ${props => props.isActive ? '1' : '0'};
+        transform: ${props => props.isActive ? 'auto' : 'translateY(100vh)'};
+        z-index: 9999;
     `;
     const StyledModal = styled.div`
         display: block;
@@ -18,7 +23,9 @@ function Modal(props) {
         background-color: white;
     `;
 
-const writeNewList = function(listName) {
+function Modal(props) {
+
+function writeNewList(listName) {
 
     //For reference: database = firebase.database()
     const database = firebase.database();
@@ -35,25 +42,27 @@ const writeNewList = function(listName) {
     return database.ref().update(updates);
 };
 
+    function handleClick(){
+        const inputVal = document.getElementById('modal_input').value;
 
-
-    const handleClick = function(){
-       const inputVal = document.getElementById('modal_input').value();
-
-       if (props.modalType === 'newList'){
+        if (props.modalType === 'newList') {
             writeNewList(inputVal);
-       }
+        }
     }
 
-    return (
-        <StyledModalWrapper>
+if(props.modalType === 'newList'){
+    return(
+        <StyledModalWrapper isActive={props.isModalActive}>
             <StyledModal>
-                <p>{props.modalPrompt}</p>
-                <input id="modal_input" type="text" name="input"/>
-                <button onClick={handleClick()}>{props.modalButtonText}</button>
+                <p>What would you like to name your new list?</p>
+                <input id="modal_input" type="text" name="input" />
+                <button onClick={handleClick}>Create List</button>
             </StyledModal>
         </StyledModalWrapper>
-    );
+
+    )
+}
+else return null
 }
 
 
