@@ -43,6 +43,7 @@ const IconContainer = styled.div`
 
     :hover {
         box-shadow: 0px 2px 16px rgba(0,0,0,.65);
+        cursor: pointer;
     }
 `;
 

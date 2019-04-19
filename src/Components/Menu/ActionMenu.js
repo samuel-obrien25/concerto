@@ -23,12 +23,12 @@ function ActionMenu(props) {
     }
 
     function handleNewConcert() {
-        setIsModalActive(!isModalActive);
+        setIsModalActive(true);
         setModalType('newConcert');
     }
 
     function handleNewList() {
-        setIsModalActive(!isModalActive);
+        setIsModalActive(true);
         setModalType('newList');
     }
 
