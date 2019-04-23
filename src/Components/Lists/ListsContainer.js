@@ -17,6 +17,11 @@ const StyledListsContainer = styled.div`
     margin-top: 10%;
     padding-left: 20px;
     justify-content: space-evenly;
+
+      @media (min-width: 700px) {
+        grid-template-columns: 30% 30% 30%;
+    }
+
 `;
 
 function ListContainer(props) {
