@@ -36,6 +36,7 @@ const StyledTrigger = styled.div`
 const StyledOverflowList = styled.ul`
     padding-left: 0px;
     display: flex;
+    flex-wrap: wrap;
     width: 90%;
     height: 100%;
     padding-bottom: 10px;
@@ -58,7 +59,7 @@ const StyledOverflowList = styled.ul`
 
 function CardOverflowMenu(props) {
 
-    const deleteList = () => {
+    function deleteList() {
         const result = window.confirm("Are you sure you would like to permanently delete this list?");
         const user = firebase.auth().currentUser.uid;
         const activeList = props.activeList;
@@ -70,11 +71,30 @@ function CardOverflowMenu(props) {
             return;
         }
     }
+
+    function favoriteList(){
+        const user = firebase.auth().currentUser.uid;
+        const activeList = props.activeList;
+        const database = firebase.database();
+
+            const listData = {
+                listName: activeList.listName
+            }
+            const newFavKey = firebase.database().ref().child('/users/' + user + '/lists/favorites/').push().key;
+
+            let updates = {};
+    
+            updates['users/' + user + '/lists/favorites/list' + newFavKey] = listData;
+
+        return database.ref().update(updates);
+
+    }
     return (
         <div>
             <StyledCardOverflowMenu isActive = {props.isActive} >
                 <StyledOverflowList > 
                     <li onClick = { deleteList }>Delete List</li>
+                    <li onClick={ favoriteList }>Add to Favorites</li>
                 </StyledOverflowList>
             </StyledCardOverflowMenu>
             <StyledTrigger onClick = { props.handleCloseTrigger } isActive = {props.isActive}/>

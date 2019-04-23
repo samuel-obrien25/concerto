@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
+import Action from '../Text/Action';
 
 //#region Styles
 const StyledCard = styled.div`
     background-color: #fff;
-    height: auto;
-    min-width: 47%;
-    border-radius: 12px;
+    height: ${props=>props.isExpanded ? '600px' : 'auto'};
+    border-radius: 6px;
     box-shadow: 0px 2px 4px rgba(0,0,0,.2);
-    margin: 10px auto;
-    overflow: hidden;
+    transition: .3s ease-in-out;
+    margin: 10px;
 `;
 const StyledListTitleContainer = styled.div`
     padding: 15px;
@@ -34,27 +34,39 @@ const StyledListTitleContainer = styled.div`
 `;
 
 const StyledCardImage = styled.div`
-    width: 100%;
-    height: 200px;
+    width: auto;
+    height: 150px;
+    margin: 10px;
     background-color: purple;
+    border-radius: 4px;
 `;
 
 const StyledActionContainer = styled.div`
     padding: 15px;
+    display: flex;
+    position: relative;
 `;
 
 // #endregion
 function Card(props) {
 
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    function setExpanded(){
+        setIsExpanded(!isExpanded)
+    }
+
     return (
-        <StyledCard activeList = {props.activeList}>
+        <StyledCard activeList = {props.activeList} isExpanded={isExpanded}>
+        <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{props.listTitle}</h2>
                 <h3>0 concerts</h3>
-                <ThreeDotMenu activeList = {props.activeList}/>
+                <ThreeDotMenu activeList={props.activeList} />
             </StyledListTitleContainer>
-            <StyledCardImage/>
+
             <StyledActionContainer>
+                <Action text='expand' isExpanded = {isExpanded} handleActionClick={setExpanded} actionIcon='expand'/>
             </StyledActionContainer>
         </StyledCard>
     );

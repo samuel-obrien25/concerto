@@ -6,14 +6,17 @@ import Loading from '../../Utilities/Loading';
 import styled from 'styled-components';
 
 const StyledListsContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 48% 48%;
     width: 100%;
-    height:100%;
+    height: 90%;
+    -webkit-transition: .2s ease-in-out;
     transition: .2s ease-in-out;
     overflow: auto;
-    padding: 0px 20px;
     margin-left: -20px;
+    margin-top: 10%;
+    padding-left: 20px;
+    justify-content: space-evenly;
 `;
 
 function ListContainer(props) {

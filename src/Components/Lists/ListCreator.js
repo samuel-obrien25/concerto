@@ -23,9 +23,8 @@ function ListCreator(props) {
     //function for writing new lists to the database
     function writeUserLists(userId, listName) {
 
-        //For reference: database = firebase.database()
         const database = firebase.database();
-    
+
         const listData = {
             listName: listName
         }
