@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
-
+import Slide from '../../Utilities/Slide';
 import styled from 'styled-components';
 
 const StyledListsContainer = styled.div`
     display: grid;
     grid-template-columns: 48% 48%;
     width: 100%;
-    height: 90%;
+    height: 100%;
     -webkit-transition: .2s ease-in-out;
     transition: .2s ease-in-out;
     overflow: auto;
@@ -24,6 +24,10 @@ const StyledListsContainer = styled.div`
 
 `;
 
+const StyledLoadingContainer = styled(StyledListsContainer)`
+    height: 500px;
+    display: flex;
+`;  
 function ListContainer(props) {
 
     //Store props.userLists in a const
@@ -56,15 +60,15 @@ function ListContainer(props) {
             )
         });
                 return (
-            <StyledListsContainer>
-                {mappedLists}
-            </StyledListsContainer>
+                <StyledListsContainer>
+                    {mappedLists}
+                </StyledListsContainer>
         )
     } else {
         return (
-            <StyledListsContainer>
+            <StyledLoadingContainer>
                 <Loading />
-            </StyledListsContainer>
+            </StyledLoadingContainer>
         )
     }
 
