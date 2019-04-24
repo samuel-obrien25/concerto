@@ -24,8 +24,13 @@ function ListOverview(props) {
         setListsLoaded(true);
     }, 4000);
 
+    if(props.refresh){
+        setListsLoaded(false);
+        setListsLoaded(true);
+    }
+
     return (
-        <StyledSection>
+        <StyledSection refresh = {props.refresh}>
             <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData} activelist ={props.activeList}/>
         </StyledSection>
     )

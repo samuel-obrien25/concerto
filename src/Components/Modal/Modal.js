@@ -32,7 +32,7 @@ function Modal(props) {
             <StyledModalWrapper isModalActive = {props.isModalActive}>
                 <StyledModal>
                     {props.children}
-                    <ListCreator isActive={props.isModalActive} handleClick = {props.handleClick}/>
+                    <ListCreator isActive={props.isModalActive} handleClick = {props.handleClick} refreshParent = {props.refresh}/>
                 </StyledModal>
             </StyledModalWrapper>
 

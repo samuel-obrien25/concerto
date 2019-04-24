@@ -70,7 +70,7 @@ function ActionMenu(props) {
 
         return (
             <StyledActionMenuWrapper>
-                <Modal modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                <Modal modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)} refresh = {props.refresh}>
                     <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
                         <StyledAddIcon/>
                     </StyledExitButton>

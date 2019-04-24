@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -30,16 +30,20 @@ const StyledDashboard = styled.div`
 
 // #endregion
 function Dashboard(props) {
+    const [shouldRefresh, setShouldRefresh] = useState(false);
     
 // #region PROPTYPES
         Dashboard.propTypes = {
             activeUserData: PropTypes.object.isRequired
         }
 // #endregion PROPTYPES    
+function refreshListOverview(){
+    setShouldRefresh(!shouldRefresh);
+}
 
     return (
         <StyledWrapper>
-            <ActionMenu />
+            <ActionMenu refresh = {refreshListOverview}/>
             <Slide inOut="in" animDelay="0s" animDuration=".5s" animFillMode="forwards" animStyle="fullscreen" isForText={false} >
                 <StyledDashboard activeDatabase={props.activeDatabase}>
                     <NavDrawer name={props.activeUserData.displayName} />
@@ -47,7 +51,7 @@ function Dashboard(props) {
                         <ProfileButton userImage={props.activeUserData.photoURL} />
                     </Slide>
                     <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below:" />
-                    <ListOverview activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
+                    <ListOverview refresh={shouldRefresh} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
                 </StyledDashboard>
             </Slide>
         </StyledWrapper>

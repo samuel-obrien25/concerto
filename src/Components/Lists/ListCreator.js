@@ -58,7 +58,7 @@ const CancelButton = styled(Button)`
     }
 `
 
-function ListCreator(props) {
+const ListCreator = ({ refreshParent, props }) => {
 
     const [reload, setReload] = useState(false);
     
@@ -76,9 +76,7 @@ function ListCreator(props) {
         const updates = {};
               updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
-              setReload(true);
-              setReload(false);
-
+              refreshParent();
         return database.ref().update(updates);
 
     };
@@ -108,7 +106,7 @@ function ListCreator(props) {
             <input onSubmit = { handleInput } id="listTitle" type="text" name="listTitle" placeholder="List Title"/>
             <ButtonContainer>
                 <CancelButton onClick = {props.handleClick}>Cancel</CancelButton>
-                <Button onClick={ handleInput }>Submit</Button>
+                <Button onClick={ handleInput } >Submit</Button>
             </ButtonContainer>
         </ListCreatorWrapper>
     )
