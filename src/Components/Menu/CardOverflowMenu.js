@@ -16,7 +16,7 @@ const StyledCardOverflowMenu = styled.div`
     right: 25px;
     overflow: hidden;
     display: flex;
-    z-index: 9000;
+    z-index: 8000;
 
     & * {
         margin: auto;
