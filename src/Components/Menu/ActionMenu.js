@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import Fab from '../Buttons/Fab';
 import Modal from '../Modal/Modal';
+import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
+
 
 const StyledActionMenuWrapper = styled.div`
     position: absolute;
@@ -11,6 +13,37 @@ const StyledActionMenuWrapper = styled.div`
     flex-direction: column;
     z-index: 9999;
 `;
+
+const StyledExitButton = styled.button`
+    border: none;
+    display: flex;
+    background-color: rgba(0,0,0,.3);
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    height: 30px;
+    width: 30px;
+    z-index: 9999;
+    transition: .15s ease-in-out;
+
+    :hover {
+        background-color: rgba(0,0,0,.45);
+        cursor: pointer;
+    }
+`;
+
+const StyledAddIcon = styled(AddIcon)`
+    margin: auto;
+    fill: #fff;
+    transform: rotate(45deg);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+`
+
 
 function ActionMenu(props) {
 
@@ -25,16 +58,23 @@ function ActionMenu(props) {
     function handleNewConcert() {
         setIsModalActive(true);
         setModalType('newConcert');
+        setIsExpanded(!isExpanded);
     }
 
     function handleNewList() {
         setIsModalActive(true);
         setModalType('newList');
+        setIsExpanded(!isExpanded);
     }
+
 
         return (
             <StyledActionMenuWrapper>
-                <Modal modalType={modalType} isModalActive={isModalActive}/>
+                <Modal modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                    <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
+                        <StyledAddIcon/>
+                    </StyledExitButton>
+                </Modal>
                 <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
                 <Fab fabType='newList' handleClick={handleNewList} isExpanded={isExpanded} />
                 <Fab fabType='open' handleClick={handleOpen} isExpanded={isExpanded} />

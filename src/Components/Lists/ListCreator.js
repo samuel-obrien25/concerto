@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import firebase from 'firebase';
 
-const StyledForm = styled.form`
+const ListCreatorWrapper = styled.section`
     transition: .3s ease-in-out;
     transform: ${props => props.isActive ? 'scale(1)' : 'scale(0)'};
     text-align: center;
@@ -85,7 +85,7 @@ function ListCreator(props) {
 
 
     //Function for handling input
-    function handleInput(event) {
+    function handleInput() {
         //For reference: userData = firebase.auth().currentUser
         const userData = props.activeUserData;        
         const listName = document.getElementById('listTitle').value;
@@ -99,19 +99,18 @@ function ListCreator(props) {
         //Thank you Mozilla <3
         sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
         
-        event.preventDefault();
         return writeUserLists(userData.uid, sanitizedListName);
     }
 
     return (
-        <StyledForm isActive = {props.isActive} reload={reload} >
+        <ListCreatorWrapper isActive = {props.isActive} reload={reload} >
             <h2>Create a new list:</h2>
             <input onSubmit = { handleInput } id="listTitle" type="text" name="listTitle" placeholder="List Title"/>
             <ButtonContainer>
                 <CancelButton onClick = {props.handleClick}>Cancel</CancelButton>
                 <Button onClick={ handleInput }>Submit</Button>
             </ButtonContainer>
-        </StyledForm>
+        </ListCreatorWrapper>
     )
 }
 

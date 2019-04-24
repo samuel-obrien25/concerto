@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
 import ListCreator from '../Lists/ListCreator';
 
     const StyledModalWrapper = styled.div`
@@ -24,60 +23,16 @@ import ListCreator from '../Lists/ListCreator';
         background-color: white;
         position: relative;
     `;
-    const StyledExitButton = styled.button`
-        border: none;
-        display: flex;
-        background-color: rgba(0,0,0,.3);
-        border-radius: 50%;
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        height: 30px;
-        width: 30px;
-        z-index: 9999;
-        transition: .15s ease-in-out;
-
-        :hover {
-            background-color: rgba(0,0,0,.45);
-            cursor: pointer;
-        }
-    `;
-
-    const StyledAddIcon = styled(AddIcon)`
-        margin: auto;
-        fill: #fff;
-        transform: rotate(45deg);
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: absolute;
-    `
 
 function Modal(props) {
 
-    const [isActive, setIsActive] = useState(props.isModalActive);
 
     if(props.modalType === 'newList'){
         return(
-            <StyledModalWrapper isModalActive ={props.isModalActive}>
+            <StyledModalWrapper isModalActive = {props.isModalActive}>
                 <StyledModal>
-                    <StyledExitButton onClick={() => setIsActive(!isActive)}>
-                        <StyledAddIcon/>
-                    </StyledExitButton>
-                    <ListCreator isActive={props.isModalActive}/>
-                </StyledModal>
-            </StyledModalWrapper>
-
-        )
-    }
-    if(props.modalType === 'newConcert'){
-        return(
-            <StyledModalWrapper isActive={isActive}>
-                <StyledModal>
-                    <StyledExitButton onClick={() => setIsActive(!isActive)}>
-                        <StyledAddIcon />
-                    </StyledExitButton>
+                    {props.children}
+                    <ListCreator isActive={props.isModalActive} handleClick = {props.handleClick}/>
                 </StyledModal>
             </StyledModalWrapper>
 
