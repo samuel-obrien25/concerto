@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
-
-import firebase from 'firebase';
+import ListCreator from '../Lists/ListCreator';
 
     const StyledModalWrapper = styled.div`
         width: 100vw;
@@ -23,62 +22,50 @@ import firebase from 'firebase';
         height: 400px;
         margin: auto;
         background-color: white;
+        position: relative;
     `;
     const StyledExitButton = styled.button`
         border: none;
         display: flex;
-        background-color: rgba(0,0,0,.5);
+        background-color: rgba(0,0,0,.3);
+        border-radius: 50%;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        height: 30px;
+        width: 30px;
+        z-index: 9999;
+        transition: .15s ease-in-out;
+
+        :hover {
+            background-color: rgba(0,0,0,.45);
+            cursor: pointer;
+        }
     `;
 
     const StyledAddIcon = styled(AddIcon)`
         margin: auto;
         fill: #fff;
+        transform: rotate(45deg);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
     `
 
 function Modal(props) {
 
     const [isActive, setIsActive] = useState(props.isModalActive);
 
-    function writeNewList(listName) {
-
-        //For reference: database = firebase.database()
-        const database = firebase.database();
-
-        const listData = {
-            listName: listName
-        }
-
-        const newListKey = database.ref().child('list').push().key;
-
-        const updates = {};
-            updates['users/' + firebase.auth().currentUser.uid + '/lists/list' + newListKey] = listData;
-
-        return database.ref().update(updates);
-    };
-
-    function submitList(){
-        const inputVal = document.getElementById('modal_input').value;
-
-        if (props.modalType === 'newList') {
-            writeNewList(inputVal);
-        }
-    }
-
-    function closeModal(){
-        setIsActive(false);
-    }
-
-    console.log(props.isModalActive);
     if(props.modalType === 'newList'){
         return(
-            <StyledModalWrapper isActive={isActive} isModalActive ={props.isModalActive}>
+            <StyledModalWrapper isModalActive ={props.isModalActive}>
                 <StyledModal>
-                    <StyledExitButton onClick={closeModal}>
+                    <StyledExitButton onClick={() => setIsActive(!isActive)}>
                         <StyledAddIcon/>
                     </StyledExitButton>
-                    <p>What would you like to name your new list?</p>
-                    <input id="modal_input" type="text" name="input" />
-                    <button onClick={submitList}>Create List</button>
+                    <ListCreator isActive={props.isModalActive}/>
                 </StyledModal>
             </StyledModalWrapper>
 
@@ -88,12 +75,9 @@ function Modal(props) {
         return(
             <StyledModalWrapper isActive={isActive}>
                 <StyledModal>
-                    <StyledExitButton onClick={closeModal}>
+                    <StyledExitButton onClick={() => setIsActive(!isActive)}>
                         <StyledAddIcon />
                     </StyledExitButton>
-                    <p>What concert would you like to add?</p>
-                    <input id="modal_input" type="text" name="input" />
-                    <button onClick={submitList}>Add concert</button>
                 </StyledModal>
             </StyledModalWrapper>
 
