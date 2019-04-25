@@ -75,7 +75,7 @@ function ActionMenu(props) {
 
         return (
             <StyledActionMenuWrapper>
-                <Modal shouldRefresh={props.shouldRefresh} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} allLists={props.allLists} writeConcert={props.writeConcert} modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                <Modal rawLists = {props.rawLists} shouldRefresh={props.shouldRefresh} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} allLists={props.allLists} writeConcert={props.writeConcert} modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
                     <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
                         <StyledAddIcon/>
                     </StyledExitButton>

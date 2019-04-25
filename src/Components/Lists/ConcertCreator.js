@@ -65,7 +65,7 @@ function ConcertCreator(props) {
             <h2>Add a new concert:</h2>
             <input onSubmit={props.writeConcert} id="concertTitle" type="text" name="concertTitle" placeholder="Concert Title" />
             <h2>Which list would you like to add this concert to?</h2>
-            <ListCheckbox allLists={props.allLists} />
+            <ListCheckbox rawLists={props.rawLists} />
             <ButtonContainer>
                 <CancelButton onClick={props.closeModal}>Cancel</CancelButton>
                 <Button onClick={props.writeConcert}>Submit</Button>

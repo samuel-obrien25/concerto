@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import ListOverview from '../Components/Lists/ListOverview';
 import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
 import ActionMenu from '../Components/Menu/ActionMenu';
 import firebase from 'firebase';
+
 //#region Styles
 
 const StyledWrapper = styled.section`
@@ -31,6 +32,7 @@ const StyledDashboard = styled.div`
 // #endregion
 function Dashboard(props) {
     const [shouldRefresh, setShouldRefresh] = useState(false);
+    const [rawLists, setRawLists] = useState();
 
 // Modal Functions
     function writeUserLists(userId, listName) {
@@ -66,9 +68,29 @@ function Dashboard(props) {
         writeUserLists(userData.uid, sanitizedListName);
     }
 
+
+    useEffect(() => {
+        setRawLists(() => {
+            const activeUserData = props.activeUserData;
+            const activeDatabase = firebase.database();
+            let returnArr = [],
+                //Sort here in the future, if so desired
+                userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
+
+            userListsRef.on('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    const item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+                    returnArr.push(item);
+                });
+            });
+            return returnArr;
+        });
+    }, [props.activeUserData]);
+
     return (
         <StyledWrapper>
-            <ActionMenu writeList = {handleInput} shouldRefresh = {shouldRefresh} />
+            <ActionMenu rawLists={rawLists} writeList = {handleInput} shouldRefresh = {shouldRefresh} />
             <Slide inOut="in" animDelay="0s" animDuration=".5s" animFillMode="forwards" animStyle="fullscreen" isForText={false} >
                 <StyledDashboard activeDatabase={props.activeDatabase}>
                     <NavDrawer name={props.activeUserData.displayName} />
@@ -76,7 +98,7 @@ function Dashboard(props) {
                         <ProfileButton userImage={props.activeUserData.photoURL} />
                     </Slide>
                     <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below:" />
-                    <ListOverview shouldRefresh = {shouldRefresh} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
+                    <ListOverview rawLists = {rawLists} shouldRefresh = {shouldRefresh} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
                 </StyledDashboard>
             </Slide>
         </StyledWrapper>

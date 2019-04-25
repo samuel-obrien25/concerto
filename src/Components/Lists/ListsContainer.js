@@ -30,7 +30,6 @@ const StyledLoadingContainer = styled(StyledListsContainer)`
 function ListContainer(props) {
 
     //Store props.userLists in a const
-    const [rawLists, setRawLists] = useState();
     const [shouldRefresh, setShouldRefresh] = useState(false);
 
     //The issue is here. Why so many re-renders?
@@ -68,24 +67,9 @@ function ListContainer(props) {
         return activeDatabase.ref().update(updates);
     }
 
-    useEffect(() => {
-        setRawLists(() => {
-            let returnArr = [],
-            //Sort here in the future, if so desired
-                userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
-
-            userListsRef.on('value', function (snapshot) {
-                snapshot.forEach(function (childSnapshot) {
-                    const item = childSnapshot.val();
-                    item.key = childSnapshot.key;
-                    returnArr.push(item);
-                });
-            });
-            return returnArr;
-        });
-    }, [shouldRefresh]);
-
     if(props.isLoaded){
+        let rawLists = props.rawLists;
+
         const mappedLists = rawLists.map((list, index) => {
             return (
                 <Card shouldRefresh={shouldRefresh} key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
