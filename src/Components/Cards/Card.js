@@ -57,7 +57,7 @@ function Card(props) {
     }
 
     return (
-        <StyledCard activeList = {props.activeList} isExpanded={isExpanded}>
+        <StyledCard activeList = {props.activeList} isExpanded={isExpanded} shouldRefresh={props.shouldRefresh}>
         <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{props.listTitle}</h2>

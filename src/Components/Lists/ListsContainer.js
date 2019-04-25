@@ -31,6 +31,7 @@ function ListContainer(props) {
 
     //Store props.userLists in a const
     const [rawLists, setRawLists] = useState();
+    const [shouldRefresh, setShouldRefresh] = useState(false);
 
     //The issue is here. Why so many re-renders?
     let activeUserData = props.activeUserData,
@@ -46,6 +47,7 @@ function ListContainer(props) {
 
         if (result) {
             listRecipe.remove();
+            setShouldRefresh(!shouldRefresh);
         } else {
             return;
         }
@@ -63,14 +65,8 @@ function ListContainer(props) {
 
         updates['users/' + user + '/lists/favorites/list' + newFavKey] = listData;
 
-        console.log(updates);
-/*
-        if (activeList) {
-            return activeDatabase.ref().update(updates);
-        } else {
-            return
-        }
-        */
+        setShouldRefresh(true);
+        return activeDatabase.ref().update(updates);
     }
 
     useEffect(() => {
@@ -87,12 +83,12 @@ function ListContainer(props) {
             });
             return returnArr;
         });
-    }, []);
+    }, [shouldRefresh]);
 
     if(props.isLoaded){
         const mappedLists = rawLists.map((list, index) => {
             return (
-                <Card key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
+                <Card shouldRefresh={shouldRefresh} key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
             )
         });
                 return (
