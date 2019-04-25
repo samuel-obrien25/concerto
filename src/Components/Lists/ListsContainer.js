@@ -37,7 +37,6 @@ function ListContainer(props) {
     let activeUserData = props.activeUserData,
         activeDatabase = firebase.database();
 
-
     //Card Overflow Functions
     function deleteList(activeList) {
         if(!activeList) { return };
@@ -72,6 +71,7 @@ function ListContainer(props) {
     useEffect(() => {
         setRawLists(() => {
             let returnArr = [],
+            //Sort here in the future, if so desired
                 userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
 
             userListsRef.on('value', function (snapshot) {
