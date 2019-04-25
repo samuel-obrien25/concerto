@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Fab from '../Buttons/Fab';
 import Modal from '../Modal/Modal';
@@ -67,10 +67,15 @@ function ActionMenu(props) {
         setIsExpanded(!isExpanded);
     }
 
+    useEffect(() => {
+        if(props.shouldRefresh){
+            setIsModalActive(false);
+        }
+    }, [props.shouldRefresh]);
 
         return (
             <StyledActionMenuWrapper>
-                <Modal modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                <Modal shouldRefresh={props.shouldRefresh} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
                     <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
                         <StyledAddIcon/>
                     </StyledExitButton>

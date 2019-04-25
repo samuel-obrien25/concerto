@@ -58,57 +58,15 @@ const CancelButton = styled(Button)`
     }
 `
 
-function ListCreator(props) {
-
-    const [reload, setReload] = useState(false);
-    
-    //function for writing new lists to the database
-    function writeUserLists(userId, listName) {
-
-        const database = firebase.database();
-
-        const listData = {
-            listName: listName
-        }
-
-        const newListKey = database.ref().child('list').push().key;
-
-        const updates = {};
-              updates['users/' + userId + '/lists/list' + newListKey] = listData;
-
-              setReload(true);
-              setReload(false);
-
-        return database.ref().update(updates);
-
-    };
-
-
-    //Function for handling input
-    function handleInput() {
-        //For reference: userData = firebase.auth().currentUser
-        const userData = props.activeUserData;        
-        const listName = document.getElementById('listTitle').value;
-        let   sanitizedListName;
-
-
-        if(!listName) {
-            window.alert('Please enter a name for your list');
-        }
-
-        //Thank you Mozilla <3
-        sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-        
-        return writeUserLists(userData.uid, sanitizedListName);
-    }
+function ListCreator( props ) {
 
     return (
-        <ListCreatorWrapper isActive = {props.isActive} reload={reload} >
+        <ListCreatorWrapper isActive = {props.isActive} >
             <h2>Create a new list:</h2>
-            <input onSubmit = { handleInput } id="listTitle" type="text" name="listTitle" placeholder="List Title"/>
+            <input onSubmit = { props.writeList } id="listTitle" type="text" name="listTitle" placeholder="List Title"/>
             <ButtonContainer>
-                <CancelButton onClick = {props.handleClick}>Cancel</CancelButton>
-                <Button onClick={ handleInput }>Submit</Button>
+                <CancelButton onClick = {props.closeModal}>Cancel</CancelButton>
+                <Button onClick={ props.writeList }>Submit</Button>
             </ButtonContainer>
         </ListCreatorWrapper>
     )

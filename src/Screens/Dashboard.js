@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ import ProfileButton from '../Components/Buttons/ProfileButton';
 import ListOverview from '../Components/Lists/ListOverview';
 import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
 import ActionMenu from '../Components/Menu/ActionMenu';
-
+import firebase from 'firebase';
 //#region Styles
 
 const StyledWrapper = styled.section`
@@ -30,16 +30,50 @@ const StyledDashboard = styled.div`
 
 // #endregion
 function Dashboard(props) {
-    
-// #region PROPTYPES
-        Dashboard.propTypes = {
-            activeUserData: PropTypes.object.isRequired
+    const [shouldRefresh, setShouldRefresh] = useState(false);
+
+// Modal Functions
+    //function for writing new lists to the database
+    function writeUserLists(userId, listName) {
+
+        const database = firebase.database();
+
+        const listData = {
+            listName: listName
         }
-// #endregion PROPTYPES    
+
+        const newListKey = database.ref().child('list').push().key;
+
+        const updates = {};
+        updates['users/' + userId + '/lists/list' + newListKey] = listData;
+
+        setShouldRefresh(true);
+        return database.ref().update(updates);
+
+    };
+
+    //Function for handling input
+    function handleInput() {
+        //For reference: userData = firebase.auth().currentUser
+        const userData = props.activeUserData;
+        const listName = document.getElementById('listTitle').value;
+        let sanitizedListName;
+
+
+        if (!listName) {
+            return window.alert('Please enter a name for your list');
+        }
+
+        //Thank you Mozilla <3
+        sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+
+        writeUserLists(userData.uid, sanitizedListName);
+    }
+
 
     return (
         <StyledWrapper>
-            <ActionMenu />
+            <ActionMenu writeList = {handleInput} shouldRefresh = {shouldRefresh} />
             <Slide inOut="in" animDelay="0s" animDuration=".5s" animFillMode="forwards" animStyle="fullscreen" isForText={false} >
                 <StyledDashboard activeDatabase={props.activeDatabase}>
                     <NavDrawer name={props.activeUserData.displayName} />
@@ -47,10 +81,15 @@ function Dashboard(props) {
                         <ProfileButton userImage={props.activeUserData.photoURL} />
                     </Slide>
                     <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below:" />
-                    <ListOverview activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
+                    <ListOverview shouldRefresh = {shouldRefresh} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
                 </StyledDashboard>
             </Slide>
         </StyledWrapper>
     );
 }
 export default Dashboard;
+// #region PROPTYPES
+Dashboard.propTypes = {
+    activeUserData: PropTypes.object.isRequired
+}
+// #endregion PROPTYPES

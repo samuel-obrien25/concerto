@@ -29,10 +29,10 @@ function Modal(props) {
 
     if(props.modalType === 'newList'){
         return(
-            <StyledModalWrapper isModalActive = {props.isModalActive}>
+            <StyledModalWrapper isModalActive = {props.isModalActive} >
                 <StyledModal>
                     {props.children}
-                    <ListCreator isActive={props.isModalActive} handleClick = {props.handleClick}/>
+                    <ListCreator writeList={props.writeList} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
                 </StyledModal>
             </StyledModalWrapper>
 
