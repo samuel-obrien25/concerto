@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ListCreator from '../Lists/ListCreator';
+import ConcertCreator from '../Lists/ConcertCreator';
 
     const StyledModalWrapper = styled.div`
         width: 100vw;
@@ -17,8 +18,8 @@ import ListCreator from '../Lists/ListCreator';
     `;
     const StyledModal = styled.div`
         display: block;
-        width: 300px;
-        height: 400px;
+        width: 400px;
+        height: 600px;
         margin: auto;
         background-color: white;
         position: relative;
@@ -33,6 +34,16 @@ function Modal(props) {
                 <StyledModal>
                     {props.children}
                     <ListCreator writeList={props.writeList} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
+                </StyledModal>
+            </StyledModalWrapper>
+        )
+    }
+    if(props.modalType === 'newConcert') {
+        return (
+            <StyledModalWrapper isModalActive = {props.isModalActive} >
+                <StyledModal>
+                    {props.children}
+                    <ConcertCreator allLists = {props.allLists} writeConcert={props.wroteConcert} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
                 </StyledModal>
             </StyledModalWrapper>
 

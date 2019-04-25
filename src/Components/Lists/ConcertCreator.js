@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import ListCheckbox from './ListCheckbox';
 
-const ListCreatorWrapper = styled.section`
+const ConcertCreatorWrapper = styled.section`
     transition: .3s ease-in-out;
     transform: ${props => props.isActive ? 'scale(1)' : 'scale(0)'};
     text-align: center;
@@ -55,21 +56,23 @@ const CancelButton = styled(Button)`
         border: 2px solid gray;
         color: #fff;
     }
-`
+`;
 
-function ListCreator( props ) {
+function ConcertCreator(props) {
 
     return (
-        <ListCreatorWrapper isActive = {props.isActive} >
-            <h2>Create a new list:</h2>
-            <input onSubmit = { props.writeList } id="listTitle" type="text" name="listTitle" placeholder="List Title"/>
+        <ConcertCreatorWrapper isActive={props.isActive}>
+            <h2>Add a new concert:</h2>
+            <input onSubmit={props.writeConcert} id="concertTitle" type="text" name="concertTitle" placeholder="Concert Title" />
+            <h2>Which list would you like to add this concert to?</h2>
+            <ListCheckbox allLists={props.allLists} />
             <ButtonContainer>
-                <CancelButton onClick = {props.closeModal}>Cancel</CancelButton>
-                <Button onClick={ props.writeList }>Submit</Button>
+                <CancelButton onClick={props.closeModal}>Cancel</CancelButton>
+                <Button onClick={props.writeConcert}>Submit</Button>
             </ButtonContainer>
-        </ListCreatorWrapper>
+        </ConcertCreatorWrapper>
     )
 }
 
 
-export default ListCreator;
+export default ConcertCreator;
