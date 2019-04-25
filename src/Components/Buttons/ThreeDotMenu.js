@@ -41,7 +41,7 @@ function ThreeDotMenu(props) {
             <Dot/>
             <Dot/>
             <Dot/>
-            <CardOverflowMenu isActive = {isActive} activeList = {props.activeList}/>
+            <CardOverflowMenu isActive = {isActive} activeList = {props.activeList} favoriteList = {props.favoriteList} deleteList = {props.deleteList}/>
         </StyledThreeDotWrapper>
     );
 }

@@ -30,8 +30,8 @@ function ListOverview(props) {
     }
 
     return (
-        <StyledSection shouldRefresh = {props.shouldRefresh}>
-            <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData} activelist ={props.activeList}/>
+        <StyledSection shouldRefresh = {props.shouldRefresh} >
+            <ListsContainer isLoaded={listsLoaded} activeUserData={props.activeUserData} activelist ={props.activeList} favoriteList = {props.favoriteList} deleteList={props.deleteList}/>
         </StyledSection>
     )
 }

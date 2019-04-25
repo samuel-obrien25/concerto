@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -33,18 +33,15 @@ function Dashboard(props) {
     const [shouldRefresh, setShouldRefresh] = useState(false);
 
 // Modal Functions
-    //function for writing new lists to the database
     function writeUserLists(userId, listName) {
 
         const database = firebase.database();
-
+        const newListKey = database.ref().child('list').push().key;
         const listData = {
             listName: listName
         }
-
-        const newListKey = database.ref().child('list').push().key;
-
         const updates = {};
+
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
         setShouldRefresh(true);
@@ -52,7 +49,6 @@ function Dashboard(props) {
 
     };
 
-    //Function for handling input
     function handleInput() {
         //For reference: userData = firebase.auth().currentUser
         const userData = props.activeUserData;
@@ -69,7 +65,6 @@ function Dashboard(props) {
 
         writeUserLists(userData.uid, sanitizedListName);
     }
-
 
     return (
         <StyledWrapper>

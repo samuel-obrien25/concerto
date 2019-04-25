@@ -62,7 +62,7 @@ function Card(props) {
             <StyledListTitleContainer>
                 <h2>{props.listTitle}</h2>
                 <h3>0 concerts</h3>
-                <ThreeDotMenu activeList={props.activeList} />
+                <ThreeDotMenu activeList={props.activeList} favoriteList = {props.favoriteList} deleteList = {props.deleteList}/>
             </StyledListTitleContainer>
 
             <StyledActionContainer>

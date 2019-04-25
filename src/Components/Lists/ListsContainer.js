@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
-import Slide from '../../Utilities/Slide';
 import styled from 'styled-components';
 
 const StyledListsContainer = styled.div`
@@ -37,6 +36,43 @@ function ListContainer(props) {
     let activeUserData = props.activeUserData,
         activeDatabase = firebase.database();
 
+
+    //Card Overflow Functions
+    function deleteList(activeList) {
+        if(!activeList) { return };
+        const result = window.confirm("Are you sure you would like to permanently delete this list?");
+        const user = firebase.auth().currentUser.uid;
+        const listRecipe = activeDatabase.ref('users/' + user + '/lists/' + activeList.key);
+
+        if (result) {
+            listRecipe.remove();
+        } else {
+            return;
+        }
+    }
+
+    function favoriteList(activeList) {
+        const user = activeUserData.uid;
+
+        const listData = {
+            listName: activeList.listName
+        }
+        const newFavKey = firebase.database().ref().child('/users/' + user + '/lists/favorites/').push().key;
+
+        let updates = {};
+
+        updates['users/' + user + '/lists/favorites/list' + newFavKey] = listData;
+
+        console.log(updates);
+/*
+        if (activeList) {
+            return activeDatabase.ref().update(updates);
+        } else {
+            return
+        }
+        */
+    }
+
     useEffect(() => {
         setRawLists(() => {
             let returnArr = [],
@@ -56,7 +92,7 @@ function ListContainer(props) {
     if(props.isLoaded){
         const mappedLists = rawLists.map((list, index) => {
             return (
-                <Card key={index} listTitle={list.listName} activeList={list}/>
+                <Card key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
             )
         });
                 return (
