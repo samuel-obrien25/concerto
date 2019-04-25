@@ -56,7 +56,7 @@ function Slide(props) {
         height: ${props => props.forFixed ? '100vh' : 'auto'};
         width: 100%;
         margin: auto;
-        z-index: 9000;
+        z-index: 1;
     `;
 
     // #endregion STYLES

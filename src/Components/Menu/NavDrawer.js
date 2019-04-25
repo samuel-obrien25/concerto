@@ -74,7 +74,7 @@ const StyledCloseTrigger = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 8000;
+    z-index: 8999;
     transform: ${props => props.isVisible ? 'auto' : 'translateX(-100%)'};
     background-color: rgba(0,0,0,.2);
 `;

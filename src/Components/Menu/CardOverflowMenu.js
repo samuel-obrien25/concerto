@@ -29,7 +29,7 @@ const StyledTrigger = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 8000;
+    z-index: 7900;
     transform: ${props => props.isActive ? "scale(1)" : "scale(0)"};
 `;
 
