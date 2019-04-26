@@ -13,14 +13,24 @@ const StyledScreenHandler = styled.main`
     left: 0;
     overflow: hidden;
 `;
+
+const AuthWrapper = styled.div`
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+`;
 function ScreenHandler(props) {
     const [isSplashActive, setIsSplashActive] = useState(true);
     const {activeDatabase, activeUser, isSignedIn} = props;
 
-    //Checks if user props.isSignedIn === true.
-    //If true, render null
-    //If not, render SignInScreen.js
+    // Checks if user props.isSignedIn === true.
+    // If true, render null
+    // If not, render SignInScreen.js
     function authCatchUp(){
+        
         let signInScreen;
             if (isSignedIn) {
                 signInScreen = null;
@@ -30,12 +40,12 @@ function ScreenHandler(props) {
             } else {
                     signInScreen = <SignInScreen isSignedIn={false} />
             }
-            return signInScreen;
+                return signInScreen;
     };
 
-    //Function that handles the logic for displaying the Dashboard.js.
-    //If isSplashActive state === true, return null.
-    //Else, return Dashboard.js
+    // Function that handles the logic for displaying the Dashboard.js.
+    // If isSplashActive state === true, return null.
+    // Else, return Dashboard.js
     function handleDashboard(){
         let dashboard =                 
             <Slide inOut='in' animDelay='0s' animDuration='1s' animFillMode='forwards' isForText={false} fullscreen={true}>
@@ -48,13 +58,14 @@ function ScreenHandler(props) {
                 return dashboard;
             }
     }
-
+    // BUG: I cannot figure out how to stop the splashscreen from re rendering once isSignedIn is passed.
+    //      Adding an animation delay of .5s allows the prop to pass without triggering a rerender.
     return (
         <StyledScreenHandler>
-            <Slide inOut={isSplashActive ? 'in' : 'out'} animDelay='0s' animDuration='1s' animFillMode='forwards' isForText={false} fullscreen={true} unmount={isSplashActive ? false : true}>
-                <SplashScreen>
-                    <div>{authCatchUp()}</div>
-                </SplashScreen>
+            <Slide inOut={isSplashActive ? 'in' : 'out'} animDelay='.5s' animDuration='1s' animFillMode='forwards' isForText={false} fullscreen={true} unmount={isSplashActive ? false : true}>
+                <AuthWrapper>{authCatchUp()}
+                    </AuthWrapper>
+                <SplashScreen/>
             </Slide>
            {handleDashboard()}
         </StyledScreenHandler>
