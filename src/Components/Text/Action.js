@@ -6,29 +6,29 @@ import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
 
 // #region STYLES
     const StyledAction = styled.div`
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    `;
     
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-
-    p{
+    const StyledText = styled.p`
         color: purple;
         font-family: 'Roboto';
         text-transform: uppercase;
         display: inline-flex;
         padding: 10px;
         margin: auto;
+        transition: .25s ease-in-out;
+        transform: ${props=>props.isExpanded ? 'translateY(75px)' : 'auto'};
 
         :hover{
             cursor: pointer;
         }
-
-    }
     `;
 
     const StyledIconWrapper = styled.div`
         margin: auto;
-        transition: .2s ease-in-out;
+        transition: .3s ease-in-out;
         transform: ${props=>props.isExpanded ? 'rotate(180deg)' : 'auto'};
         border-radius: 50%;
         width: 30px;
@@ -76,8 +76,8 @@ function Action(props) {
         return icon;
     }
     return (
-        <StyledAction onClick={props.handleActionClick}>
-            <p>{props.text}</p>
+        <StyledAction onClick={props.handleActionClick} isExpanded = {props.isExpanded}>
+            <StyledText isExpanded = {props.isExpanded}>{props.text}</StyledText>
             {currentIcon()}
         </StyledAction>
     );

@@ -45,7 +45,8 @@ const StyledCardImage = styled.div`
 const StyledActionContainer = styled.div`
     padding: 15px;
     display: flex;
-    position: relative;
+    transition: .3s ease-in-out;
+    transform: ${props => props.isExpanded ? 'translateY(225px)' : 'auto'};
 `;
 // #endregion
 
@@ -85,8 +86,8 @@ function Card(props) {
                 <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} />
             </StyledListTitleContainer>
 
-            <StyledActionContainer>
-                <Action text='expand' isExpanded={isExpanded} handleActionClick={setExpanded} actionIcon='expand' />
+            <StyledActionContainer isExpanded = {isExpanded}>
+                <Action text={isExpanded ? 'Hide' : 'Expand'} isExpanded={isExpanded} handleActionClick={setExpanded} actionIcon='expand' />
             </StyledActionContainer>
         </StyledCard>
     );
