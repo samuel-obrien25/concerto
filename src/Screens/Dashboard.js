@@ -83,7 +83,8 @@ function Dashboard(props) {
             let updates = {};
 
             updates['users/' + userId + '/lists/' + selection.value + '/concertList'] = concertData;
-
+            
+            setShouldRefresh(true);
             return database.ref().update(updates);
         })
     };

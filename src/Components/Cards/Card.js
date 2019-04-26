@@ -56,12 +56,30 @@ function Card(props) {
         setIsExpanded(!isExpanded)
     }
 
+    function getNumberOfConcerts(){
+        const list = props.activeList;
+
+        let count;
+
+        if(list.concertList){
+            count = Object.keys(list.concertList).length;
+        } else {
+            count = 0;
+        }
+
+        if(count === 1){
+            return count + ' concert';
+        } else {
+            return count + ' concerts'
+        }
+    }
+
     return (
         <StyledCard activeList = {props.activeList} isExpanded={isExpanded} shouldRefresh={props.shouldRefresh}>
         <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{props.listTitle}</h2>
-                <h3>0 concerts</h3>
+                <h3>{getNumberOfConcerts()}</h3>
                 <ThreeDotMenu activeList={props.activeList} favoriteList = {props.favoriteList} deleteList = {props.deleteList}/>
             </StyledListTitleContainer>
 
