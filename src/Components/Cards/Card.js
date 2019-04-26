@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 import Action from '../Text/Action';
+import List from '../Lists/List';
 import PropTypes from 'prop-types';
 
 //#region Styles
@@ -85,7 +86,7 @@ function Card(props) {
                 <h3>{getNumberOfConcerts()}</h3>
                 <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} />
             </StyledListTitleContainer>
-
+            <List isVisible = {isExpanded} listData = {props.activeList}/>
             <StyledActionContainer isExpanded = {isExpanded}>
                 <Action text={isExpanded ? 'Hide' : 'Expand'} isExpanded={isExpanded} handleActionClick={setExpanded} actionIcon='expand' />
             </StyledActionContainer>

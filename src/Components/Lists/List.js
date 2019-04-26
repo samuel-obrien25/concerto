@@ -28,6 +28,7 @@ const slide = () => keyframes`
 const StyledContainer = styled.div`
     background-color:linear-gradient(to top left, #FDC830, #F37335);
     animation: ${slide} 300ms forwards ease-in-out;
+    transform: ${props=>props.isVisible ? 'scale(1)' : 'scale(0)'};
 `;
 
 const StyledDiv = styled.div`
@@ -78,34 +79,44 @@ class List extends Component {
         });
     }
 
+    mapConcerts = () => {
+        this.state.items.map((concert, index) => {
+            if(concert.concertName){
+                return (
+                    <Draggable key={concert.key} draggableId={concert.key} index={index}>
+                        {(provided) => (
+                            <StyledDiv
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                            >
+                                <ListDragIcon />
+                                <StyledListName>{concert.concertName}</StyledListName>
+                            </StyledDiv>
+                        )}
+                    </Draggable>
+                )
+            } else {
+                return null
+            }
+        })
+    }
+
     // Normally you would want to split things out into separate components.
     // But in this example everything is just done in one place for simplicity
     render() {
+        console.log("test", this.state.items);
+                
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <StyledContainer>
+                <StyledContainer isVisible = {this.props.isVisible}>
                     <Droppable droppableId='droppable'>
                         {(provided) => (
                             <div
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
-                                <h2>LISTS</h2>
-
-                                {this.state.items.map((item, index) => (
-                                    <Draggable key={item.key} draggableId={item.key} index={index}>
-                                        {(provided) => (
-                                            <StyledDiv
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                            <ListDragIcon />
-                                                <StyledListName>{item.listName}</StyledListName>
-                                            </StyledDiv>
-                                        )}
-                                    </Draggable>
-                                ))}
+                                {this.mapConcerts}
                                 {provided.placeholder}
                             </div>
                         )}
