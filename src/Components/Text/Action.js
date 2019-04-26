@@ -20,7 +20,6 @@ import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
         margin: auto;
 
         :hover{
-            background-color: #f8f8f8;
             cursor: pointer;
         }
 
@@ -31,6 +30,19 @@ import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
         margin: auto;
         transition: .2s ease-in-out;
         transform: ${props=>props.isExpanded ? 'rotate(180deg)' : 'auto'};
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        padding: 5px;
+
+        :hover{
+            background-color: #f4f4f4;
+            cursor: pointer;
+        }
+        :active{
+            background-color: lightgray;
+        }
     `;
 
     const StyledExpand = styled(Expand)`
