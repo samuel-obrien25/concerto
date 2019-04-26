@@ -13,7 +13,7 @@ const StyledNavDrawer = styled.section`
     width: 300px;
     height: 100vh;
     transform: ${props => props.isActive ? 'auto' : 'translateX(-100%)'};
-    transition: .4s ease-in-out;
+    transition: .3s cubic-bezier(0.4,0.0,0.2,1);;
     overflow: hidden;
     z-index: 9000;
     box-shadow: ${props => props.isActive ? '0px 0px 18px rgba(0, 0, 0, .15)' : 'auto'};

@@ -43,7 +43,7 @@ function Modal(props) {
             <StyledModalWrapper isModalActive = {props.isModalActive} >
                 <StyledModal>
                     {props.children}
-                    <ConcertCreator rawLists = {props.rawLists} writeConcert={props.wroteConcert} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
+                    <ConcertCreator rawLists = {props.rawLists} writeConcert={props.writeConcert} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
                 </StyledModal>
             </StyledModalWrapper>
 

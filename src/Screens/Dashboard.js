@@ -51,7 +51,7 @@ function Dashboard(props) {
 
     };
 
-    function handleInput() {
+    function handleListInput() {
         //For reference: userData = firebase.auth().currentUser
         const userData = props.activeUserData;
         const listName = document.getElementById('listTitle').value;
@@ -66,6 +66,43 @@ function Dashboard(props) {
         sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 
         writeUserLists(userData.uid, sanitizedListName);
+    }
+
+    function writeUserConcert(userId, concertName) {
+
+        const database = firebase.database();
+        const checkedLists = document.querySelectorAll('.listCheckbox:checked');
+
+        let concertData = {}
+
+        checkedLists.forEach((selection) => {
+            console.log(selection.value);
+
+            concertData.concertName = concertName;
+
+            let updates = {};
+
+            updates['users/' + userId + '/lists/' + selection.value + '/concertList'] = concertData;
+
+            return database.ref().update(updates);
+        })
+    };
+
+    function handleConcertInput() {
+        //For reference: userData = firebase.auth().currentUser
+        const userData = props.activeUserData;
+        const concertName = document.getElementById('concertTitle').value;
+        let sanitizedConcertName;
+
+
+        if (!concertName) {
+            return window.alert('Please enter a name for your concert');
+        }
+
+        //Thank you Mozilla <3
+        sanitizedConcertName = concertName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+
+        writeUserConcert(userData.uid, sanitizedConcertName);
     }
 
 
@@ -90,7 +127,7 @@ function Dashboard(props) {
 
     return (
         <StyledWrapper>
-            <ActionMenu rawLists={rawLists} writeList = {handleInput} shouldRefresh = {shouldRefresh} />
+            <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} shouldRefresh = {shouldRefresh} />
             <Slide inOut="in" animDelay="0s" animDuration=".5s" animFillMode="forwards" animStyle="fullscreen" isForText={false} >
                 <StyledDashboard activeDatabase={props.activeDatabase}>
                     <NavDrawer name={props.activeUserData.displayName} />

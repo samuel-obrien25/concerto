@@ -14,10 +14,11 @@ const StyledLabel = styled.label`
 function ListCheckbox(props) {
     const lists = props.rawLists;
     const mappedLists = lists.map((list, index) => {
+
         return (
-        <StyledLabel>
+        <StyledLabel key = {index}>
             {list.listName}
-            <input type="checkbox" value={list.listName} name={index} />
+            <input className='listCheckbox' type="checkbox" value={list.key} name={index} />
         </StyledLabel>
         );
     });
