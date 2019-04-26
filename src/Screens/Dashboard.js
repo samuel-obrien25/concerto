@@ -145,6 +145,6 @@ function Dashboard(props) {
 export default Dashboard;
 // #region PROPTYPES
 Dashboard.propTypes = {
-    activeUserData: PropTypes.object.isRequired
+    activeUserData: PropTypes.object
 }
 // #endregion PROPTYPES
