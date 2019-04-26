@@ -22,7 +22,7 @@ function ListOverview(props) {
 
     setTimeout(() => {
         setListsLoaded(true);
-    }, 4000);
+    }, 2000);
 
     if(props.refresh){
         setListsLoaded(false);

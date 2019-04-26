@@ -5,24 +5,35 @@ import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
 
 
 // #region STYLES
-    const StyledAction = styled.p`
+    const StyledAction = styled.div`
+    
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+
+    p{
         color: purple;
         font-family: 'Roboto';
         text-transform: uppercase;
         display: inline-flex;
         padding: 10px;
-        margin-left: -10px;
-        margin-right: auto;
-        margin-bottom: 0px;
+        margin: auto;
 
         :hover{
             background-color: #f8f8f8;
+            cursor: pointer;
         }
+
+    }
+    `;
+
+    const StyledIconWrapper = styled.div`
+        margin: auto;
+        transition: .2s ease-in-out;
+        transform: ${props=>props.isExpanded ? 'rotate(180deg)' : 'auto'};
     `;
 
     const StyledExpand = styled(Expand)`
-        transform: ${props=>props.isExpanded ? 'rotate(180deg)' : 'auto'};
-        transition: .2s ease-in-out;
         fill: rgba(0,0,0,.85);
         margin: auto;
     `;
@@ -40,7 +51,10 @@ function Action(props) {
     function currentIcon(){
         let icon;
         if(props.actionIcon === 'expand'){
-            icon = <StyledExpand isExpanded = {props.isExpanded} />
+            icon = 
+                <StyledIconWrapper isExpanded = {props.isExpanded}>
+                     <StyledExpand  />
+                </StyledIconWrapper>
         }
 
         if(props.actionIcon === 'favorite'){
@@ -50,10 +64,10 @@ function Action(props) {
         return icon;
     }
     return (
-    <StyledAction onClick={props.handleActionClick}>
-    {props.text}
-    {currentIcon()}
-    </StyledAction>
+        <StyledAction onClick={props.handleActionClick}>
+            <p>{props.text}</p>
+            {currentIcon()}
+        </StyledAction>
     );
 
 
