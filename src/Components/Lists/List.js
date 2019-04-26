@@ -13,7 +13,7 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-const slide = (props) => keyframes`
+const slide = () => keyframes`
         0% {
             opacity: 0;
             transform: translateY(50px);

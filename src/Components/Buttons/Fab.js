@@ -94,7 +94,7 @@ function Fab(props) {
 
     if(props.fabType === 'open'){
         return (
-            <IconWrapper isExpanded = {props.isExpanded}>
+            <IconWrapper>
                 <IconLabel isExpanded={props.isExpanded}>Close</IconLabel>
                     <AddIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledAddIcon />
@@ -104,7 +104,7 @@ function Fab(props) {
     }
     if(props.fabType === 'newConcert'){
         return (
-            <IconWrapper isExpanded = {props.isExpanded}>
+            <IconWrapper>
                 <IconLabel isExpanded = {props.isExpanded}>Add Concert</IconLabel>
                     <MicIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledMicIcon/>
@@ -114,7 +114,7 @@ function Fab(props) {
     }
     if(props.fabType === 'newList'){
         return (
-            <IconWrapper isExpanded = {props.isExpanded}>
+            <IconWrapper>
                 <IconLabel isExpanded = {props.isExpanded}>Add List</IconLabel>
                     <ListIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledListIcon/>

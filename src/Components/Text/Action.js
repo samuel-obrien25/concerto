@@ -44,7 +44,7 @@ function Action(props) {
         }
 
         if(props.actionIcon === 'favorite'){
-            icon = <StyledFavorite isExpanded = {props.isExpanded} />
+            icon = <StyledFavorite />
         }
 
         return icon;
