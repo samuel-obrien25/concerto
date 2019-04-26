@@ -22,7 +22,7 @@ function Slide(props) {
 // #region STYLES
     const SlideIn = (props) => keyframes`
         from {
-            transform: ${props.animStyle === "fullscreen" ? "translateY(100vh)" : "translateY(50px)"};
+            transform: ${props.animStyle === 'fullscreen' ? 'translateY(100vh)' : 'translateY(50px)'};
         }
         to {
             transform: auto;
@@ -32,7 +32,7 @@ function Slide(props) {
     `;
     const SlideOut = (props) => keyframes`
         from {
-            transform: ${props.animStyle === "fullscreen" ? "translateY(-100vh)" : "translateY(-100px)"};
+            transform: ${props.animStyle === 'fullscreen' ? 'translateY(-100vh)' : 'translateY(-100px)'};
         }
         to {
             transform: auto;
@@ -43,14 +43,14 @@ function Slide(props) {
 
 
     const StyledSlide = styled.div`
-        animation: ${props => props.inOut === "in" ? SlideIn : SlideOut};
+        animation: ${props => props.inOut === 'in' ? SlideIn : SlideOut};
         animation-delay: ${props => props.animDelay};
         animation-fill-mode: ${props => props.animFillMode};
         animation-duration: ${props => props.animDuration};
         opacity: 0;
         display: flex;
-        position: ${props => props.isForText ? "relative" : "absolute"};
-        text-align: ${props => props.isForText ? "center" : "left"};
+        position: ${props => props.isForText ? 'relative' : 'absolute'};
+        text-align: ${props => props.isForText ? 'center' : 'left'};
         top:0;
         left: 0;
         height: ${props => props.forFixed ? '100vh' : 'auto'};

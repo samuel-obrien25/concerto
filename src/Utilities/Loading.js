@@ -41,9 +41,9 @@ function Loading(props) {
 
         return (
             <StyledLoadingWrapper>
-                <StyledLoading delay="0s" />
-                <StyledLoading delay=".15s" />
-                <StyledLoading delay=".3s" />
+                <StyledLoading delay='0s' />
+                <StyledLoading delay='.15s' />
+                <StyledLoading delay='.3s' />
             </StyledLoadingWrapper>
         );
 }

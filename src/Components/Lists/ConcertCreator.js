@@ -63,7 +63,7 @@ function ConcertCreator(props) {
     return (
         <ConcertCreatorWrapper isActive={props.isActive}>
             <h2>Add a new concert:</h2>
-            <input onSubmit={props.writeConcert} id="concertTitle" type="text" name="concertTitle" placeholder="Concert Title" />
+            <input onSubmit={props.writeConcert} id='concertTitle' type='text' name='concertTitle' placeholder='Concert Title' />
             <h2>Which list would you like to add this concert to?</h2>
             <ListCheckbox rawLists={props.rawLists} />
             <ButtonContainer>

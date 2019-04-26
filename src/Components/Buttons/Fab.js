@@ -38,7 +38,7 @@ const IconContainer = styled.div`
     display: flex;
     transition: .2s ease-in-out;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? "scale(1)" : "scale(0)"};
+    transform: ${props => props.isExpanded ? 'scale(1)' : 'scale(0)'};
     opacity: ${props => props.isExpanded ? '1' : '0'};
 
     :hover {
@@ -49,7 +49,7 @@ const IconContainer = styled.div`
 
 const AddIconWrap = styled(IconContainer)`
     background-color: green;
-    transform: ${props => props.isExpanded ? "rotate(-45deg) scale(1.25)" : "scale(1.25)"};
+    transform: ${props => props.isExpanded ? 'rotate(-45deg) scale(1.25)' : 'scale(1.25)'};
     opacity: 1;
 `;
 

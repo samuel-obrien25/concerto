@@ -68,7 +68,7 @@ class SignInScreen extends React.Component {
            return null
         }
         return (
-            <Slide animDelay="0s" animDuration="1s" animFillMode="forwards" inOut="in" isForText={true}>
+            <Slide animDelay='0s' animDuration='1s' animFillMode='forwards' inOut='in' isForText={true}>
                 <StyledSignInScreen isSignedIn={this.state.isSignedIn}>
                     <p>Please sign up, or login below:</p>
                     <FirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />

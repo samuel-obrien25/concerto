@@ -23,13 +23,13 @@ class AppTitle extends React.Component {
         const { text, slideInOut } = this.props;
 
         const inputString = text;
-        const separatedString = inputString.split("");
+        const separatedString = inputString.split('');
         const mappedChars = separatedString.map((char, index) => {
 
-            if (slideInOut === "in"){
-                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0" inOut="in" isForText={true}>{char}</Slide>;
+            if (slideInOut === 'in'){
+                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode='forwards' animDelay='0' inOut='in' isForText={true}>{char}</Slide>;
             } else {
-                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode="forwards" animDelay="0s" inOut="out" isForText={true}>{char}</Slide>;
+                return <Slide key={index} animDuration={index * 300 + 'ms'} animFillMode='forwards' animDelay='0s' inOut='out' isForText={true}>{char}</Slide>;
             }
         })
 

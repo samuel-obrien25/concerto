@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import React, { Component } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styled, { keyframes } from 'styled-components';
-import ListDragIcon from "../Icons/ListDragIcon";
+import ListDragIcon from '../Icons/ListDragIcon';
 
 
 // a little function to help us with reordering the result
@@ -84,7 +84,7 @@ class List extends Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <StyledContainer>
-                    <Droppable droppableId="droppable">
+                    <Droppable droppableId='droppable'>
                         {(provided) => (
                             <div
                                 {...provided.droppableProps}

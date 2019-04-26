@@ -38,7 +38,7 @@ const StyledMenuButtonWrapper = styled.section`
 const MenuButton = (props) => {
     return (
 
-        <StyledMenuButtonWrapper role="button" active={props.isActive} onClick={props.handleClick}>
+        <StyledMenuButtonWrapper role='button' active={props.isActive} onClick={props.handleClick}>
 
             <StyledMenuButtonTop
                 active={props.isActive}

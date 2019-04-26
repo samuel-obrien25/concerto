@@ -7,7 +7,7 @@ const StyledCardOverflowMenu = styled.div`
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0px 2px 6px rgba(0,0,0,.25);
-    transform: ${props => props.isActive ? "scale(1)" : "scale(0)"};
+    transform: ${props => props.isActive ? 'scale(1)' : 'scale(0)'};
     transition: .25s ease-in-out;
     transform-origin: top right;
     position: absolute;
@@ -29,7 +29,7 @@ const StyledTrigger = styled.div`
     width: 100vw;
     height: 100vh;
     z-index: 7900;
-    transform: ${props => props.isActive ? "scale(1)" : "scale(0)"};
+    transform: ${props => props.isActive ? 'scale(1)' : 'scale(0)'};
 `;
 
 const StyledOverflowList = styled.ul`

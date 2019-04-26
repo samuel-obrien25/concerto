@@ -18,7 +18,7 @@ function ListCheckbox(props) {
         return (
         <StyledLabel key = {index}>
             {list.listName}
-            <input className='listCheckbox' type="checkbox" value={list.key} name={index} />
+            <input className='listCheckbox' type='checkbox' value={list.key} name={index} />
         </StyledLabel>
         );
     });

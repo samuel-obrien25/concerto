@@ -38,7 +38,7 @@ function ScreenHandler(props) {
     //Else, return Dashboard.js
     function handleDashboard(){
         let dashboard =                 
-            <Slide inOut='in' animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true}>
+            <Slide inOut='in' animDelay='0s' animDuration='1s' animFillMode='forwards' isForText={false} fullscreen={true}>
                    <Dashboard activeUserData={activeUser} activeDatabase={activeDatabase} />
             </Slide>;
             
@@ -51,7 +51,7 @@ function ScreenHandler(props) {
 
     return (
         <StyledScreenHandler>
-            <Slide inOut={isSplashActive ? "in" : "out"} animDelay="0s" animDuration="1s" animFillMode="forwards" isForText={false} fullscreen={true} unmount={isSplashActive ? false : true}>
+            <Slide inOut={isSplashActive ? 'in' : 'out'} animDelay='0s' animDuration='1s' animFillMode='forwards' isForText={false} fullscreen={true} unmount={isSplashActive ? false : true}>
                 <SplashScreen>
                     <div>{authCatchUp()}</div>
                 </SplashScreen>

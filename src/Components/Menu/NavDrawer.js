@@ -102,7 +102,7 @@ function NavDrawer (props) {
                 </StyledNavHeader>
                 <hr />
                 <StyledNavMenu onClick={handleNavClick}>
-                    <li data-value="allConcerts"><MusicNote /><span>All Concerts</span></li>
+                    <li data-value='allConcerts'><MusicNote /><span>All Concerts</span></li>
                 </StyledNavMenu>
             </StyledNavDrawer>
             <StyledCloseTrigger isVisible = { isVisible } onClick={() => setIsVisible(!isVisible)}/>

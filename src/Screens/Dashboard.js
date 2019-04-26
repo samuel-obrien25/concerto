@@ -129,13 +129,13 @@ function Dashboard(props) {
     return (
         <StyledWrapper>
             <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} shouldRefresh = {shouldRefresh} />
-            <Slide inOut="in" animDelay="0s" animDuration=".5s" animFillMode="forwards" animStyle="fullscreen" isForText={false} >
+            <Slide inOut='in' animDelay='0s' animDuration='.5s' animFillMode='forwards' animStyle='fullscreen' isForText={false} >
                 <StyledDashboard activeDatabase={props.activeDatabase}>
                     <NavDrawer name={props.activeUserData.displayName} />
-                    <Slide inOut="in" animDelay=".25s" animDuration="1s" animFillMode="forwards" >
+                    <Slide inOut='in' animDelay='.25s' animDuration='1s' animFillMode='forwards' >
                         <ProfileButton userImage={props.activeUserData.photoURL} />
                     </Slide>
-                    <DashboardWelcomeText h2text="Wecome to Concerto!" h3text="Choose a list below:" />
+                    <DashboardWelcomeText h2text='Wecome to Concerto!' h3text='Choose a list below:' />
                     <ListOverview rawLists = {rawLists} shouldRefresh = {shouldRefresh} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
                 </StyledDashboard>
             </Slide>

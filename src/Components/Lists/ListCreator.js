@@ -62,7 +62,7 @@ function ListCreator( props ) {
     return (
         <ListCreatorWrapper isActive = {props.isActive} >
             <h2>Create a new list:</h2>
-            <input onSubmit = { props.writeList } id="listTitle" type="text" name="listTitle" placeholder="List Title"/>
+            <input onSubmit = { props.writeList } id='listTitle' type='text' name='listTitle' placeholder='List Title'/>
             <ButtonContainer>
                 <CancelButton onClick = {props.closeModal}>Cancel</CancelButton>
                 <Button onClick={ props.writeList }>Submit</Button>

@@ -39,7 +39,7 @@ function ListContainer(props) {
     //Card Overflow Functions
     function deleteList(activeList) {
         if(!activeList) { return };
-        const result = window.confirm("Are you sure you would like to permanently delete this list?");
+        const result = window.confirm('Are you sure you would like to permanently delete this list?');
         const user = firebase.auth().currentUser.uid;
         const listRecipe = activeDatabase.ref('users/' + user + '/lists/' + activeList.key);
 
