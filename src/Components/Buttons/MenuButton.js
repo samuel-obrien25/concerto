@@ -8,7 +8,7 @@ const StyledMenuButtonTop = styled.div`
     height: 2px;
     background-color: rgba(0,0,0,.85);
     margin: auto;
-    transition: .4s ease-in-out;
+    transition: .3s cubic-bezier(0.4,0.0,0.2,1);
     transform: ${props => props.active ? 'rotate(-45deg) scaleX(.6) translate(-20px , -5px)' : 'rotate(180deg)'};
 `;
 const StyledMenuButtonMid = styled(StyledMenuButtonTop)`

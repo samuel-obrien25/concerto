@@ -80,7 +80,7 @@ class List extends Component {
     }
 
     mapConcerts = () => {
-        this.state.items.map((concert, index) => {
+        Object.values(this.state.items).map((concert, index) => {
             if(concert.concertName){
                 return (
                     <Draggable key={concert.key} draggableId={concert.key} index={index}>
@@ -105,8 +105,8 @@ class List extends Component {
     // Normally you would want to split things out into separate components.
     // But in this example everything is just done in one place for simplicity
     render() {
-        console.log("test", this.state.items);
-                
+        console.log("test", Object.values(this.state.items));
+
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <StyledContainer isVisible = {this.props.isVisible}>
