@@ -45,8 +45,9 @@ function Dashboard(props) {
         const updates = {};
 
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
-
+        console.log(newListKey);
         setShouldRefresh(true);
+        setShouldRefresh(false);
         return database.ref().update(updates);
 
     };
@@ -72,19 +73,18 @@ function Dashboard(props) {
 
         const database = firebase.database();
         const checkedLists = document.querySelectorAll('.listCheckbox:checked');
+        const concertKey = database.ref().child('list').push().key;
 
         let concertData = {};
-        let val = 0;
 
         checkedLists.forEach((selection) => {
-            concertData.val = concertName;
+            concertData = concertName;
 
             let updates = {};
 
-            updates['users/' + userId + '/lists/' + selection.value + '/concertList'] = concertData;
+            updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
             
             setShouldRefresh(true);
-            val++
             return database.ref().update(updates);
         })
     };
