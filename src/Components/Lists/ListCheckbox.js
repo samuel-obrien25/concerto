@@ -24,9 +24,9 @@ function ListCheckbox(props) {
     });
 
     return (
-        <div>
+        <React.Fragment>
             {mappedLists}
-        </div>
+        </React.Fragment>
     )
 }
 

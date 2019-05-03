@@ -63,14 +63,14 @@ function ProfileMenu(props) {
     }
 
     return (
-        <div>
+        <React.Fragment>
             <StyledProfileMenu isActive = {props.isActive} >
                 <StyledProfileList > 
                     <li onClick = { signOut }>Sign Out</li>
                 </StyledProfileList>
             </StyledProfileMenu>
             <StyledTrigger onClick = { props.handleCloseTrigger } isActive = {props.isActive}/>
-        </div>
+        </React.Fragment>
     );
 }
 

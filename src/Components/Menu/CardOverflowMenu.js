@@ -58,7 +58,7 @@ const StyledOverflowList = styled.ul`
 
 function CardOverflowMenu(props) {
     return (
-        <div>
+        <React.Fragment>
             <StyledCardOverflowMenu isActive = {props.isActive} >
                 <StyledOverflowList > 
                     <li onClick = { props.deleteList }>Delete List</li>
@@ -66,7 +66,7 @@ function CardOverflowMenu(props) {
                 </StyledOverflowList>
             </StyledCardOverflowMenu>
             <StyledTrigger onClick = { props.handleCloseTrigger } isActive = {props.isActive}/>
-        </div>
+        </React.Fragment>
     );
 }
 
