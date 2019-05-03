@@ -47,9 +47,7 @@ function Dashboard(props) {
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
         setShouldRefresh(true);
-        setShouldRefresh(false);
         return database.ref().update(updates);
-
     };
 
     function handleListInput() {
@@ -86,7 +84,6 @@ function Dashboard(props) {
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
             
             setShouldRefresh(true);
-            setShouldRefresh(false);
             return database.ref().update(updates);
         })
     };

@@ -13,6 +13,7 @@ const StyledCard = styled.div`
     box-shadow: 0px 2px 4px rgba(0,0,0,.2);
     transition: .3s ease-in-out;
     margin: 10px;
+    position: relative;
 `;
 const StyledListTitleContainer = styled.div`
     padding: 15px;
