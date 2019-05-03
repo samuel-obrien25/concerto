@@ -15,7 +15,7 @@ const StyledThreeDotWrapper = styled.div`
     :hover{
         cursor: pointer;
     }
-    :hover > div{
+    :hover > .sc-dxgOiQ{
         background-color: rgba(0,0,0,.85);
     }
 `;
