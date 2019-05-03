@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 const StyledProfileMenu = styled.div`
     width: 200px;
-    height: 150px;
+    height: auto;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0px 2px 6px rgba(0,0,0,.25);
@@ -38,15 +38,15 @@ const StyledProfileList = styled.ul`
     display: flex;
     width: 90%;
     height: 100%;
+    padding: 10px;
 
     & li {
-        border-radius: 10px;
+        border-radius: 5px;
         transition: .25s ease-in-out;
         list-style: none;
         padding: 10px;
         width: 100%;
         margin: auto;
-        margin-top: 10px;
 
         :hover{
             background-color: #f0f0f0;
