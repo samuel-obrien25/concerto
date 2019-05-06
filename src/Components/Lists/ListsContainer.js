@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
@@ -26,7 +26,7 @@ const StyledListsContainer = styled.div`
 const StyledLoadingContainer = styled(StyledListsContainer)`
     height: 500px;
     display: flex;
-`;  
+`;
 function ListContainer(props) {
 
     //The issue is here. Why so many re-renders?
@@ -35,7 +35,7 @@ function ListContainer(props) {
 
     //Card Overflow Functions
     function deleteList(activeList) {
-        if(!activeList) { return };
+        if (!activeList) { return };
         const result = window.confirm('Are you sure you would like to permanently delete this list?');
         const user = firebase.auth().currentUser.uid;
         const listRecipe = activeDatabase.ref('users/' + user + '/lists/' + activeList.key);
@@ -59,30 +59,40 @@ function ListContainer(props) {
 
         updates['users/' + user + '/lists/favorites/list' + newFavKey] = listData;
 
-        setShouldRefresh(true);
         return activeDatabase.ref().update(updates);
     }
 
-    if(props.isLoaded){
-        let rawLists = props.rawLists;
+    const mapCards = function () {
+        if (props.isLoaded) {
+            let rawLists = props.rawLists;
 
-        const mappedLists = rawLists.map((list, index) => {
-            return (
-                <Card key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
-            )
-        });
+            let mappedLists = rawLists.map((list, index) => {
                 return (
-                <StyledListsContainer>
-                    {mappedLists}
-                </StyledListsContainer>
-        )
-    } else {
+                    <Card key={index} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)} />
+                )
+            });
+            return mappedLists;
+
+        } else { return; }
+    }
+
+    useEffect(() => {
+        mapCards();
+    }, [props.rawLists])
+
+    if (!props.isLoaded) {
         return (
             <StyledLoadingContainer>
                 <Loading />
             </StyledLoadingContainer>
         )
-    }
 
+    } else {
+        return (
+            <StyledListsContainer>
+                {mapCards()}
+            </StyledListsContainer>
+        )
+    }
 }
 export default ListContainer
