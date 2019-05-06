@@ -3,11 +3,16 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.ul`
     position: absolute;
-    transition: .25s ease-in-out;
+    transition: .2s ease-in-out;
     transform: ${props=>props.isVisible ? 'scale(1)' : 'scale(0)'};
+    opacity: ${props => props.isVisible ? '1' : '0'};
     padding-left: 0px;
     width: 100%;
+    height: 250px;
+    overflow-x: hidden;
+    overflow-y: scroll;
     box-sizing: border-box;
+    z-index: 900;
 
     li{
         padding: 10px 20px;

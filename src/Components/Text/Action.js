@@ -15,11 +15,10 @@ import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
         color: purple;
         font-family: 'Roboto';
         text-transform: uppercase;
-        display: inline-flex;
         padding: 10px;
         margin: auto;
         transition: .25s ease-in-out;
-        transform: ${props=>props.isExpanded ? 'translateY(75px)' : 'auto'};
+        transform: ${props => props.isExpanded ? 'translateY(75px)' : 'auto'};
 
         :hover{
             cursor: pointer;
