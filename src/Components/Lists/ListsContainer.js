@@ -29,9 +29,6 @@ const StyledLoadingContainer = styled(StyledListsContainer)`
 `;  
 function ListContainer(props) {
 
-    //Store props.userLists in a const
-    const [shouldRefresh, setShouldRefresh] = useState(false);
-
     //The issue is here. Why so many re-renders?
     let activeUserData = props.activeUserData,
         activeDatabase = firebase.database();
@@ -45,7 +42,6 @@ function ListContainer(props) {
 
         if (result) {
             listRecipe.remove();
-            setShouldRefresh(!shouldRefresh);
         } else {
             return;
         }
@@ -72,7 +68,7 @@ function ListContainer(props) {
 
         const mappedLists = rawLists.map((list, index) => {
             return (
-                <Card shouldRefresh={shouldRefresh} key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
+                <Card key={index} listTitle={list.listName} activeList={list} favoriteList = {() => favoriteList(list) } deleteList = {() => deleteList(list) }/>
             )
         });
                 return (

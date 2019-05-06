@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 import Action from '../Text/Action';
@@ -14,6 +14,7 @@ const StyledCard = styled.div`
     transition: .3s ease-in-out;
     margin: 10px;
     position: relative;
+    transform: ${props=>props.isDeleted ? 'scale(0)' : 'auto'};
 `;
 const StyledListTitleContainer = styled.div`
     padding: 15px;
@@ -78,9 +79,10 @@ function Card(props) {
         }
     }
 
-    const {activeList, deleteList, favoriteList, listTitle, shouldRefresh } = props;
+    const {activeList, deleteList, favoriteList, isDeleted, listTitle } = props;
+
     return (
-        <StyledCard activeList={activeList} isExpanded={isExpanded} shouldRefresh={shouldRefresh}>
+        <StyledCard activeList={activeList} isExpanded={isExpanded} isDeleted={isDeleted}>
             <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{listTitle}</h2>
@@ -101,7 +103,6 @@ Card.propTypes = {
     deleteList: PropTypes.func,
     favoriteList: PropTypes.func,
     listTitle: PropTypes.string,
-    shouldRefresh: PropTypes.bool
 }
 // #endregion
 

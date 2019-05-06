@@ -31,7 +31,6 @@ const StyledDashboard = styled.div`
 
 // #endregion
 function Dashboard(props) {
-    const [shouldRefresh, setShouldRefresh] = useState(false);
     const [rawLists, setRawLists] = useState();
 
 // Modal Functions
@@ -46,7 +45,6 @@ function Dashboard(props) {
 
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
-        setShouldRefresh(true);
         return database.ref().update(updates);
     };
 
@@ -83,7 +81,6 @@ function Dashboard(props) {
 
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
             
-            setShouldRefresh(true);
             return database.ref().update(updates);
         })
     };
@@ -105,29 +102,31 @@ function Dashboard(props) {
         writeUserConcert(userData.uid, sanitizedConcertName);
     }
 
+    function updateRawLists(){
+        const activeUserData = props.activeUserData;
+        const activeDatabase = firebase.database();
+        let returnArr = [],
+            //Sort here in the future, if so desired
+            userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
+
+        userListsRef.on('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                const item = childSnapshot.val();
+                item.key = childSnapshot.key;
+                returnArr.push(item);
+            });
+        });
+        return setRawLists(returnArr);
+    }
+
 
     useEffect(() => {
-        setRawLists(() => {
-            const activeUserData = props.activeUserData;
-            const activeDatabase = firebase.database();
-            let returnArr = [],
-                //Sort here in the future, if so desired
-                userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
-
-            userListsRef.on('value', function (snapshot) {
-                snapshot.forEach(function (childSnapshot) {
-                    const item = childSnapshot.val();
-                    item.key = childSnapshot.key;
-                    returnArr.push(item);
-                });
-            });
-            return returnArr;
-        });
-    }, [props.activeUserData]);
+        updateRawLists();
+    }, [firebase.database().ref()]);
 
     return (
         <StyledWrapper>
-            <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} shouldRefresh = {shouldRefresh} />
+            <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} />
             <Slide inOut='in' animDelay='0s' animDuration='.5s' animFillMode='forwards' animStyle='fullscreen' isForText={false} >
                 <StyledDashboard activeDatabase={props.activeDatabase}>
                     <NavDrawer name={props.activeUserData.displayName} />
@@ -135,7 +134,7 @@ function Dashboard(props) {
                         <ProfileButton userImage={props.activeUserData.photoURL} />
                     </Slide>
                     <DashboardWelcomeText h2text='Wecome to Concerto!' h3text='Choose a list below:' />
-                    <ListOverview rawLists = {rawLists} shouldRefresh = {shouldRefresh} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
+                    <ListOverview rawLists = {rawLists} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
                 </StyledDashboard>
             </Slide>
         </StyledWrapper>
