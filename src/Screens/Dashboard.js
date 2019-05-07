@@ -10,23 +10,22 @@ import ActionMenu from '../Components/Menu/ActionMenu';
 import firebase from 'firebase';
 
 //#region Styles
-
 const StyledWrapper = styled.section`
     position: fixed;
-    left: 0;
-    top: 0;
     width: 100%;
     height: 100vh;
-`;
-const StyledDashboard = styled.div`
-    background: #f2f2f2;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
     top: 0;
     left: 0;
+`;
+const StyledDashboard = styled.div`
+    position: absolute;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: #f2f2f2;
 `;
 
 // #endregion
@@ -34,8 +33,43 @@ function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
 
 // Modal Functions
-    function writeUserLists(userId, listName) {
 
+    // Sanitize Input Functions -- Need to refactor into one, reusable function
+
+    function handleListInput() {
+        //For reference: userData = firebase.auth().currentUser
+        const userData = props.activeUserData;
+        const listName = document.getElementById('listTitle').value;
+        let sanitizedListName;
+
+        if (!listName) {
+            return window.alert('Please enter a name for your list');
+        }
+
+        //Thank you Mozilla <3
+        sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+
+        writeUserLists(userData.uid, sanitizedListName);
+    }
+
+    function handleConcertInput() {
+        //For reference: userData = firebase.auth().currentUser
+        const userData = props.activeUserData;
+        const concertName = document.getElementById('concertTitle').value;
+        let sanitizedConcertName;
+
+        if (!concertName) {
+            return window.alert('Please enter a name for your concert');
+        }
+
+        //Thank you Mozilla <3
+        sanitizedConcertName = concertName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+
+        writeUserConcert(userData.uid, sanitizedConcertName);
+    }
+
+    // Write user lists to database
+    function writeUserLists(userId, listName) {
         const database = firebase.database();
         const newListKey = database.ref().child('list').push().key;
         const listData = {
@@ -52,23 +86,7 @@ function Dashboard(props) {
         return database.ref().update(updates);
     };
 
-    function handleListInput() {
-        //For reference: userData = firebase.auth().currentUser
-        const userData = props.activeUserData;
-        const listName = document.getElementById('listTitle').value;
-        let sanitizedListName;
-
-
-        if (!listName) {
-            return window.alert('Please enter a name for your list');
-        }
-
-        //Thank you Mozilla <3
-        sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-
-        writeUserLists(userData.uid, sanitizedListName);
-    }
-
+    // Write user concerts to database
     function writeUserConcert(userId, concertName) {
 
         const database = firebase.database();
@@ -83,70 +101,51 @@ function Dashboard(props) {
                 concertKey: concertKey
             };
 
-
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
             
             return database.ref().update(updates);
         })
     };
 
-    function handleConcertInput() {
-        //For reference: userData = firebase.auth().currentUser
-        const userData = props.activeUserData;
-        const concertName = document.getElementById('concertTitle').value;
-        let sanitizedConcertName;
-
-
-        if (!concertName) {
-            return window.alert('Please enter a name for your concert');
-        }
-
-        //Thank you Mozilla <3
-        sanitizedConcertName = concertName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-
-        writeUserConcert(userData.uid, sanitizedConcertName);
-    }
-
-    function deleteList(targetCard) {
-        console.log('callback', targetCard);
-        targetCard.remove();
-    }
-
+    /** Function for updating the raw lists from the database.
+     *  Gets the raw lists from props
+     *  Gets a snapshot of user lists from database
+     *  pushes each list into a returned array
+     */
+    
     function updateRawLists(){
         const activeUserData = props.activeUserData;
         const activeDatabase = firebase.database();
-        let returnArr = [],
-            //Sort here in the future, if so desired
-            userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
+        const userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
+        let returnArr = [];
 
-            userListsRef.on('value', function (snapshot) {
-                //Clear returnArr every time this function runs. Otherwise you get old returnArr + new returnArr
-                if(returnArr.length){
-                    returnArr = [];
-                };
-
-                snapshot.forEach(function (childSnapshot) {
-                    const item = childSnapshot.val();
-                    item.key = childSnapshot.key;
-                    returnArr.push(item);
-                });
-
+        userListsRef.on('value', function (snapshot) {
+            //Clear returnArr every time this function runs. Otherwise returnArr will equal old returnArr + new returnArr
+            if(returnArr.length){
+                returnArr = [];
+            };
+            // For each user list, push into returnArr
+            snapshot.forEach(function (childSnapshot) {
+                const item = childSnapshot.val();
+                item.key = childSnapshot.key;
+                returnArr.push(item);
             });
 
-            userListsRef.on('child_removed', function(data) {
-                let processedData = 'list' + data.val().key,
-                    targetCard = document.getElementById(processedData);
-                console.log(targetCard);
-                return deleteList(targetCard);
-            })
+        });
 
-            return returnArr;
-        }
+        userListsRef.on('child_removed', function(data) {
+            const processedData = 'list' + data.val().key;
+            const targetCard = document.getElementById(processedData);
+                
+            return targetCard.remove();
+        })
+
+        return returnArr;
+    }
 
         useLayoutEffect(() => {
             setRawLists(updateRawLists());
         }, [])
-
 
     return (
         <StyledWrapper>

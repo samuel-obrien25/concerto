@@ -12,6 +12,7 @@ const StyledSection = styled.section`
     flex-direction: column;
     width: 100%;
     overflow: hidden;
+    padding-bottom: 25px;
 `;
 
 //#endregion
