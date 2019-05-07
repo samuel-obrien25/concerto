@@ -159,9 +159,7 @@ function Dashboard(props) {
         useEffect(() => {
             setRawLists(updateRawLists());
         }, [])
-
-        console.log('should update', shouldUpdate);
-
+        
     return (
         <StyledWrapper>
             <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} didModalClose = {shouldUpdate} />
