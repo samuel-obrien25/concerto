@@ -74,10 +74,7 @@ function ActionMenu(props) {
             console.log('asdf');
             const allInputs = document.querySelectorAll['input'];
 
-            allInputs.forEach(element => {
-                if(element.value){ element.value = ''};
-            });
-
+            //Clear all inputs here
         }
     }, [props.didModalClose])
 
