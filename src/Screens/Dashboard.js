@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -39,7 +39,11 @@ function Dashboard(props) {
         const database = firebase.database();
         const newListKey = database.ref().child('list').push().key;
         const listData = {
-            listName: listName
+            listName: listName,
+            concertList: {
+
+            },
+            key: newListKey
         }
         const updates = {};
 
@@ -75,7 +79,8 @@ function Dashboard(props) {
 
         checkedLists.forEach((selection) => {
             let concertData = {
-                concertName: concertName
+                concertName: concertName,
+                concertKey: concertKey
             };
 
 
@@ -102,6 +107,11 @@ function Dashboard(props) {
         writeUserConcert(userData.uid, sanitizedConcertName);
     }
 
+    function deleteList(targetCard) {
+        console.log('callback', targetCard);
+        targetCard.remove();
+    }
+
     function updateRawLists(){
         const activeUserData = props.activeUserData;
         const activeDatabase = firebase.database();
@@ -109,20 +119,34 @@ function Dashboard(props) {
             //Sort here in the future, if so desired
             userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
 
-        userListsRef.on('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                const item = childSnapshot.val();
-                item.key = childSnapshot.key;
-                returnArr.push(item);
+            userListsRef.on('value', function (snapshot) {
+                //Clear returnArr every time this function runs. Otherwise you get old returnArr + new returnArr
+                if(returnArr.length){
+                    returnArr = [];
+                };
+
+                snapshot.forEach(function (childSnapshot) {
+                    const item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+                    returnArr.push(item);
+                });
+
             });
-        });
-        return setRawLists(returnArr);
-    }
 
+            userListsRef.on('child_removed', function(data) {
+                let processedData = 'list' + data.val().key,
+                    targetCard = document.getElementById(processedData);
+                console.log(targetCard);
+                return deleteList(targetCard);
+            })
 
-    useEffect(() => {
-        updateRawLists();
-    }, [firebase.database().ref()]);
+            return returnArr;
+        }
+
+        useLayoutEffect(() => {
+            setRawLists(updateRawLists());
+        }, [])
+
 
     return (
         <StyledWrapper>

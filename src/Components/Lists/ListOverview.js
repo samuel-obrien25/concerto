@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ListsContainer from './ListsContainer';
 
@@ -19,15 +19,19 @@ const StyledSection = styled.section`
 function ListOverview(props) {
 
     const [listsLoaded, setListsLoaded] = useState(false);
+    const [activeRawLists, setActiveRawLists] = useState(props.rawLists);
 
     setTimeout(() => {
         setListsLoaded(true);
     }, 2000);
 
+    useEffect(() => {
+        setActiveRawLists(props.rawLists);
+    }, [])
 
     return (
-        <StyledSection >
-            <ListsContainer rawLists={props.rawLists} isLoaded={listsLoaded} activeUserData={props.activeUserData} activelist ={props.activeList} favoriteList = {props.favoriteList} deleteList={props.deleteList}/>
+        <StyledSection>
+            <ListsContainer rawLists={activeRawLists} isLoaded={listsLoaded} activeUserData={props.activeUserData} activelist ={props.activeList} />
         </StyledSection>
     )
 }

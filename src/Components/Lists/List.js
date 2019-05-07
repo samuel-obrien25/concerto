@@ -43,7 +43,7 @@ class List extends Component {
             return (
                 <StyledContainer isVisible={this.props.isVisible}> 
                     {Object.values(concerts.concertList).map((concert, index) => (
-                        <li key={'concert' + index} draggableId={'concert' + index} index={index}>
+                        <li key={concert.key} index={index}>
                             {concert.concertName}
                         </li>
                     )

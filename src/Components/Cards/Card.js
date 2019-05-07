@@ -82,7 +82,7 @@ function Card(props) {
     const {activeList, deleteList, favoriteList, isDeleted, listTitle } = props;
 
     return (
-        <StyledCard activeList={activeList} isExpanded={isExpanded} isDeleted={isDeleted}>
+        <StyledCard id={props.id} activeList={activeList} isExpanded={isExpanded} isDeleted={isDeleted}>
             <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{listTitle}</h2>
