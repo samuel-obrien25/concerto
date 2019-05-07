@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -31,6 +31,7 @@ const StyledDashboard = styled.div`
 // #endregion
 function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
+    const [shouldUpdate, setShouldUpdate] = useState(false);
 
 // Modal Functions
 
@@ -83,6 +84,8 @@ function Dashboard(props) {
 
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
+        updateDashboard();
+
         return database.ref().update(updates);
     };
 
@@ -96,15 +99,16 @@ function Dashboard(props) {
         let updates = {};
 
         checkedLists.forEach((selection) => {
+
             let concertData = {
                 concertName: concertName,
                 concertKey: concertKey
             };
 
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
-            
             return database.ref().update(updates);
-        })
+        });
+        updateDashboard();
     };
 
     /** Function for updating the raw lists from the database.
@@ -143,15 +147,26 @@ function Dashboard(props) {
         return returnArr;
     }
 
-        useLayoutEffect(() => {
+    function updateDashboard() {
+        setRawLists(updateRawLists());
+        setShouldUpdate(true);
+
+        setInterval(() => {
+            setShouldUpdate(false)
+        }, 0);
+    }
+
+        useEffect(() => {
             setRawLists(updateRawLists());
         }, [])
 
+        console.log('should update', shouldUpdate);
+
     return (
         <StyledWrapper>
-            <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} />
+            <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} didModalClose = {shouldUpdate} />
             <Slide inOut='in' animDelay='0s' animDuration='.5s' animFillMode='forwards' animStyle='fullscreen' isForText={false} >
-                <StyledDashboard activeDatabase={props.activeDatabase}>
+                <StyledDashboard activeDatabase={props.activeDatabase} shouldUpdate = {shouldUpdate}>
                     <NavDrawer name={props.activeUserData.displayName} />
                     <Slide inOut='in' animDelay='.25s' animDuration='1s' animFillMode='forwards' >
                         <ProfileButton userImage={props.activeUserData.photoURL} />

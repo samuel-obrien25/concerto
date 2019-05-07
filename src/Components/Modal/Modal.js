@@ -12,8 +12,8 @@ import ConcertCreator from '../Lists/ConcertCreator';
         top: 0;
         left: 0;
         transition: .25s ease-in-out;
-        opacity: ${props => props.isModalActive ? '1' : '0'};
-        transform: ${props => props.isModalActive ? 'auto' : 'translateY(100vh)'};
+        opacity: ${props => props.isModalExpanded ? '1' : '0'};
+        transform: ${props => props.isModalExpanded ? 'auto' : 'translateY(100vh)'};
         z-index: 9999;
     `;
     const StyledModal = styled.div`
@@ -30,20 +30,20 @@ function Modal(props) {
 
     if(props.modalType === 'newList'){
         return(
-            <StyledModalWrapper isModalActive = {props.isModalActive} >
+            <StyledModalWrapper isModalExpanded = {props.isModalExpanded} >
                 <StyledModal>
                     {props.children}
-                    <ListCreator writeList={props.writeList} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
+                    <ListCreator writeList={props.writeList} isActive={props.isModalExpanded} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
                 </StyledModal>
             </StyledModalWrapper>
         )
     }
     if(props.modalType === 'newConcert') {
         return (
-            <StyledModalWrapper isModalActive = {props.isModalActive} >
+            <StyledModalWrapper isModalExpanded = {props.isModalExpanded} >
                 <StyledModal>
                     {props.children}
-                    <ConcertCreator rawLists = {props.rawLists} writeConcert={props.writeConcert} isActive={props.isModalActive} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
+                    <ConcertCreator rawLists = {props.rawLists} writeConcert={props.writeConcert} isActive={props.isModalExpanded} handleClick = {props.handleClick} closeModal = {props.closeModal}/>
                 </StyledModal>
             </StyledModalWrapper>
 
