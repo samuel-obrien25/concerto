@@ -67,9 +67,25 @@ function ActionMenu(props) {
         setIsExpanded(!isExpanded);
     }
 
+
+    useEffect(() => {
+        if (props.didModalClose) {
+            setIsModalActive(false);
+            console.log('asdf');
+            const allInputs = document.querySelectorAll['input'];
+
+            allInputs.forEach(element => {
+                if(element.value){ element.value = ''};
+            });
+
+        }
+    }, [props.didModalClose])
+
+    console.log('props.didModalClose', props.didModalClose);
+
         return (
             <StyledActionMenuWrapper>
-                <Modal rawLists = {props.rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} allLists={props.allLists} writeConcert={props.writeConcert} modalType={modalType} isModalActive={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                <Modal rawLists = {props.rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} allLists={props.allLists} writeConcert={props.writeConcert} modalType={modalType} didModalClose = {props.didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
                     <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
                         <StyledAddIcon/>
                     </StyledExitButton>
