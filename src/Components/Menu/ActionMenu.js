@@ -9,9 +9,10 @@ const StyledActionMenuWrapper = styled.div`
     position: absolute;
     bottom: 25px;
     right: 25px;
-    display: flex;
-    flex-direction: column;
     z-index: 9999;
+    height: 100px;
+    width: 100px;
+    transition: .25s ease-in-out;
 `;
 
 const StyledExitButton = styled.button`
@@ -81,7 +82,7 @@ function ActionMenu(props) {
     console.log('props.didModalClose', props.didModalClose);
 
         return (
-            <StyledActionMenuWrapper>
+            <StyledActionMenuWrapper isExpanded={isExpanded}>
                 <Modal rawLists = {props.rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} allLists={props.allLists} writeConcert={props.writeConcert} modalType={modalType} didModalClose = {props.didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
                     <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
                         <StyledAddIcon/>
