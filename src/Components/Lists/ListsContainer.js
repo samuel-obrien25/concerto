@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const StyledListsContainer = styled.div`
     display: grid;
-    grid-template-columns: 60%;
+    grid-template-columns: 80%;
     width: 100%;
     height: 100%;
     -webkit-transition: .2s ease-in-out;
