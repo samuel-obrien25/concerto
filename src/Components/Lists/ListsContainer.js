@@ -6,14 +6,14 @@ import styled from 'styled-components';
 
 const StyledListsContainer = styled.div`
     display: grid;
-    grid-template-columns: 48% 48%;
+    grid-template-columns: 60%;
     width: 100%;
     height: 100%;
     -webkit-transition: .2s ease-in-out;
     transition: .2s ease-in-out;
     overflow: auto;
     margin-left: -20px;
-    margin-top: 10%;
+    margin-top: 15px;
     padding-left: 20px;
     justify-content: space-evenly;
 
