@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
@@ -28,8 +28,6 @@ const StyledLoadingContainer = styled(StyledListsContainer)`
     display: flex;
 `;
 function ListContainer(props) {
-
-    const [rawLists, setRawLists] = useState(props.rawLists);
 
     //The issue is here. Why so many re-renders?
     let activeUserData = props.activeUserData,
@@ -66,6 +64,7 @@ function ListContainer(props) {
 
     const mapCards = function () {
         if (props.isLoaded) {
+            let rawLists = props.rawLists;
 
             let mappedLists = rawLists.map((list, index) => {
                 console.log(list.key);

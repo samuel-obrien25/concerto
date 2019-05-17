@@ -72,7 +72,7 @@ function ActionMenu(props) {
         if (props.didModalClose) {
             setIsModalActive(false);
             console.log('asdf');
-            const allInputs = document.querySelectorAll['input'];
+            //const allInputs = document.querySelectorAll['input'];
 
             //Clear all inputs here
         }
