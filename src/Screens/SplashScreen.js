@@ -10,7 +10,8 @@ const StyledSplashScreen = styled.section`
     left: 0;
     width: 100%;
     height: 100vh;
-    background:linear-gradient(to top left, #FDC830, #F37335);
+    background: white;
+    /* background:linear-gradient(to top left, #FDC830, #F37335); */
     display: flex;
     flex-direction: column;
     z-index: 9000;

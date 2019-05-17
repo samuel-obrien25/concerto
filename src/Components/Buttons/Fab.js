@@ -6,13 +6,12 @@ import { ReactComponent as MicIcon } from '../Icons/assets/microphone.svg';
 //#region styles
 const IconWrapper = styled.div`
     height: 100px;
+    width: 100%;
     position: absolute;
-    transition: .25 ease-in-out;
-    width: ${props => props.isExpanded ? '250px' : '100%'};
+    transition: .25s ease-in-out;
 `
 const ToggleActionMenuWrapper = styled(IconWrapper)`
     position: relative;
-    transition-delay: ${props => props.isExpanded ? '.2s' : '.1s'};
     width: auto;
 `;
 
@@ -25,8 +24,8 @@ const IconLabel = styled.span`
     color: rgba(0,0,0,.65);
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transition: .25s ease-in-out;
     opacity: ${props => props.isExpanded ? '1' : '0'};
+    scale: ${props => props.isExpanded ? '1' : '0'};
     transform-origin: top right;
 `;
 
@@ -34,14 +33,13 @@ const IconContainer = styled.div`
     position: absolute;
     top: 30px;
     right: 20px;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     padding: 10px;
     border-radius: 50%;
     display: flex;
     transition: .2s ease-in-out;
     box-shadow: 0px 4px 8px rgba(0,0,0,.45);
-    transform: ${props => props.isExpanded ? 'scale(1)' : 'scale(0)'};
     opacity: ${props => props.isExpanded ? '1' : '0'};
 
     :hover {
@@ -50,8 +48,8 @@ const IconContainer = styled.div`
     }
 `;
 
-const AddIconWrap = styled(IconContainer)`
-    background-color: green;
+const AddIconContainer = styled(IconContainer)`
+    background-color: rgb(30, 136, 229);
     opacity: 1;
     transform: ${props => props.isExpanded ? 'scale(1.25)' : 'scale(1.25)'};
 `;
@@ -66,16 +64,17 @@ const StyledAddIcon = styled(AddIcon)`
 `;
 
 const AddListWrapper = styled(IconWrapper)`
-    transform: translate(-150px, -100px);
+    top: -100px;
+    transform: ${props => props.isExpanded ? 'auto' : 'scale(0)'};
 `
 
-const ListIconWrap = styled(IconContainer)`
-    background-color: red;
+const ListIconContainer = styled(IconContainer)`
+    background-color: white;
     transition-delay: ${props => props.isExpanded ? '.1s' : '.2s'};
 `;
 
 const StyledListIcon = styled(AddIcon)`
-    fill: #fff;
+    fill: rgb(30, 136, 229);
     margin: auto;
     width: 100%;
     height: 100%;
@@ -83,16 +82,17 @@ const StyledListIcon = styled(AddIcon)`
 `;
 
 const AddConcertWrapper = styled(IconWrapper)`
-    transform: translate(-150px, -200px);
+    top: -200px;
+    transform: ${props => props.isExpanded ? 'auto' : 'scale(0)'};
 `
 
-const MicIconWrap = styled(IconContainer)`
-    background-color: orange;
+const MicIconContainer = styled(IconContainer)`
+    background-color: #fff;
     transition-delay: ${props => props.isExpanded ? '.2s' : '.1s'};
 `;
 
 const StyledMicIcon = styled(MicIcon)`
-    fill: #fff;
+    fill: rgb(30, 136, 229);
     margin: auto;
     width: 100%;
     height: 100%;
@@ -107,9 +107,9 @@ function Fab(props) {
         return (
             <ToggleActionMenuWrapper isExpanded = {props.isExpanded}>
                 <IconLabel isExpanded={props.isExpanded}>Close</IconLabel>
-                    <AddIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
+                    <AddIconContainer onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledAddIcon isExpanded ={props.isExpanded}/>
-                    </AddIconWrap>
+                </AddIconContainer>
             </ToggleActionMenuWrapper>
         )
     }
@@ -117,9 +117,9 @@ function Fab(props) {
         return (
             <AddConcertWrapper isExpanded = {props.isExpanded}>
                 <IconLabel isExpanded = {props.isExpanded}>Add Concert</IconLabel>
-                    <MicIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
+                    <MicIconContainer onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledMicIcon/>
-                    </MicIconWrap>
+                    </MicIconContainer>
             </AddConcertWrapper>
         )
     }
@@ -127,9 +127,9 @@ function Fab(props) {
         return (
             <AddListWrapper isExpanded={props.isExpanded}>
                 <IconLabel isExpanded = {props.isExpanded}>Add List</IconLabel>
-                    <ListIconWrap onClick={props.handleClick} isExpanded={props.isExpanded}>
+                    <ListIconContainer onClick={props.handleClick} isExpanded={props.isExpanded}>
                         <StyledListIcon/>
-                    </ListIconWrap>
+                    </ListIconContainer>
             </AddListWrapper>
         )
     }

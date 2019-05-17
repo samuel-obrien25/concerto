@@ -11,8 +11,7 @@ const StyledActionMenuWrapper = styled.div`
     right: 25px;
     z-index: 9999;
     height: 100px;
-    width: 100px;
-    transition: .25s ease-in-out;
+    width: ${props => props.isExpanded ? '250px' : '100px'};
 `;
 
 const StyledExitButton = styled.button`
