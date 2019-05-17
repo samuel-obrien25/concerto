@@ -7,7 +7,7 @@ import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
 
 const StyledActionMenuWrapper = styled.div`
     position: absolute;
-    bottom: 45px;
+    bottom: 25px;
     right: 15px;
     z-index: 9999;
     height: 100px;
