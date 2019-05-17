@@ -7,8 +7,8 @@ import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
 
 const StyledActionMenuWrapper = styled.div`
     position: absolute;
-    bottom: 75px;
-    right: 20px;
+    bottom: 45px;
+    right: 15px;
     z-index: 9999;
     height: 100px;
     width: ${props => props.isExpanded ? '250px' : '100px'};
