@@ -69,24 +69,26 @@ const StyledIcon = styled.div`
         && * {
         margin: auto;
     }
-
 `;
-// #endregion styles
+
+const MicIconFix = styled(Microphone)`
+    fill: #fff;
+`;
+
+//#endregion styles
+
 function Icon() {
     //Add any new icons to this array so they show up in loading animation
-    const iconArray = [<Eguitar />, <Harp />, <Microphone />, <Panflute />, <Xylophone />];
+    const iconArray = [<Eguitar />, <Harp />, <MicIconFix />, <Panflute />, <Xylophone />];
     
     const [activeIcon, setActiveIcon] = useState(iconArray[0]);
     //Function to change the icon every 3 seconds (in conjunction with the "Burst" animation timing)
     useEffect(() => {
-        let iconTimer = setTimeout(() => {
+        //I think this will need to be cleared. The <Icon /> is destroyed on fade-out, but still.
+        setInterval(() => {
             setActiveIcon(iconArray[Math.floor(Math.random() * iconArray.length)]); 
         }, 3000);
-        //Cleanup
-        return () => {
-            clearTimeout(iconTimer);
-        }
-    }, []);
+    },[]);
 
     return(
         <StyledIconContainer>
