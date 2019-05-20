@@ -1,11 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, {useState} from 'react';
+import styled, {keyframes} from 'styled-components';
 
 // #region STYLES
+const fadeOut = keyframes`
+  to {
+    opacity: 0;
+    transform: translateY(-75px);
+  }
+`;
 const StyledTextWrapper = styled.div`
         margin: auto;
         text-align: center;
-        padding-top: 100px;
+        top: 150px;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        animation: ${fadeOut};
+        animation-delay: 4s;
+        animation-duration: .35s;
+        animation-fill-mode: forwards;
 `;
 const StyledH2 = styled.h2`
         position: relative;
@@ -44,12 +58,21 @@ const StyledH3 = styled.h3`
 
 
 function DashboardWelcomeText(props) {
-        return (
-                <StyledTextWrapper>
-                        <StyledH2>{props.h2text}</StyledH2>
-                        <StyledH3>{props.h3text}</StyledH3>
-                </StyledTextWrapper>
-        );
+        const [isVisible, setIsVisible] = useState(true);
+
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 4500);
+
+        if(isVisible){
+          return (
+            <StyledTextWrapper>
+              <StyledH2>{props.h2text}</StyledH2>
+              <StyledH3>{props.h3text}</StyledH3>
+            </StyledTextWrapper>
+          );
+        }
+        else return null
     }
 
 export default DashboardWelcomeText;

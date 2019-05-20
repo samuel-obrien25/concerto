@@ -4,6 +4,7 @@ import ListsContainer from './ListsContainer';
 
 //#region styles
 
+
 const StyledSection = styled.section`
     position: relative;
     transition: .3s ease-in-out;
@@ -13,6 +14,7 @@ const StyledSection = styled.section`
     width: 100%;
     overflow: hidden;
     padding-bottom: 25px;
+
 `;
 
 //#endregion

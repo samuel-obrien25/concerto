@@ -2,7 +2,13 @@ import React from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+const slideUp = keyframes`
+    to{
+        transform: translateY(0);
+    }
+`;
 
 const StyledListsContainer = styled.div`
     display: grid;
@@ -14,8 +20,15 @@ const StyledListsContainer = styled.div`
     overflow: auto;
     margin-left: -20px;
     margin-top: 15px;
+    padding-top: 100px;
     padding-left: 20px;
     justify-content: space-evenly;
+    transform: translateY(250px);
+    animation: ${slideUp};
+    animation-delay: 2s;
+    animation-duration: .35s;
+    animation-fill-mode: forwards;
+
 
       @media (min-width: 700px) {
         grid-template-columns: 30% 30% 30%;
