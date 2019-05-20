@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 //#region Styles
 const StyledCard = styled.div`
     background-color: #fff;
-    height: ${props => props.isExpanded ? '600px' : '350px'};
+    height: ${props => props.isExpanded ? '600px' : '400px'};
     border-radius: 6px;
     box-shadow: 0px 2px 4px rgba(0,0,0,.2);
     transition: .3s ease-in-out;
