@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import CardOverflowMenu from '../Menu/CardOverflowMenu';
+import PropTypes from 'prop-types';
 
 //#region Styles
 const StyledThreeDotWrapper = styled.div`
@@ -32,6 +33,7 @@ const Dot = styled.div`
 // #endregion
 function ThreeDotMenu(props) {
     const [isActive, setIsActive] = useState();
+    const { activeList, deleteList, favoriteList } = props;
 
     const handleClick = function(){
         setIsActive(!isActive);
@@ -41,13 +43,17 @@ function ThreeDotMenu(props) {
             <Dot/>
             <Dot/>
             <Dot/>
-            <CardOverflowMenu isActive = {isActive} activeList = {props.activeList} favoriteList = {props.favoriteList} deleteList = {props.deleteList}/>
+            <CardOverflowMenu isActive = {isActive} activeList = {activeList} favoriteList = {favoriteList} deleteList = {deleteList}/>
         </StyledThreeDotWrapper>
     );
 }
 
-// #region PROPTYPES
-
-// #endregion
+//#region PropTypes
+ThreeDotMenu.propTypes = {
+    activeList: PropTypes.object,
+    deleteList: PropTypes.func,
+    favoriteList: PropTypes.func
+}
+//#endregion
 
 export default ThreeDotMenu;
