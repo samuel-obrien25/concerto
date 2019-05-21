@@ -56,13 +56,17 @@ const StyledActionContainer = styled.div`
 function Card(props) {
 
     const [isExpanded, setIsExpanded] = useState(false);
+    const { activeList, deleteList, favoriteList, id, isDeleted, listTitle } = props;
 
     function setExpanded() {
         setIsExpanded(!isExpanded)
     }
 
     function getNumberOfConcerts() {
-        const list = props.activeList;
+        //This might throw an error. Not sure how destructuring plays with scope and stuff
+        //const list = props.activeList was the old code
+
+        const list = {activeList};
         let count;
 
         // Check if list has concerts, set count accordingly
@@ -79,17 +83,16 @@ function Card(props) {
         }
     }
 
-    const {activeList, deleteList, favoriteList, isDeleted, listTitle } = props;
 
     return (
-        <StyledCard id={props.id} activeList={activeList} isExpanded={isExpanded} isDeleted={isDeleted}>
+        <StyledCard id={id} activeList={activeList} isExpanded={isExpanded} isDeleted={isDeleted}>
             <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{listTitle}</h2>
                 <h3>{getNumberOfConcerts()}</h3>
                 <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} />
             </StyledListTitleContainer>
-            <List isVisible = {isExpanded} listData = {props.activeList}/>
+            <List isVisible = {isExpanded} listData = {activeList}/>
             <StyledActionContainer isExpanded = {isExpanded}>
                 <Action text={isExpanded ? 'Hide' : 'Expand'} isExpanded={isExpanded} handleActionClick={setExpanded} actionIcon='expand' />
             </StyledActionContainer>
@@ -102,6 +105,8 @@ Card.propTypes = {
     activeList: PropTypes.object,
     deleteList: PropTypes.func,
     favoriteList: PropTypes.func,
+    id: PropTypes.string,
+    isDeleted: PropTypes.func,
     listTitle: PropTypes.string,
 }
 // #endregion
