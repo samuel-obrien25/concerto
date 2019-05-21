@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
 import { ReactComponent as MicIcon } from '../Icons/assets/microphone.svg';
+import PropTypes from 'prop-types';
 
 //#region styles
 const IconWrapper = styled.div`
@@ -103,31 +104,33 @@ const StyledMicIcon = styled(MicIcon)`
 
 function Fab(props) {
 
-    if(props.fabType === 'open'){
+    const {fabType, isExpanded, handleClick} = props;
+
+    if(fabType === 'open'){
         return (
-            <ToggleActionMenuWrapper isExpanded = {props.isExpanded}>
-                <IconLabel isExpanded={props.isExpanded}>Close</IconLabel>
-                    <AddIconContainer onClick={props.handleClick} isExpanded={props.isExpanded}>
-                        <StyledAddIcon isExpanded ={props.isExpanded}/>
+            <ToggleActionMenuWrapper isExpanded = {isExpanded}>
+                <IconLabel isExpanded={isExpanded}>Close</IconLabel>
+                    <AddIconContainer onClick={handleClick} isExpanded={props.isExpanded}>
+                        <StyledAddIcon isExpanded ={isExpanded}/>
                 </AddIconContainer>
             </ToggleActionMenuWrapper>
         )
     }
-    if(props.fabType === 'newConcert'){
+    if(fabType === 'newConcert'){
         return (
-            <AddConcertWrapper isExpanded = {props.isExpanded}>
-                <IconLabel isExpanded = {props.isExpanded}>Add Concert</IconLabel>
-                    <MicIconContainer onClick={props.handleClick} isExpanded={props.isExpanded}>
+            <AddConcertWrapper isExpanded = {isExpanded}>
+                <IconLabel isExpanded = {isExpanded}>Add Concert</IconLabel>
+                    <MicIconContainer onClick={handleClick} isExpanded={isExpanded}>
                         <StyledMicIcon/>
                     </MicIconContainer>
             </AddConcertWrapper>
         )
     }
-    if(props.fabType === 'newList'){
+    if(fabType === 'newList'){
         return (
-            <AddListWrapper isExpanded={props.isExpanded}>
-                <IconLabel isExpanded = {props.isExpanded}>Add List</IconLabel>
-                    <ListIconContainer onClick={props.handleClick} isExpanded={props.isExpanded}>
+            <AddListWrapper isExpanded={isExpanded}>
+                <IconLabel isExpanded = {isExpanded}>Add List</IconLabel>
+                    <ListIconContainer onClick={handleClick} isExpanded={isExpanded}>
                         <StyledListIcon/>
                     </ListIconContainer>
             </AddListWrapper>
@@ -139,3 +142,11 @@ function Fab(props) {
 }
 
 export default Fab;
+
+//#region PropTypes
+Fab.PropTypes = {
+    fabType: PropTypes.string,
+    handleClick: PropTypes.func,
+    isExpanded: PropTypes.bool
+}
+//#endregion
