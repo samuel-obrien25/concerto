@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ListCheckbox from './ListCheckbox';
+import PropTypes from 'prop-types';
 
 const ConcertCreatorWrapper = styled.section`
     transition: .3s ease-in-out;
@@ -59,20 +60,27 @@ const CancelButton = styled(Button)`
 `;
 
 function ConcertCreator(props) {
+    const { closeModal, isActive, rawLists, writeConcert } = props;
 
     return (
-        <ConcertCreatorWrapper isActive={props.isActive}>
+        <ConcertCreatorWrapper isActive={isActive}>
             <h2>Add a new concert:</h2>
-            <input onSubmit={props.writeConcert} id='concertTitle' type='text' name='concertTitle' placeholder='Concert Title' />
+            <input onSubmit={writeConcert} id='concertTitle' type='text' name='concertTitle' placeholder='Concert Title' />
             <h2>Which list would you like to add this concert to?</h2>
-            <ListCheckbox rawLists={props.rawLists} />
+            <ListCheckbox rawLists={rawLists} />
             <ButtonContainer>
-                <CancelButton onClick={props.closeModal}>Cancel</CancelButton>
-                <Button onClick={props.writeConcert}>Submit</Button>
+                <CancelButton onClick={closeModal}>Cancel</CancelButton>
+                <Button onClick={writeConcert}>Submit</Button>
             </ButtonContainer>
         </ConcertCreatorWrapper>
     )
 }
 
+ConcertCreator.propTypes = {
+    closeModal: PropTypes.func,
+    isActive: PropTypes.bool,
+    rawLists: PropTypes.object,
+    writeConcert: PropTypes.func
+}
 
 export default ConcertCreator;
