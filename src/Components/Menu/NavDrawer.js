@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MenuButton from '../Buttons/MenuButton';
 import styled from 'styled-components';
 import { ReactComponent as MusicNote } from '../Icons/assets/musicNote.svg';
-
+import PropTypes from 'prop-types';
 
 //#region STYLES
 const StyledNavDrawer = styled.section`
@@ -81,9 +81,9 @@ const StyledCloseTrigger = styled.div`
 //#endregion
 
 function NavDrawer (props) {
-
     const [isVisible, setIsVisible] = useState(false);
     const [activeNavItem, setActiveNavItem] = useState(null);
+    const { name } = props;
 
     const handleNavClick = (e) => {
         window.alert(e.target.closest('li').dataset.value);
@@ -96,9 +96,9 @@ function NavDrawer (props) {
             <MenuButton isActive={isVisible}
                 handleClick={() => setIsVisible(!isVisible)}
             />
-            <StyledNavDrawer name = { props.name } isActive={ isVisible } >
+            <StyledNavDrawer name = { name } isActive={ isVisible } >
                 <StyledNavHeader >
-                    <StyledNavH2>{ props.name }</StyledNavH2>
+                    <StyledNavH2>{ name }</StyledNavH2>
                 </StyledNavHeader>
                 <hr />
                 <StyledNavMenu onClick={handleNavClick}>
@@ -110,5 +110,8 @@ function NavDrawer (props) {
     );
 }
 
+NavDrawer.propTypes = {
+    name: PropTypes.string
+}
 
 export default NavDrawer;

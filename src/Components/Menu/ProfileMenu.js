@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import firebase from 'firebase';
+import PropTypes from 'prop-types';
 
+//#region styles
 const StyledProfileMenu = styled.div`
     width: 200px;
     height: auto;
@@ -54,9 +56,11 @@ const StyledProfileList = styled.ul`
         }
     }
 `;
+//#endregion
 
 function ProfileMenu(props) {
-
+    const { handleCloseTrigger, isActive } = props;
+    
     const signOut = () => {
         firebase.auth().signOut();
         window.location.reload(false);
@@ -64,15 +68,21 @@ function ProfileMenu(props) {
 
     return (
         <React.Fragment>
-            <StyledProfileMenu isActive = {props.isActive} >
+            <StyledProfileMenu isActive = {isActive} >
                 <StyledProfileList > 
                     <li onClick = { signOut }>Sign Out</li>
                 </StyledProfileList>
             </StyledProfileMenu>
-            <StyledTrigger onClick = { props.handleCloseTrigger } isActive = {props.isActive}/>
+            <StyledTrigger onClick = { handleCloseTrigger } isActive = {isActive}/>
         </React.Fragment>
     );
 }
 
+//#region proptypes
+ProfileMenu.propTypes = {
+    handleCloseTrigger: PropTypes.func,
+    isActive: PropTypes.func
+}
+//#endregion
 
 export default ProfileMenu;

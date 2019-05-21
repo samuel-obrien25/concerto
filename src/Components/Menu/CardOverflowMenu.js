@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
+//#region styles
 const StyledCardOverflowMenu = styled.div`
     width: 200px;
     height: auto;
@@ -55,20 +57,30 @@ const StyledOverflowList = styled.ul`
         }
     }
 `;
+//#endregion styles
 
 function CardOverflowMenu(props) {
+    const { deleteList, favoriteList, handleCloseTrigger, isActive } = props;
+
     return (
         <React.Fragment>
-            <StyledCardOverflowMenu isActive = {props.isActive} >
+            <StyledCardOverflowMenu isActive = {isActive} >
                 <StyledOverflowList > 
-                    <li onClick = { props.deleteList }>Delete List</li>
-                    <li onClick = { props.favoriteList }>Add to Favorites</li>
+                    <li onClick = { deleteList }>Delete List</li>
+                    <li onClick = { favoriteList }>Add to Favorites</li>
                 </StyledOverflowList>
             </StyledCardOverflowMenu>
-            <StyledTrigger onClick = { props.handleCloseTrigger } isActive = {props.isActive}/>
+            <StyledTrigger onClick = { handleCloseTrigger } isActive = {isActive}/>
         </React.Fragment>
     );
 }
 
-
+//#region proptypes
+CardOverflowMenu.propTypes = {
+    deleteList: PropTypes.func,
+    favoriteList: PropTypes.func,
+    handleCloseTrigger: PropTypes.func,
+    isActive: PropTypes.bool
+}
+//#endregion proptypes
 export default CardOverflowMenu;

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Fab from '../Buttons/Fab';
 import Modal from '../Modal/Modal';
 import { ReactComponent as AddIcon } from '../Icons/assets/add.svg';
+import PropTypes from 'prop-types';
 
-
+//#region styles
 const StyledActionMenuWrapper = styled.div`
     position: absolute;
     bottom: 25px;
@@ -43,13 +44,15 @@ const StyledAddIcon = styled(AddIcon)`
     left: 0;
     position: absolute;
 `
-
+//#endregion
 
 function ActionMenu(props) {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const [isModalActive, setIsModalActive] = useState(false);
     const [modalType, setModalType] = useState(null);
+
+    const { allLists, didModalClose, rawLists, writeConcert, writeList } = props;
 
     function handleOpen() {
         setIsExpanded(!isExpanded);
@@ -69,20 +72,18 @@ function ActionMenu(props) {
 
 
     useEffect(() => {
-        if (props.didModalClose) {
+        if (didModalClose) {
             setIsModalActive(false);
             console.log('asdf');
             //const allInputs = document.querySelectorAll['input'];
 
             //Clear all inputs here
         }
-    }, [props.didModalClose])
-
-    console.log('props.didModalClose', props.didModalClose);
+    }, [didModalClose])
 
         return (
             <StyledActionMenuWrapper isExpanded={isExpanded}>
-                <Modal rawLists = {props.rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={props.writeList} allLists={props.allLists} writeConcert={props.writeConcert} modalType={modalType} didModalClose = {props.didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                <Modal rawLists = {rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={writeList} allLists={allLists} writeConcert={writeConcert} modalType={modalType} didModalClose = {didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
                     <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
                         <StyledAddIcon/>
                     </StyledExitButton>
@@ -94,5 +95,14 @@ function ActionMenu(props) {
         )
     }
 
+    //#region PropTypes
+    ActionMenu.propTypes = {
+        allLists: PropTypes.array,
+        didModalClose: PropTypes.bool,
+        rawLists: PropTypes.array,
+        writeConcert: PropTypes.func,
+        writeList: PropTypes.func
+    }
+    //#endregion
 
 export default ActionMenu;
