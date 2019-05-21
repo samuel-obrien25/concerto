@@ -36,28 +36,30 @@ const StyledMenuButtonWrapper = styled.section`
 //#endregion
 
 const MenuButton = (props) => {
-    return (
+    const {handleClick, isActive} = props;
 
-        <StyledMenuButtonWrapper role='button' active={props.isActive} onClick={props.handleClick}>
+    return (
+        <StyledMenuButtonWrapper role='button' active={isActive} onClick={handleClick}>
 
             <StyledMenuButtonTop
-                active={props.isActive}
+                active={isActive}
             />
             <StyledMenuButtonMid
-                active={props.isActive}
+                active={isActive}
             />
             <StyledMenuButtonBottom
-                active={props.isActive}
+                active={isActive}
             />
 
         </StyledMenuButtonWrapper>
     );
 }
 
-// #region PROPTYPES
+//#region PROPTYPES
 MenuButton.propTypes = {
+    handleClick: PropTypes.func,
     isActive: PropTypes.bool
 }
-// #endregion
+//#endregion
 
 export default MenuButton;
