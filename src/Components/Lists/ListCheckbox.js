@@ -14,9 +14,9 @@ const StyledLabel = styled.label`
 
 function ListCheckbox(props) {
 
-    const {lists} = props;
+    const {rawLists} = props;
 
-    const mappedLists = lists.map((list, index) => {
+    const mappedLists = rawLists.map((list, index) => {
 
         return (
         <StyledLabel key = {index}>
