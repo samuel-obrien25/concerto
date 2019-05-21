@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
+//#region STYLES
 const ListCreatorWrapper = styled.section`
     transition: .3s ease-in-out;
     transform: ${props => props.isActive ? 'scale(1)' : 'scale(0)'};
@@ -56,8 +58,11 @@ const CancelButton = styled(Button)`
         color: #fff;
     }
 `
+//#endregion
+
 
 function ListCreator( props ) {
+    const { closeModal, isActive, writeList } = props;
 
     return (
         <ListCreatorWrapper isActive = {props.isActive} >
@@ -71,5 +76,10 @@ function ListCreator( props ) {
     )
 }
 
+ListCreator.propTypes = {
+    closeModal: PropTypes.func,
+    isActive: PropTypes.bool,
+    writeLists: PropTypes.func
+}
 
 export default ListCreator;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledLabel = styled.label`
     display: block;
@@ -12,7 +13,9 @@ const StyledLabel = styled.label`
 `;
 
 function ListCheckbox(props) {
-    const lists = props.rawLists;
+
+    const {lists} = props;
+
     const mappedLists = lists.map((list, index) => {
 
         return (
@@ -30,5 +33,8 @@ function ListCheckbox(props) {
     )
 }
 
+ListCheckbox.propTypes = {
+    lists: PropTypes.array
+}
 
 export default ListCheckbox;

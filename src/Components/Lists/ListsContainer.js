@@ -3,7 +3,9 @@ import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
 import styled, {keyframes} from 'styled-components';
+import PropTypes from 'prop-types';
 
+//#region styles
 const slideUp = keyframes`
     to{
         transform: translateY(0);
@@ -40,11 +42,13 @@ const StyledLoadingContainer = styled(StyledListsContainer)`
     height: 500px;
     display: flex;
 `;
-function ListContainer(props) {
+//#endregion
 
+function ListContainer(props) {
+    
+    const {activeUserData, isLoaded, rawLists, snapshot} = props;
     //The issue is here. Why so many re-renders?
-    let activeUserData = props.activeUserData,
-        activeDatabase = firebase.database();
+    let activeDatabase = firebase.database();
 
     //Card Overflow Functions
     function deleteList(activeList) {
@@ -76,9 +80,7 @@ function ListContainer(props) {
     }
 
     const mapCards = function () {
-        if (props.isLoaded) {
-            let rawLists = props.rawLists;
-
+        if (isLoaded) {
             let mappedLists = rawLists.map((list, index) => {
                 console.log(list.key);
                 return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)}/>
@@ -88,9 +90,9 @@ function ListContainer(props) {
         } else { return; }
     }
 
-    if (!props.isLoaded) {
+    if (!isLoaded) {
         return (
-            <StyledLoadingContainer snapshot = {props.snapshot} rawLists = {props.rawLists}>
+            <StyledLoadingContainer snapshot = {snapshot} rawLists = {rawLists}>
                 <Loading />
             </StyledLoadingContainer>
         )
@@ -103,4 +105,14 @@ function ListContainer(props) {
         )
     }
 }
+
+//#region PropTypes
+ListContainer.propTypes = {
+    activeUserData: PropTypes.object,
+    isLoaded: PropTypes.bool,
+    rawLists: PropTypes.object,
+    snapshot: PropTypes.object
+}
+//#endregion
+
 export default ListContainer

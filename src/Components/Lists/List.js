@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
+//#region Styles
 const StyledContainer = styled.ul`
     position: absolute;
     transition: .2s ease-in-out;
@@ -27,6 +29,7 @@ const StyledContainer = styled.ul`
         }
     }
 `;
+//#endregion Styles
 
 class List extends Component {
     constructor(props) {
@@ -39,9 +42,11 @@ class List extends Component {
 
     render() {
         const concerts = this.state.items;
+        const {isVisible} = this.props;
+
         if (concerts.concertList) {
             return (
-                <StyledContainer isVisible={this.props.isVisible}> 
+                <StyledContainer isVisible={isVisible}> 
                     {Object.values(concerts.concertList).map((concert, index) => (
                         <li key={concert.key} index={index}>
                             {concert.concertName}
@@ -54,6 +59,10 @@ class List extends Component {
             return null
         }
     }
+}
+
+List.propTypes = {
+    isVisible: PropTypes.bool
 }
 
 export default List
