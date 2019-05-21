@@ -4,7 +4,9 @@ import Dashboard from './Dashboard';
 import SignInScreen from './SignInScreen';
 import Slide from '../Utilities/Slide';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
+//#region styles
 const StyledScreenHandler = styled.main`
     height: 100%;
     width: 100%;
@@ -22,9 +24,11 @@ const AuthWrapper = styled.div`
     margin: auto;
     display: flex;
 `;
+//#endregion
+
 function ScreenHandler(props) {
     const [isSplashActive, setIsSplashActive] = useState(true);
-    const {activeDatabase, activeUser, isSignedIn} = props;
+    const { activeDatabase, activeUser, isSignedIn } = props;
 
     /**
      * Checks if user props.isSignedIn === true.
@@ -81,4 +85,12 @@ function ScreenHandler(props) {
         </StyledScreenHandler>
     )
 }
+
+//#region proptypes
+ScreenHandler.propTypes = {
+    activeDatabase: PropTypes.object,
+    activeUser: PropTypes.object,
+    isSignedIn: PropTypes.bool
+}
+//#endregion
 export default ScreenHandler;

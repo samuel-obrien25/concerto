@@ -32,6 +32,7 @@ const StyledDashboard = styled.div`
 function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
+    const { activeUserData, activeDatabase } = props;
 
 // Modal Functions
 
@@ -39,7 +40,7 @@ function Dashboard(props) {
 
     function handleListInput() {
         //For reference: userData = firebase.auth().currentUser
-        const userData = props.activeUserData;
+        const userData = activeUserData;
         const listName = document.getElementById('listTitle').value;
         let sanitizedListName;
 
@@ -55,7 +56,7 @@ function Dashboard(props) {
 
     function handleConcertInput() {
         //For reference: userData = firebase.auth().currentUser
-        const userData = props.activeUserData;
+        const userData = activeUserData;
         const concertName = document.getElementById('concertTitle').value;
         let sanitizedConcertName;
 
@@ -118,7 +119,6 @@ function Dashboard(props) {
      */
     
     function updateRawLists(){
-        const activeUserData = props.activeUserData;
         const activeDatabase = firebase.database();
         const userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
         let returnArr = [];
@@ -164,13 +164,13 @@ function Dashboard(props) {
         <StyledWrapper>
             <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} didModalClose = {shouldUpdate} />
             <Slide inOut='in' animDelay='0s' animDuration='.5s' animFillMode='forwards' animStyle='fullscreen' isForText={false} >
-                <StyledDashboard activeDatabase={props.activeDatabase} shouldUpdate = {shouldUpdate}>
-                    <NavDrawer name={props.activeUserData.displayName} />
+                <StyledDashboard activeDatabase={activeDatabase} shouldUpdate = {shouldUpdate}>
+                    <NavDrawer name={activeUserData.displayName} />
                     <Slide inOut='in' animDelay='.25s' animDuration='1s' animFillMode='forwards' >
-                        <ProfileButton userImage={props.activeUserData.photoURL} />
+                        <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
                         <DashboardWelcomeText h2text='Wecome to Concerto!' h3text='Choose a list below:' />
-                    <ListOverview rawLists = {rawLists} activeUserData={props.activeUserData} activeDatabase={props.activeDatabase} />
+                    <ListOverview rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
                 </StyledDashboard>
             </Slide>
         </StyledWrapper>
@@ -179,6 +179,7 @@ function Dashboard(props) {
 export default Dashboard;
 // #region PROPTYPES
 Dashboard.propTypes = {
+    activeDatabase: PropTypes.object,
     activeUserData: PropTypes.object
 }
 // #endregion PROPTYPES

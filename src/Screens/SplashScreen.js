@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from '../Components/Icons/Icon';
-
 import styled from 'styled-components';
 import AppTitle from '../Components/Text/AppTitle';
 
@@ -20,9 +19,8 @@ const StyledSplashScreen = styled.section`
 // #endregion
 function SplashScreen(props) {
 
-    
     const {isSignedIn} = props;
-
+    
         return (
                 <StyledSplashScreen>
                     <AppTitle text='CONCERTO' slideInOut={isSignedIn ? 'out' : 'in'} />

@@ -5,7 +5,6 @@ import Slide from '../Utilities/Slide';
 import styled from 'styled-components';
 
 // #region STYLES
-
 const StyledSignInScreen = styled.div`
     width: 50vw;
     height: auto;
@@ -61,7 +60,6 @@ class SignInScreen extends React.Component {
     componentWillUnmount() {
         this.unregisterAuthObserver();
     }
-
 
     render() {
         if (this.state.isSignedIn) {
