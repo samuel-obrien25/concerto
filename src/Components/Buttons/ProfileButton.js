@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProfileMenu from '../Menu/ProfileMenu';
+import PropTypes from 'prop-types';
 
 //#region STYLES
 const StyledProfileButtonWrapper = styled.div`
@@ -32,12 +33,11 @@ const StyledProfileButton = styled.div`
         cursor: pointer;
     }
 `;
-
-
 //#endregion
 
 const ProfileButton = (props) => {
     const [isActive, setIsActive] = useState(false);
+    const { userImage } = props;
 
     const toggleButtonState = () => {
         setIsActive(!isActive);
@@ -45,11 +45,16 @@ const ProfileButton = (props) => {
 
     return (
         <StyledProfileButtonWrapper>
-            <StyledProfileButton userImage = { props.userImage } onClick = { toggleButtonState }/>
+            <StyledProfileButton userImage = { userImage } onClick = { toggleButtonState }/>
             <ProfileMenu isActive={isActive} handleCloseTrigger={toggleButtonState}/>
         </StyledProfileButtonWrapper>
     );
 }
 
+//#region PropTypes
+ProfileButton.propTypes = {
+    userImage: PropTypes.string
+}
+//#endregion
 
 export default ProfileButton;

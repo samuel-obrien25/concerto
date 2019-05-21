@@ -141,8 +141,6 @@ function Fab(props) {
     }
 }
 
-export default Fab;
-
 //#region PropTypes
 Fab.PropTypes = {
     fabType: PropTypes.string,
@@ -150,3 +148,6 @@ Fab.PropTypes = {
     isExpanded: PropTypes.bool
 }
 //#endregion
+
+export default Fab;
+
