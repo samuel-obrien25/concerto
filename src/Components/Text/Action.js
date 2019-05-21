@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Expand } from '../Icons/assets/expand.svg';
 import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
-
+import PropTypes from 'prop-types';
 
 // #region STYLES
     const StyledAction = styled.div`
@@ -58,30 +58,37 @@ import { ReactComponent as Favorite } from '../Icons/assets/favorite.svg';
 
 
 function Action(props) {
+    const { actionIcon, isExpanded, handleActionClick, text } = props;
 
     function currentIcon(){
         let icon;
-        if(props.actionIcon === 'expand'){
+        if(actionIcon === 'expand'){
             icon = 
-                <StyledIconWrapper isExpanded = {props.isExpanded}>
+                <StyledIconWrapper isExpanded = {isExpanded}>
                      <StyledExpand  />
                 </StyledIconWrapper>
         }
 
-        if(props.actionIcon === 'favorite'){
+        if(actionIcon === 'favorite'){
             icon = <StyledFavorite />
         }
 
         return icon;
     }
     return (
-        <StyledAction onClick={props.handleActionClick} isExpanded = {props.isExpanded}>
-            <StyledText isExpanded = {props.isExpanded}>{props.text}</StyledText>
+        <StyledAction onClick={handleActionClick} isExpanded = {isExpanded}>
+            <StyledText isExpanded = {isExpanded}>{text}</StyledText>
             {currentIcon()}
         </StyledAction>
     );
-
-
 }
 
+//#region proptypes
+Action.propTypes = {
+    actionIcon: PropTypes.string,
+    handleActionClick: PropTypes.func,
+    isExpanded: PropTypes.bool,
+    text: PropTypes.string
+}
+//#endregion
 export default Action;

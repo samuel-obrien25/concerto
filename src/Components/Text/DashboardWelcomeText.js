@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled, {keyframes} from 'styled-components';
+import PropTypes from 'prop-types';
 
 // #region STYLES
 const fadeOut = keyframes`
@@ -56,23 +57,27 @@ const StyledH3 = styled.h3`
 `;
 // #endregion STYLES
 
-
 function DashboardWelcomeText(props) {
-        const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const { h2text, h3text } = props;
 
-        setTimeout(() => {
-          setIsVisible(false);
-        }, 4500);
+  setTimeout(() => {
+    setIsVisible(false);
+  }, 4500);
 
-        if(isVisible){
-          return (
-            <StyledTextWrapper>
-              <StyledH2>{props.h2text}</StyledH2>
-              <StyledH3>{props.h3text}</StyledH3>
-            </StyledTextWrapper>
-          );
-        }
-        else return null
-    }
+  if(isVisible){
+    return (
+      <StyledTextWrapper>
+        <StyledH2>{h2text}</StyledH2>
+        <StyledH3>{h3text}</StyledH3>
+      </StyledTextWrapper>
+    );
+  }
+  else return null
+}
 
+DashboardWelcomeText.propTypes = {
+  h2text: PropTypes.string,
+  h3text: PropTypes.string
+}
 export default DashboardWelcomeText;
