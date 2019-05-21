@@ -43,7 +43,7 @@ function ListOverview(props) {
 ListOverview.propTypes = {
     activeList: PropTypes.array,
     activeUserData: PropTypes.object,
-    rawLists: PropTypes.object
+    rawLists: PropTypes.array
 }
 //#endregion
 

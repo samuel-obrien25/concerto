@@ -110,7 +110,7 @@ function ListContainer(props) {
 ListContainer.propTypes = {
     activeUserData: PropTypes.object,
     isLoaded: PropTypes.bool,
-    rawLists: PropTypes.object,
+    rawLists: PropTypes.array,
     snapshot: PropTypes.object
 }
 //#endregion

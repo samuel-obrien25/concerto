@@ -81,7 +81,7 @@ function ProfileMenu(props) {
 //#region proptypes
 ProfileMenu.propTypes = {
     handleCloseTrigger: PropTypes.func,
-    isActive: PropTypes.func
+    isActive: PropTypes.bool
 }
 //#endregion
 

@@ -142,7 +142,7 @@ function Fab(props) {
 }
 
 //#region PropTypes
-Fab.PropTypes = {
+Fab.propTypes = {
     fabType: PropTypes.string,
     handleClick: PropTypes.func,
     isExpanded: PropTypes.bool
