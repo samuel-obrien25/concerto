@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components';
 function Slide(props) {
 
     const [destroy, setDestroy] = useState(false);
+    const { animDelay, animDuration, animFillMode, animStyle, children, unmount, inOut, isForText, forFixed } = props;
 
 // #region PROPTYPES
     Slide.propTypes = {
@@ -13,6 +14,8 @@ function Slide(props) {
         animDuration: PropTypes.string.isRequired,
         animFillMode: PropTypes.string,
         animStyle: PropTypes.string,
+        children: PropTypes.node,
+        forFixed: PropTypes.bool,
         inOut: PropTypes.string.isRequired,
         isForText: PropTypes.bool,
         unmount: PropTypes.bool
@@ -61,7 +64,6 @@ function Slide(props) {
 
     // #endregion STYLES
 
-        const { animDelay, animDuration, animFillMode, animStyle, unmount, inOut, isForText, forFixed } = props;
 
         function destroyChild() {
             if(unmount) {
@@ -78,7 +80,7 @@ function Slide(props) {
         if(!destroy){
             return (
                 <StyledSlide inOut = {inOut} isForText={isForText} animDelay={animDelay} animFillMode={animFillMode} animDuration={animDuration} animStyle={animStyle} unmount={unmount} forFixed={forFixed}>
-                    {props.children}
+                    {children}
                 </StyledSlide>
             );
         
