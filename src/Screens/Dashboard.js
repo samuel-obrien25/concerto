@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Slide from '../Utilities/Slide';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import NavDrawer from '../Components/Menu/NavDrawer';
+import BottomNav from '../Components/Menu/BottomNav';
 import ProfileButton from '../Components/Buttons/ProfileButton';
 import ListOverview from '../Components/Lists/ListOverview';
 import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
@@ -162,10 +162,8 @@ function Dashboard(props) {
         
     return (
         <StyledWrapper>
-            <ActionMenu rawLists={rawLists} writeList = {handleListInput} writeConcert = {handleConcertInput} didModalClose = {shouldUpdate} />
             <Slide inOut='in' animDelay='0s' animDuration='.5s' animFillMode='forwards' animStyle='fullscreen' isForText={false} >
                 <StyledDashboard activeDatabase={activeDatabase} shouldUpdate = {shouldUpdate}>
-                    <NavDrawer name={activeUserData.displayName} />
                     <Slide inOut='in' animDelay='.25s' animDuration='1s' animFillMode='forwards' >
                         <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
@@ -173,6 +171,9 @@ function Dashboard(props) {
                     <ListOverview rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
                 </StyledDashboard>
             </Slide>
+            <BottomNav>
+                <ActionMenu rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
+            </BottomNav>
         </StyledWrapper>
     );
 }
