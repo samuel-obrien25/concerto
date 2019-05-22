@@ -44,6 +44,20 @@ const StyledAddIcon = styled(AddIcon)`
     left: 0;
     position: absolute;
 `
+
+const Trigger = styled.div`
+    height: 100vh;
+    width: 100vw;
+    transform: ${props => props.isExpanded ? 'auto' : 'scale(0)'};
+    opacity: ${props => props.isExpanded ? 'auto' : '0'};
+    transition: .35s linear;
+    transform-origin: bottom right;
+    background-color: rgba(255,255,255,.75);
+    position: absolute;
+    bottom: -25px;
+    right:-15px;
+    z-index: -1;
+`; 
 //#endregion
 
 function ActionMenu(props) {
@@ -70,7 +84,6 @@ function ActionMenu(props) {
         setIsExpanded(!isExpanded);
     }
 
-
     useEffect(() => {
         if (didModalClose) {
             setIsModalActive(false);
@@ -91,6 +104,7 @@ function ActionMenu(props) {
                 <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
                 <Fab fabType='newList' handleClick={handleNewList} isExpanded={isExpanded} />
                 <Fab fabType='open' handleClick={handleOpen} isExpanded={isExpanded} />
+                <Trigger isExpanded = {isExpanded} onClick={handleOpen}/>
             </StyledActionMenuWrapper>
         )
     }
