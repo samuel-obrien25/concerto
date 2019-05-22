@@ -63,11 +63,7 @@ function Card(props) {
     }
 
     function getNumberOfConcerts() {
-        //This might throw an error. Not sure how destructuring plays with scope and stuff
-        //const list = props.activeList was the old code
-
         let count;
-
         // Check if list has concerts, set count accordingly
         if (activeList.concertList) {
             count = Object.keys(activeList.concertList).length;
