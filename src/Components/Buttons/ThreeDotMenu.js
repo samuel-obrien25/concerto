@@ -5,14 +5,11 @@ import PropTypes from 'prop-types';
 
 //#region Styles
 const StyledThreeDotWrapper = styled.div`
-    display:inline;
-    flex-direction: column;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: -12px;
+    right: 0;
     padding: 20px;
-    margin: -20px;
-
+    
     :hover{
         cursor: pointer;
     }
