@@ -28,7 +28,8 @@ const Column = styled.div`
     h2{
         font-size: 16px;
         text-transform: uppercase;
-        text-align: center;
+        text-align: left;
+        padding-left: 15px;
     }
     h3{
         font-weight: 400;
@@ -83,7 +84,7 @@ class List extends Component {
                             <div>
                             {Object.values(concerts.concertList).map((concert, index) => (
                                 <h3 key={concert.concertKey} index={index}>
-                                    {concert.concertName}
+                                    {concert.bandName}
                                 </h3>
                             )
                             )}
@@ -91,9 +92,27 @@ class List extends Component {
                     </Column>
                     <Column>
                         <h2>Venue</h2>
+                        <div>
+                            {Object.values(concerts.concertList).map((concert, index) => (
+                                <h3 key={concert.concertKey} index={index}>
+                                    {concert.venueName}
+                                </h3>
+                            )
+                            )}
+                        </div>
+
                     </Column>
                     <Column>
                         <h2>Date</h2>
+                        <div>
+                            {Object.values(concerts.concertList).map((concert, index) => (
+                                <h3 key={concert.concertKey} index={index}>
+                                    {concert.concertDate}
+                                </h3>
+                            )
+                            )}
+                        </div>
+
                     </Column>
                 </ListWrapper>
 

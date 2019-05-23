@@ -23,6 +23,18 @@ const ConcertCreatorWrapper = styled.section`
     }
 `;
 
+const StyledInput = styled.input`
+    border: none;
+    position: relative;
+    border-bottom: 1px solid #077FDB;
+    padding: 10px;
+    margin: 10px 0px;
+    
+    &:focus{
+    border-bottom: 2px solid #077FDB;
+    }
+`;
+
 const ButtonContainer = styled.div`
     display: flex;
     width: 100%;
@@ -65,7 +77,9 @@ function ConcertCreator(props) {
     return (
         <ConcertCreatorWrapper isActive={isActive}>
             <h2>Add a new concert:</h2>
-            <input onSubmit={writeConcert} id='concertTitle' type='text' name='concertTitle' placeholder='Concert Title' />
+            <StyledInput id='bandName' type='text' name='bandName' placeholder='Band Name' />
+            <StyledInput id='venueName' type='text' name='venueName' placeholder='Venue Name' />
+            <StyledInput id='concertDate' type='date' name='concertDate' placeholder='Date' />
             <h2>Which list would you like to add this concert to?</h2>
             <ListCheckbox rawLists={rawLists} />
             <ButtonContainer>

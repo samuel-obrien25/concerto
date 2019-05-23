@@ -19,11 +19,11 @@ const StyledBottomNav = styled.nav`
 //#endregion
 
 function BottomNav(props) {
-    const { handleListInput, handleConcertInput, name, rawLists, shouldUpdate } = props;
+    const { handleListInput, writeConcert, name, rawLists, shouldUpdate } = props;
     return (
         <StyledBottomNav>
             <NavDrawer name={name} />
-            <ActionMenu rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate}/>
+            <ActionMenu rawLists={rawLists} writeList={handleListInput} writeConcert={writeConcert} didModalClose={shouldUpdate}/>
         </StyledBottomNav>
     )
 }

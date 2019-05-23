@@ -56,17 +56,25 @@ function Dashboard(props) {
     function handleConcertInput() {
         //For reference: userData = firebase.auth().currentUser
         const userData = activeUserData;
-        const concertName = document.getElementById('concertTitle').value;
-        let sanitizedConcertName;
+        const bandName = document.getElementById('bandName').value,
+              venueName = document.getElementById('venueName').value,
+              concertDate = document.getElementById('concertDate').value;
 
-        if (!concertName) {
+        let sanitizedBandName,
+            sanitizedVenueName,
+            sanitizedConcertDate;
+
+        if (!bandName) {
             return window.alert('Please enter a name for your concert');
         }
 
         //Thank you Mozilla <3
-        sanitizedConcertName = concertName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+        sanitizedBandName = bandName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        sanitizedVenueName = venueName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        sanitizedConcertDate = concertDate.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-        writeUserConcert(userData.uid, sanitizedConcertName);
+
+        writeUserConcert(userData.uid, sanitizedVenueName, sanitizedBandName, sanitizedConcertDate);
     }
 
     // Write user lists to database
@@ -90,7 +98,7 @@ function Dashboard(props) {
     };
 
     // Write user concerts to database
-    function writeUserConcert(userId, concertName) {
+    function writeUserConcert(userId, venueName, bandName, concertDate) {
 
         const database = firebase.database();
         const checkedLists = document.querySelectorAll('.listCheckbox:checked');
@@ -101,8 +109,10 @@ function Dashboard(props) {
         checkedLists.forEach((selection) => {
 
             let concertData = {
-                concertName: concertName,
-                concertKey: concertKey
+                venueName: venueName,
+                concertKey: concertKey,
+                bandName: bandName,
+                concertDate: concertDate
             };
 
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
