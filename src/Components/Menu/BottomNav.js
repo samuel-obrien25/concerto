@@ -18,10 +18,10 @@ const StyledBottomNav = styled.nav`
 //#endregion
 
 function BottomNav(props) {
-    const { rawLists, handleListInput, handleConcertInput, shouldUpdate } = props;
+    const { handleListInput, handleConcertInput, name, rawLists, shouldUpdate } = props;
     return (
         <StyledBottomNav>
-            <NavDrawer name={props.name} />
+            <NavDrawer name={name} />
             <ActionMenu rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate}/>
         </StyledBottomNav>
     )
@@ -29,6 +29,11 @@ function BottomNav(props) {
 
 //#region PropTypes
 BottomNav.propTypes = {
+    handleListInput: PropTypes.func,
+    handleConcertInput: PropTypes.func,
+    name: PropTypes.string,
+    rawLists: PropTypes.array,
+    shouldUpdate: PropTypes.bool
 }
 //#endregion
 

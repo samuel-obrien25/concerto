@@ -17,8 +17,8 @@ const StyledCard = styled.div`
     display: flex;
 
     @media(min-width: 700px) {
-        height: 300px;
-        width: 250px;
+        height: 350px;
+        flex-direction: column;
 
         :hover {
             box-shadow: 0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
@@ -55,6 +55,16 @@ const StyledCardImage = styled.div`
     border-radius: 50%;
     margin: 10px;
     background-color: purple;
+
+    @media(min-width: 700px) {
+        height: 60%;
+        width: 90%;
+        border-radius: 6px;
+        margin: 2% auto;
+        background-color: purple;
+        box-sizing: border-box;
+    }
+
 `;
 // #endregion
 

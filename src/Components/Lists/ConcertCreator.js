@@ -79,7 +79,7 @@ function ConcertCreator(props) {
 ConcertCreator.propTypes = {
     closeModal: PropTypes.func,
     isActive: PropTypes.bool,
-    rawLists: PropTypes.object,
+    rawLists: PropTypes.array,
     writeConcert: PropTypes.func
 }
 

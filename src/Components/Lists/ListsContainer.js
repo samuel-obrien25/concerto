@@ -29,9 +29,17 @@ const StyledListsContainer = styled.div`
     animation-duration: .35s;
     animation-fill-mode: forwards;
 
-
-      @media (min-width: 700px) {
+    @media (min-width: 700px) {
+        grid-template-columns: 40% 40%;
+        grid-row-gap: 25px;
+    }
+    @media (min-width: 900px) {
         grid-template-columns: 30% 30% 30%;
+        grid-row-gap: 25px;
+    }
+    @media (min-width: 1200px) {
+        grid-template-columns: 20% 20% 20% 20%;
+        grid-row-gap: 25px;
     }
 
 `;

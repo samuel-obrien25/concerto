@@ -171,9 +171,7 @@ function Dashboard(props) {
                     <ListOverview rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
                 </StyledDashboard>
             </Slide>
-            <BottomNav name = {activeUserData.displayName}>
-                <ActionMenu rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
-            </BottomNav>
+            <BottomNav name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
         </StyledWrapper>
     );
 }
