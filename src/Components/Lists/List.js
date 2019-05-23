@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 //#region Styles
-const StyledContainer = styled.ul`
+const ListWrapper = styled.section`
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
     position: absolute;
+    top: 100px;
     transition: .2s ease-in-out;
-    transform: ${props=>props.isVisible ? 'scale(1)' : 'scale(0)'};
+    transform: ${props => props.isVisible ? 'scale(1)' : 'scale(0)'};
     opacity: ${props => props.isVisible ? '1' : '0'};
     padding-left: 0px;
     width: 100%;
@@ -16,19 +19,47 @@ const StyledContainer = styled.ul`
     box-sizing: border-box;
     z-index: 900;
 
-    li{
-        padding: 10px 20px;
-        list-style: none;
-        transition: .1s ease-in-out;
-        width: 100%;
-        box-sizing: border-box;
+`;
 
+const Column = styled.div`
+    display: flex;
+    flex-direction: column;
 
-        :hover{
+    h2{
+        font-size: 16px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    h3{
+        font-weight: 400;
+        font-size: 14px;
+        transition: .25s ease-in-out;
+        position: relative;
+        padding: 5px 15px;
+
+        :before{
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            height: 14px;
+            padding: 10px 0px;
+            width: 96vw;
             background-color: #f0f0f0;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: .2s ease-in-out;
+            z-index: -1;
         }
+
+        &:hover{
+            &:before{
+                transform: scaleY(1);
+            }
+        } 
     }
 `;
+
 //#endregion Styles
 
 class List extends Component {
@@ -46,14 +77,26 @@ class List extends Component {
 
         if (concerts.concertList) {
             return (
-                <StyledContainer isVisible={isVisible}> 
-                    {Object.values(concerts.concertList).map((concert, index) => (
-                        <li key={concert.concertKey} index={index}>
-                            {concert.concertName}
-                        </li>
-                    )
-                    )}
-                </StyledContainer>
+                <ListWrapper isVisible = {isVisible}>
+                    <Column>
+                        <h2>Artist</h2>
+                            <div>
+                            {Object.values(concerts.concertList).map((concert, index) => (
+                                <h3 key={concert.concertKey} index={index}>
+                                    {concert.concertName}
+                                </h3>
+                            )
+                            )}
+                            </div>
+                    </Column>
+                    <Column>
+                        <h2>Venue</h2>
+                    </Column>
+                    <Column>
+                        <h2>Date</h2>
+                    </Column>
+                </ListWrapper>
+
             );
         } else {
             return null

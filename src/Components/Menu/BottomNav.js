@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import NavDrawer from '../Menu/NavDrawer';
 import ActionMenu from '../Menu/ActionMenu';
@@ -14,6 +14,7 @@ const StyledBottomNav = styled.nav`
     height: 75px;
     background-color: #fff;
     z-index: 9999;
+    box-shadow: 0 0px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `;
 //#endregion
 

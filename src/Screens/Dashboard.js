@@ -6,7 +6,6 @@ import BottomNav from '../Components/Menu/BottomNav';
 import ProfileButton from '../Components/Buttons/ProfileButton';
 import ListOverview from '../Components/Lists/ListOverview';
 import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
-import ActionMenu from '../Components/Menu/ActionMenu';
 import firebase from 'firebase';
 
 //#region Styles
