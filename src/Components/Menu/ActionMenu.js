@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 //#region styles
 const StyledActionMenuWrapper = styled.div`
-    z-index: 9999;
+    z-index: 8998;
     height: 100px;
     width: 100px;
     position: absolute;
@@ -51,7 +51,7 @@ const Trigger = styled.div`
     width: 100vw;
     transform: ${props => props.isExpanded ? 'auto' : 'scale(0)'};
     opacity: ${props => props.isExpanded ? 'auto' : '0'};
-    transition: .35s linear;
+    transition: .15s linear;
     transform-origin: bottom right;
     background-color: rgba(255,255,255,.75);
     position: absolute;

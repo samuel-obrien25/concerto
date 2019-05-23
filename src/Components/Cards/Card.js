@@ -8,12 +8,22 @@ const StyledCard = styled.div`
     background-color: #fff;
     height: auto;
     border-radius: 6px;
-    box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
     transition: .3s ease-in-out;
     margin: 10px;
+    padding: 10px 0px;
     position: relative;
     transform: ${props=>props.isDeleted ? 'scale(0)' : 'auto'};
     display: flex;
+
+    @media(min-width: 700px) {
+        height: 300px;
+        width: 250px;
+
+        :hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
+        }
+    }
 `;
 
 const StyledListTitleContainer = styled.div`

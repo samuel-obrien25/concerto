@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 //#region STYLES
 const StyledNavDrawer = styled.section`
     background-color: #fff;
-    position: absolute;
+    position: fixed;
     top:0;
     left:0;
     width: 300px;
@@ -82,21 +82,19 @@ const StyledCloseTrigger = styled.div`
 
 function NavDrawer (props) {
     const [isVisible, setIsVisible] = useState(false);
-    const [activeNavItem, setActiveNavItem] = useState(null);
     const { name } = props;
 
     const handleNavClick = (e) => {
-        window.alert(e.target.closest('li').dataset.value);
-        setActiveNavItem(e.target.closest('li').dataset.value);
+        window.alert(e.target, ' Placeholder func')
         setIsVisible(!isVisible);
     }
 
     return (
-        <div value = {activeNavItem}>
+        <>
             <MenuButton isActive={isVisible}
                 handleClick={() => setIsVisible(!isVisible)}
             />
-            <StyledNavDrawer name = { name } isActive={ isVisible } >
+            <StyledNavDrawer isActive={ isVisible } >
                 <StyledNavHeader >
                     <StyledNavH2>{ name }</StyledNavH2>
                 </StyledNavHeader>
@@ -106,7 +104,7 @@ function NavDrawer (props) {
                 </StyledNavMenu>
             </StyledNavDrawer>
             <StyledCloseTrigger isVisible = { isVisible } onClick={() => setIsVisible(!isVisible)}/>
-        </div>
+        </>
     );
 }
 

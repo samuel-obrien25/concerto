@@ -21,8 +21,6 @@ const StyledListsContainer = styled.div`
     transition: .2s ease-in-out;
     overflow: auto;
     margin-left: -20px;
-    margin-top: 15px;
-    padding-top: 100px;
     padding-left: 20px;
     justify-content: space-evenly;
     transform: translateY(250px);

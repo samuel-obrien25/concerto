@@ -9,7 +9,7 @@ const StyledMenuButtonTop = styled.div`
     background-color: rgba(0,0,0,.85);
     margin: auto;
     transition: .3s cubic-bezier(0.4,0.0,0.2,1);
-    transform: ${props => props.active ? 'rotate(-45deg) scaleX(.6) translate(-20px , -5px)' : 'rotate(180deg)'};
+    transform: ${props => props.active ? 'rotate(-45deg) scaleX(.6) translate(-14px , -5px)' : 'rotate(180deg)'};
 `;
 const StyledMenuButtonMid = styled(StyledMenuButtonTop)`
     order: 2;
@@ -17,18 +17,19 @@ const StyledMenuButtonMid = styled(StyledMenuButtonTop)`
 `
 const StyledMenuButtonBottom = styled(StyledMenuButtonTop)`
     order: 3;
-    transform: ${props => props.active ? 'rotate(45deg) scaleX(.6) translate(-20px, 5px)' : 'rotate(180deg)'};
+    transform: ${props => props.active ? 'rotate(45deg) scaleX(.6) translate(-12px, 5px)' : 'rotate(180deg)'};
 `
 const StyledMenuButtonWrapper = styled.section`
-    position: fixed;
+    position: relative;
     z-index: 9100;
-    top: 25px;
-    left: 25px;
-    width: 40px;
-    height: 40px;
+    left: 35px;
+    width: 30px;
+    height: 25px;
     display: flex;
     flex-direction: column;
     transition: .4s ease-in-out;
+    margin: auto 0;
+    
     & :hover{
         cursor: pointer;
     }
