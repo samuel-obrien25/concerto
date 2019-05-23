@@ -109,7 +109,7 @@ function Card(props) {
         <StyledCard id={id} activeList={activeList} isDeleted={isDeleted} onClick = {() => setIsCardExpanded(true)} isCardExpanded = {isCardExpanded}>
             <StyledCardImage isCardExpanded={isCardExpanded}/>
             <StyledListTitleContainer isCardExpanded={isCardExpanded}>
-                <h2 contenteditable="true">{listTitle}</h2>
+                <h2>{listTitle}</h2>
                 <h3>{getNumberOfConcerts()}</h3>
                 <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} />
             </StyledListTitleContainer>
