@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 import PropTypes from 'prop-types';
@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 //#region Styles
 const StyledCard = styled.div`
     background-color: #fff;
-    height: auto;
+    height: ${props=>props.isCardExpanded ? '100vh' : 'auto'};
+    width: ${props=>props.isCardExpanded ? '100vw' : 'auto'};
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
     transition: .3s ease-in-out;
-    margin: 10px;
+    margin: ${props => props.isCardExpanded ? '0' : '10px'};
+    margin-left: ${props=>props.isCardExpanded ? '-50px' : '10px'};
     padding: 10px 0px;
     position: relative;
     transform: ${props=>props.isDeleted ? 'scale(0)' : 'auto'};
@@ -70,6 +72,7 @@ const StyledCardImage = styled.div`
 
 function Card(props) {
 
+    const [isCardExpanded, setIsCardExpanded] = useState(false);
     const { activeList, deleteList, favoriteList, id, isDeleted, listTitle } = props;
 
     function getNumberOfConcerts() {
@@ -88,9 +91,8 @@ function Card(props) {
         }
     }
 
-
     return (
-        <StyledCard id={id} activeList={activeList} isDeleted={isDeleted}>
+        <StyledCard id={id} activeList={activeList} isDeleted={isDeleted} onClick = {() => setIsCardExpanded(!isCardExpanded)} isCardExpanded = {isCardExpanded}>
             <StyledCardImage />
             <StyledListTitleContainer>
                 <h2>{listTitle}</h2>
