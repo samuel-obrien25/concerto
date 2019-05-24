@@ -95,19 +95,19 @@ function ActionMenu(props) {
         }
     }, [didModalClose])
 
-        return (
-            <StyledActionMenuWrapper isExpanded={isExpanded}>
-                <Modal rawLists = {rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={writeList} allLists={allLists} writeConcert={writeConcert} modalType={modalType} didModalClose = {didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
-                    <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
-                        <StyledAddIcon/>
-                    </StyledExitButton>
-                </Modal>
-                <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
-                <Fab fabType='newList' handleClick={handleNewList} isExpanded={isExpanded} />
-                <Fab fabType='open' handleClick={handleOpen} isExpanded={isExpanded} />
-                <Trigger isExpanded = {isExpanded} onClick={handleOpen}/>
-            </StyledActionMenuWrapper>
-        )
+    return (
+        <StyledActionMenuWrapper isExpanded={isExpanded}>
+            <Modal rawLists = {rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={writeList} allLists={allLists} writeConcert={writeConcert} modalType={modalType} didModalClose = {didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+                <StyledExitButton onClick={() => setIsModalActive(!isModalActive)}>
+                    <StyledAddIcon/>
+                </StyledExitButton>
+            </Modal>
+            <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
+            <Fab fabType='newList' handleClick={handleNewList} isExpanded={isExpanded} />
+            <Fab fabType='open' handleClick={handleOpen} isExpanded={isExpanded} />
+            <Trigger isExpanded = {isExpanded} onClick={handleOpen}/>
+        </StyledActionMenuWrapper>
+    )
     }
 
     //#region PropTypes

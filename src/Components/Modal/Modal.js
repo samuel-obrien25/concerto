@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import ListCreator from '../Lists/ListCreator';
 import ConcertCreator from '../Lists/ConcertCreator';
@@ -29,20 +29,26 @@ const StyledModal = styled.div`
 //#endregion
 
 function Modal(props) {
-    const {closeModal, children, handleClick, isModalExpanded, modalType, rawLists, writeConcert, writeList} = props;
+    const [modalType, setModalType] = useState(props.modalType);
+
+    const {closeModal, children, handleClick, isModalExpanded, rawLists, writeConcert, writeList} = props;
     let modal;
 
     if(modalType === 'newList'){
         modal = <ListCreator writeList={writeList} isActive={isModalExpanded} handleClick = {handleClick} closeModal = {closeModal}/>;
     }
 
-    if(modalType === 'newConcert'){
+    else if(modalType === 'newConcert'){
         modal = <ConcertCreator rawLists = {rawLists} writeConcert={writeConcert} isActive={isModalExpanded} handleClick = {handleClick} closeModal = {closeModal}/>;
     }
 
     else {
         modal = null;
     }
+
+    useEffect(() => {
+        setModalType(props.modalType)
+    },[props.modalType]);
 
     return (
         <StyledModalWrapper isModalExpanded = {isModalExpanded} >

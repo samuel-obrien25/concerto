@@ -23,6 +23,18 @@ const ListCreatorWrapper = styled.section`
     }
 `;
 
+const StyledInput = styled.input`
+    border: none;
+    position: relative;
+    border-bottom: 1px solid #077FDB;
+    padding: 10px;
+    margin: 10px 0px;
+    
+    &:focus{
+    border-bottom: 2px solid #077FDB;
+    }
+`;
+
 const ButtonContainer = styled.div`
     display: flex;
     width: 100%;
@@ -67,7 +79,7 @@ function ListCreator( props ) {
     return (
         <ListCreatorWrapper isActive = {isActive} >
             <h2>Create a new list:</h2>
-            <input onSubmit = { writeList } id='listTitle' type='text' name='listTitle' placeholder='List Title'/>
+            <StyledInput id='listTitle' type='text' name='listTitle' placeholder='List Title'/>
             <ButtonContainer>
                 <CancelButton onClick = {closeModal}>Cancel</CancelButton>
                 <Button onClick={ writeList }>Submit</Button>

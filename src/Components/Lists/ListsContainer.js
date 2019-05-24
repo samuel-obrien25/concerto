@@ -96,6 +96,9 @@ function ListContainer(props) {
         } else { return; }
     }
 
+    
+    const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
+
     if (!isLoaded) {
         return (
             <StyledLoadingContainer snapshot = {snapshot} rawLists = {rawLists}>
@@ -106,7 +109,7 @@ function ListContainer(props) {
     } else {
         return (
             <StyledListsContainer>
-                {mapCards()}
+               {mapCards()}
             </StyledListsContainer>
         )
     }
