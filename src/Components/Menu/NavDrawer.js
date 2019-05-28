@@ -3,7 +3,8 @@ import MenuButton from '../Buttons/MenuButton';
 import styled from 'styled-components';
 import { ReactComponent as MusicNote } from '../Icons/assets/musicNote.svg';
 import PropTypes from 'prop-types';
-
+import firebase from 'firebase';
+import Card from '../Cards/Card';
 //#region STYLES
 const StyledNavDrawer = styled.section`
     background-color: #fff;
@@ -82,12 +83,7 @@ const StyledCloseTrigger = styled.div`
 
 function NavDrawer (props) {
     const [isVisible, setIsVisible] = useState(false);
-    const { name } = props;
-
-    const handleNavClick = (e) => {
-        window.alert(e.target, ' Placeholder func')
-        setIsVisible(!isVisible);
-    }
+    const { name, showAllConcerts } = props;
 
     return (
         <>
@@ -99,8 +95,8 @@ function NavDrawer (props) {
                     <StyledNavH2>{ name }</StyledNavH2>
                 </StyledNavHeader>
                 <hr />
-                <StyledNavMenu onClick={handleNavClick}>
-                    <li data-value='allConcerts'><MusicNote /><span>All Concerts</span></li>
+                <StyledNavMenu>
+                    <li data-value='allConcerts' onClick = {showAllConcerts}><MusicNote /><span>All Concerts</span></li>
                 </StyledNavMenu>
             </StyledNavDrawer>
             <StyledCloseTrigger isVisible = { isVisible } onClick={() => setIsVisible(!isVisible)}/>

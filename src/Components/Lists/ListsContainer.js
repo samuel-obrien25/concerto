@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 //#region styles
 const StyledSection = styled.section`
     position: relative;
-    transition: .3s ease-in-out;
+    transition: ${props => props.isLoaded ? '.3s ease-in-out;' : '1s ease-in-out;'};
+    transition-delay: ${props => props.isLoaded ? '2000ms' : '0ms'};
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -16,6 +17,7 @@ const StyledSection = styled.section`
     height: auto;
     overflow: hidden;
     padding: 25px 0;
+    transform: ${props=>props.isLoaded ? 'auto' : 'translateY(50px)'};
 `;
 
 //#endregion
@@ -88,7 +90,7 @@ function ListContainer(props) {
         )
     }
         return (
-            <StyledSection>
+            <StyledSection isLoaded = {listsLoaded}>
                {mapCards()}
             </StyledSection>
         )

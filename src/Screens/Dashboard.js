@@ -7,6 +7,7 @@ import ProfileButton from '../Components/Buttons/ProfileButton';
 import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
 import firebase from 'firebase';
 import ListContainer from '../Components/Lists/ListsContainer';
+import Card from '../Components/Cards/Card';
 
 //#region Styles
 const StyledWrapper = styled.section`
@@ -32,6 +33,8 @@ function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [favoriteCard, setFavoriteCard] = useState(null);
+    const [allConcertsCard, setAllConcertsCard] = useState(null);
 
     const { activeUserData, activeDatabase } = props;
 
@@ -147,7 +150,6 @@ function Dashboard(props) {
                 item.key = childSnapshot.key;
                 returnArr.push(item);
             });
-
         });
 
         userListsRef.on('child_removed', function(data) {
@@ -169,12 +171,23 @@ function Dashboard(props) {
         }, 0);
     }
 
-        useEffect(() => {
-            setRawLists(updateRawLists());
-            setTimeout(() => {
-                setIsLoaded(true);
-            }, 2000);
-        }, [])
+    function showAllConcerts() {
+        const db = firebase.database();
+        const user = firebase.auth().currentUser.uid;
+
+        const list = db.ref('/users/' + user + '/allConcerts').once('value');
+        const allConcertsCard = <Card permanent = {true} titleOverride='All Concerts' listData = {list}/>
+
+        console.log(list);
+        setAllConcertsCard(allConcertsCard);
+    }
+
+    useEffect(() => {
+        setRawLists(updateRawLists());
+        setTimeout(() => {
+            setIsLoaded(true);
+        }, 200);
+    }, [])
         
     return (
         <StyledWrapper>
@@ -184,10 +197,13 @@ function Dashboard(props) {
                         <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
                         <DashboardWelcomeText isLoaded={isLoaded} h2text='Wecome to Concerto!' h3text='Choose a list below:' />
-                        <ListContainer rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
+                        <ListContainer rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase}>
+                            {favoriteCard}
+                            {allConcertsCard}
+                        </ListContainer>
                 </StyledDashboard>
             </Slide>
-            <BottomNav name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
+            <BottomNav showAllConcerts = {showAllConcerts} name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
         </StyledWrapper>
     );
 }

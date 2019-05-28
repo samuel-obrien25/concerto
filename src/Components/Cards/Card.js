@@ -113,6 +113,25 @@ function Card(props) {
 
     console.log(isCardExpanded, 'isCardExpanded');
 
+    if(props.permanent){
+        return (
+            <>
+            <ExitButtonWrapper isCardExpanded={isCardExpanded}>
+                <ExitButton handleClick={props.removeCard} />
+            </ExitButtonWrapper>
+            <StyledCard id={id} activeList={activeList} isCardExpanded={true}>
+                <StyledCardImage isCardExpanded={true} />
+                <StyledListTitleContainer isCardExpanded={true}>
+                    <h2>{props.titleOverride}</h2>
+                    <h3>{getNumberOfConcerts()}</h3>
+                    <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} isCardExpanded={true} />
+                </StyledListTitleContainer>
+                <List listData={activeList} isVisible={true} />
+            </StyledCard>
+            </>
+        )
+    }
+
     return (
         <>
         <ExitButtonWrapper isCardExpanded={isCardExpanded}>

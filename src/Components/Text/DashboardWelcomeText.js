@@ -18,7 +18,7 @@ const StyledTextWrapper = styled.div`
         display: flex;
         flex-direction: column;
         animation: ${fadeOut};
-        animation-delay: 4s;
+        animation-delay: 2s;
         animation-duration: .35s;
         animation-fill-mode: forwards;
 `;
