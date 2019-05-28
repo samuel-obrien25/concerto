@@ -2,21 +2,24 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 import List from '../Lists/List';
+import ExitButton from '../Buttons/ExitButton';
 import PropTypes from 'prop-types';
 
 //#region Styles
 const StyledCard = styled.div`
     background-color: #fff;
-    height: ${props=>props.isCardExpanded ? '100vh' : 'auto'};
-    width: ${props=>props.isCardExpanded ? '100vw' : 'auto'};
+    height: ${props=>props.isCardExpanded ? '84vh' : 'auto'};
+    width: ${props=>props.isCardExpanded ? '96vw' : '96%'};
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
     transition: .3s ease-in-out;
-    margin: ${props => props.isCardExpanded ? '0' : '10px'};
-    margin-left: ${props=>props.isCardExpanded ? '-12.5%' : '10px'};
+    margin: ${props => props.isCardExpanded ? '0' : '25px auto'}; 
     padding: 10px 0px;
-    position: relative;
+    position: ${props => props.isCardExpanded ? 'fixed' : 'relative'};
     transform: ${props=>props.isDeleted ? 'scale(0)' : 'auto'};
+    top: ${props => props.isCardExpanded ? '2vw' : 'auto'};
+    left: ${props => props.isCardExpanded ? '2vw' : 'auto'};
+    z-index: ${props => props.isCardExpanded ? '1' : 'auto'};
     display: flex;
 
     @media(min-width: 700px) {
@@ -72,8 +75,17 @@ const StyledCardImage = styled.div`
         background-color: purple;
         box-sizing: border-box;
     }
-
 `;
+
+const ExitButtonWrapper = styled.div`
+    position: fixed;
+    z-index: 10;
+    right: 3vw;
+    top: 2vw;
+    display: ${props => props.isCardExpanded ? 'block' : 'none'};
+    height: 50px;
+    width: 50px;
+`
 
 // #endregion
 
@@ -98,14 +110,13 @@ function Card(props) {
         }
     }
 
-    useEffect(() => {
-        if(isCardExpanded){
-           /* document.querySelectorAll('.iBfpUL')[0].style.overflow = 'hidden'; */
-           console.log(activeList);
-        };
-    }, [isCardExpanded]);
+    console.log(isCardExpanded, 'isCardExpanded');
 
     return (
+        <>
+        <ExitButtonWrapper isCardExpanded={isCardExpanded}>
+            <ExitButton handleClick={() => setIsCardExpanded(false)} />
+        </ExitButtonWrapper>
         <StyledCard id={id} activeList={activeList} isDeleted={isDeleted} onClick = {() => setIsCardExpanded(true)} isCardExpanded = {isCardExpanded}>
             <StyledCardImage isCardExpanded={isCardExpanded}/>
             <StyledListTitleContainer isCardExpanded={isCardExpanded}>
@@ -115,6 +126,7 @@ function Card(props) {
             </StyledListTitleContainer>
             <List listData = {activeList} isVisible = {isCardExpanded}/>
         </StyledCard>
+        </>
     );
 }
 

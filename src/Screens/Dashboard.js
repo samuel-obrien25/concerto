@@ -31,6 +31,7 @@ const StyledDashboard = styled.div`
 function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
+    const [isModalActive, setisModalActive] = useState(false);
     const { activeUserData, activeDatabase } = props;
 
 // Modal Functions
