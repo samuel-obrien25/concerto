@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BottomNav from '../Components/Menu/BottomNav';
 import ProfileButton from '../Components/Buttons/ProfileButton';
-import ListOverview from '../Components/Lists/ListOverview';
 import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
 import firebase from 'firebase';
+import ListContainer from '../Components/Lists/ListsContainer';
 
 //#region Styles
 const StyledWrapper = styled.section`
@@ -177,7 +177,7 @@ function Dashboard(props) {
                         <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
                         <DashboardWelcomeText h2text='Wecome to Concerto!' h3text='Choose a list below:' />
-                    <ListOverview rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
+                        <ListContainer rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
                 </StyledDashboard>
             </Slide>
             <BottomNav name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />

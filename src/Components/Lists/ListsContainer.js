@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
@@ -12,47 +12,25 @@ const slideUp = keyframes`
     }
 `;
 
-const StyledListsContainer = styled.div`
-    display: grid;
-    grid-template-columns: 80%;
+const StyledSection = styled.section`
+    position: relative;
+    transition: .3s ease-in-out;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    -webkit-transition: .2s ease-in-out;
-    transition: .2s ease-in-out;
-    overflow: auto;
-    margin-left: -20px;
-    padding-left: 20px;
-    justify-content: space-evenly;
-    transform: translateY(250px);
-    animation: ${slideUp};
-    animation-delay: 2s;
-    animation-duration: .35s;
-    animation-fill-mode: forwards;
-
-    @media (min-width: 700px) {
-        grid-template-columns: 40% 40%;
-        grid-row-gap: 25px;
-    }
-    @media (min-width: 900px) {
-        grid-template-columns: 30% 30% 30%;
-        grid-row-gap: 25px;
-    }
-    @media (min-width: 1200px) {
-        grid-template-columns: 20% 20% 20% 20%;
-        grid-row-gap: 25px;
-    }
-
-`;
-
-const StyledLoadingContainer = styled(StyledListsContainer)`
-    height: 500px;
-    display: flex;
+    overflow: hidden;
+    padding-bottom: 25px;
 `;
 //#endregion
 
 function ListContainer(props) {
-    
-    const {activeUserData, isLoaded, rawLists, snapshot} = props;
+    const [listsLoaded, setListsLoaded] = useState(false);
+    const [activeRawLists, setActiveRawLists] = useState(props.rawLists);
+
+    const { activeList, activeUserData, snapshot } = props;
+
     //The issue is here. Why so many re-renders?
     let activeDatabase = firebase.database();
 
@@ -72,12 +50,10 @@ function ListContainer(props) {
 
     function favoriteList(activeList) {
         const user = activeUserData.uid;
-
         const listData = {
             listName: activeList.listName
         }
         const newFavKey = firebase.database().ref().child('/users/' + user + '/lists/favorites/').push().key;
-
         let updates = {};
 
         updates['users/' + user + '/lists/favorites/list' + newFavKey] = listData;
@@ -86,11 +62,12 @@ function ListContainer(props) {
     }
 
     const mapCards = function () {
-        if (isLoaded) {
-            let mappedLists = rawLists.map((list, index) => {
+        if (listsLoaded) {
+            let mappedLists = activeRawLists.map((list, index) => {
                 console.log(list.key);
                 return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)}/>
             });
+            console.log(mappedLists);
             return mappedLists;
 
         } else { return; }
@@ -99,26 +76,35 @@ function ListContainer(props) {
     
     const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
 
-    if (!isLoaded) {
+    setTimeout(() => {
+        setListsLoaded(true);
+    }, 2000);
+
+    useEffect(() => {
+        setActiveRawLists(activeRawLists);
+    }, [])
+
+
+    if (!listsLoaded) {
         return (
-            <StyledLoadingContainer snapshot = {snapshot} rawLists = {rawLists}>
+            <StyledSection snapshot = {snapshot} rawLists = {activeRawLists}>
                 <Loading />
-            </StyledLoadingContainer>
+            </StyledSection>
         )
 
     } else {
         return (
-            <StyledListsContainer>
+            <StyledSection>
                {mapCards()}
-            </StyledListsContainer>
+            </StyledSection>
         )
     }
 }
 
 //#region PropTypes
 ListContainer.propTypes = {
+    activeList: PropTypes.object,
     activeUserData: PropTypes.object,
-    isLoaded: PropTypes.bool,
     rawLists: PropTypes.array,
     snapshot: PropTypes.object
 }
