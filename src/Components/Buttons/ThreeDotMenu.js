@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //#region Styles
 const StyledThreeDotWrapper = styled.div`
     position: absolute;
-    top: -12px;
+    top: ${props => props.isCardExpanded ? '0px' : '-12px'};
     right: 0;
     padding: 20px;
     
@@ -30,13 +30,13 @@ const Dot = styled.div`
 // #endregion
 function ThreeDotMenu(props) {
     const [isActive, setIsActive] = useState();
-    const { activeList, deleteList, favoriteList } = props;
+    const { activeList, deleteList, favoriteList, isCardExpanded } = props;
 
     const handleClick = function(){
         setIsActive(!isActive);
     }
     return (
-        <StyledThreeDotWrapper onClick={handleClick}>
+        <StyledThreeDotWrapper onClick={handleClick} isCardExpanded = {isCardExpanded}>
             <Dot/>
             <Dot/>
             <Dot/>
@@ -49,7 +49,8 @@ function ThreeDotMenu(props) {
 ThreeDotMenu.propTypes = {
     activeList: PropTypes.object,
     deleteList: PropTypes.func,
-    favoriteList: PropTypes.func
+    favoriteList: PropTypes.func,
+    isCardExpanded: PropTypes.bool
 }
 //#endregion
 

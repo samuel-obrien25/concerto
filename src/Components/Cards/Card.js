@@ -111,7 +111,7 @@ function Card(props) {
             <StyledListTitleContainer isCardExpanded={isCardExpanded}>
                 <h2>{listTitle}</h2>
                 <h3>{getNumberOfConcerts()}</h3>
-                <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} />
+                <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} isCardExpanded = {isCardExpanded}/>
             </StyledListTitleContainer>
             <List listData = {activeList} isVisible = {isCardExpanded}/>
         </StyledCard>
