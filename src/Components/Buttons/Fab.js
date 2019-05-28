@@ -54,15 +54,15 @@ const AddIconContainer = styled(IconContainer)`
     background-color: rgb(30, 136, 229);
     opacity: 1;
     transform: ${props => props.isExpanded ? 'scale(1.25)' : 'scale(1.25)'};
-`;
 
-const StyledAddIcon = styled(AddIcon)`
-    fill: #fff;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    transition: .25s ease-in-out;
-    transform: ${props => props.isExpanded ? 'rotate(-45deg) scale(.85)' : 'scale(.85)'};
+    & svg {
+        fill: #fff;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        transition: .25s ease-in-out;
+        transform: ${props => props.isExpanded ? 'rotate(45deg) scale(.85)' : 'scale(.85)'};
+    }
 `;
 
 const AddListWrapper = styled(IconWrapper)`
@@ -73,14 +73,14 @@ const AddListWrapper = styled(IconWrapper)`
 const ListIconContainer = styled(IconContainer)`
     background-color: white;
     transition-delay: ${props => props.isExpanded ? '.1s' : '.2s'};
-`;
 
-const StyledListIcon = styled(AddIcon)`
-    fill: rgb(30, 136, 229);
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    transform: scale(.85);
+    & svg {
+        fill: rgb(30, 136, 229);
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        transform: scale(.85);
+    }
 `;
 
 const AddConcertWrapper = styled(IconWrapper)`
@@ -91,15 +91,16 @@ const AddConcertWrapper = styled(IconWrapper)`
 const MicIconContainer = styled(IconContainer)`
     background-color: #fff;
     transition-delay: ${props => props.isExpanded ? '.2s' : '.1s'};
+
+    & svg {
+        fill: rgb(30, 136, 229);
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        transform: scale(.85);
+    }
 `;
 
-const StyledMicIcon = styled(MicIcon)`
-    fill: rgb(30, 136, 229);
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    transform: scale(.85);
-`;
 
 //#endregion
 
@@ -111,8 +112,8 @@ function Fab(props) {
         return (
             <ToggleActionMenuWrapper>
                 <IconLabel isExpanded={isExpanded}>Close</IconLabel>
-                    <AddIconContainer onClick={handleClick} isExpanded={props.isExpanded}>
-                        <StyledAddIcon isExpanded ={isExpanded}/>
+                <AddIconContainer onClick={handleClick} isExpanded={isExpanded}>
+                    <AddIcon/>
                 </AddIconContainer>
             </ToggleActionMenuWrapper>
         )
@@ -121,9 +122,9 @@ function Fab(props) {
         return (
             <AddConcertWrapper isExpanded = {isExpanded}>
                 <IconLabel isExpanded = {isExpanded}>Add Concert</IconLabel>
-                    <MicIconContainer onClick={handleClick} isExpanded={isExpanded}>
-                        <StyledMicIcon/>
-                    </MicIconContainer>
+                <MicIconContainer onClick={handleClick} isExpanded={isExpanded}>
+                    <MicIcon/>
+                </MicIconContainer>
             </AddConcertWrapper>
         )
     }
@@ -131,9 +132,9 @@ function Fab(props) {
         return (
             <AddListWrapper isExpanded={isExpanded}>
                 <IconLabel isExpanded = {isExpanded}>Add List</IconLabel>
-                    <ListIconContainer onClick={handleClick} isExpanded={isExpanded}>
-                        <StyledListIcon/>
-                    </ListIconContainer>
+                <ListIconContainer onClick={handleClick} isExpanded={isExpanded}>
+                    <AddIcon/>
+                </ListIconContainer>
             </AddListWrapper>
         )
     }

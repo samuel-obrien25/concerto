@@ -13,7 +13,7 @@ const StyledCard = styled.div`
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
     transition: .3s ease-in-out;
-    margin: ${props => props.isCardExpanded ? '0' : '25px auto'}; 
+    margin: ${props => props.isCardExpanded ? '0' : '15px auto'}; 
     padding: 10px 0px;
     position: ${props => props.isCardExpanded ? 'fixed' : 'relative'};
     transform: ${props=>props.isDeleted ? 'scale(0)' : 'auto'};
