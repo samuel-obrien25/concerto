@@ -8,17 +8,16 @@ const ListWrapper = styled.section`
     grid-template-columns: 40% 35% 25%;
     position: absolute;
     top: 100px;
-    transition: .2s ease-in-out;
+    transition: ${props => props.isVisible ? '.2s ease-in-out' : '.0s ease-in-out'};
     transform: ${props => props.isVisible ? 'scale(1)' : 'scale(0)'};
     opacity: ${props => props.isVisible ? '1' : '0'};
     padding-left: 0px;
     width: 100%;
-    height: 250px;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     box-sizing: border-box;
     z-index: 900;
-
 `;
 
 const Column = styled.div`

@@ -40,6 +40,7 @@ const StyledListTitleContainer = styled.div`
     height: ${props => props.isCardExpanded ? '50px' : 'auto'};
     padding: ${props => props.isCardExpanded ? '10px 30px' : '5px'};
     transform: ${props => props.isCardExpanded ? 'translateX(-50px)' : 'auto'};
+    z-index: ${props => props.isCardExpanded ? '901' : 'auto'};
     
     & h2, h3{
         text-align: left;
