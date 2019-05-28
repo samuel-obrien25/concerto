@@ -117,6 +117,8 @@ function Dashboard(props) {
             };
 
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
+            updates['users/' + userId + '/allConcerts/concert' + concertKey] = concertData;
+
             return database.ref().update(updates);
         });
         updateDashboard();

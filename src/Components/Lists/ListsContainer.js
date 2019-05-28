@@ -21,8 +21,9 @@ const StyledSection = styled.section`
     width: 100%;
     height: auto;
     overflow: hidden;
-    padding-bottom: 25px;
+    padding: 25px 0;
 `;
+
 //#endregion
 
 function ListContainer(props) {
