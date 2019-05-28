@@ -31,7 +31,8 @@ const StyledDashboard = styled.div`
 function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
-    const [isModalActive, setisModalActive] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const { activeUserData, activeDatabase } = props;
 
 // Modal Functions
@@ -170,6 +171,9 @@ function Dashboard(props) {
 
         useEffect(() => {
             setRawLists(updateRawLists());
+            setTimeout(() => {
+                setIsLoaded(true);
+            }, 2000);
         }, [])
         
     return (
@@ -179,7 +183,7 @@ function Dashboard(props) {
                     <Slide inOut='in' animDelay='.25s' animDuration='1s' animFillMode='forwards' >
                         <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
-                        <DashboardWelcomeText h2text='Wecome to Concerto!' h3text='Choose a list below:' />
+                        <DashboardWelcomeText isLoaded={isLoaded} h2text='Wecome to Concerto!' h3text='Choose a list below:' />
                         <ListContainer rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase} />
                 </StyledDashboard>
             </Slide>

@@ -2,16 +2,10 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
-import styled, {keyframes} from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 //#region styles
-const slideUp = keyframes`
-    to{
-        transform: translateY(0);
-    }
-`;
-
 const StyledSection = styled.section`
     position: relative;
     transition: .3s ease-in-out;
@@ -30,7 +24,7 @@ function ListContainer(props) {
     const [listsLoaded, setListsLoaded] = useState(false);
     const [activeRawLists, setActiveRawLists] = useState(props.rawLists);
 
-    const { activeList, activeUserData, snapshot } = props;
+    const { activeUserData, snapshot } = props;
 
     //The issue is here. Why so many re-renders?
     let activeDatabase = firebase.database();
@@ -65,17 +59,15 @@ function ListContainer(props) {
     const mapCards = function () {
         if (listsLoaded) {
             let mappedLists = activeRawLists.map((list, index) => {
-                console.log(list.key);
                 return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)}/>
             });
-            console.log(mappedLists);
             return mappedLists;
 
         } else { return; }
     }
 
     
-    const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
+    //const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
 
     setTimeout(() => {
         setListsLoaded(true);

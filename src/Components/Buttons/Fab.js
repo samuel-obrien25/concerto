@@ -109,7 +109,7 @@ function Fab(props) {
 
     if(fabType === 'open'){
         return (
-            <ToggleActionMenuWrapper isExpanded = {isExpanded}>
+            <ToggleActionMenuWrapper>
                 <IconLabel isExpanded={isExpanded}>Close</IconLabel>
                     <AddIconContainer onClick={handleClick} isExpanded={props.isExpanded}>
                         <StyledAddIcon isExpanded ={isExpanded}/>

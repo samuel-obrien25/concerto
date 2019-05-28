@@ -58,22 +58,19 @@ const StyledH3 = styled.h3`
 // #endregion STYLES
 
 function DashboardWelcomeText(props) {
-  const [isVisible, setIsVisible] = useState(true);
-  const { h2text, h3text } = props;
+  const { h2text, h3text, isLoaded } = props;
 
-  setTimeout(() => {
-    setIsVisible(false);
-  }, 4500);
 
-  if(isVisible){
-    return (
-      <StyledTextWrapper>
-        <StyledH2>{h2text}</StyledH2>
-        <StyledH3>{h3text}</StyledH3>
-      </StyledTextWrapper>
-    );
+  if(!isLoaded){
+    return null;
   }
-  else return null
+
+  return (
+    <StyledTextWrapper>
+      <StyledH2>{h2text}</StyledH2>
+      <StyledH3>{h3text}</StyledH3>
+    </StyledTextWrapper>
+  );
 }
 
 DashboardWelcomeText.propTypes = {
