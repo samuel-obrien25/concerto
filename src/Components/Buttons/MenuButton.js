@@ -17,18 +17,18 @@ const StyledMenuButtonMid = styled(StyledMenuButtonTop)`
 `
 const StyledMenuButtonBottom = styled(StyledMenuButtonTop)`
     order: 3;
-    transform: ${props => props.active ? 'rotate(45deg) scaleX(.6) translate(-12px, 5px)' : 'rotate(180deg)'};
+    transform: ${props => props.active ? 'rotate(45deg) scaleX(.6) translate(-14px, 5px)' : 'rotate(180deg)'};
 `
 const StyledMenuButtonWrapper = styled.section`
-    position: relative;
-    z-index: 9100;
-    left: 35px;
+    position: fixed;
     width: 30px;
     height: 25px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     transition: .4s ease-in-out;
     margin: auto 0;
+    z-index: 11;
     
     & :hover{
         cursor: pointer;

@@ -10,6 +10,7 @@ const IconWrapper = styled.div`
     width: 100%;
     position: absolute;
     transition: .25s ease-in-out;
+    z-index: 13;
 `
 const ToggleActionMenuWrapper = styled(IconWrapper)`
     position: relative;

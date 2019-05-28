@@ -6,14 +6,14 @@ import PropTypes from 'prop-types';
 
 //#region styles
 const StyledBottomNav = styled.nav`
-    position: absolute;
+    position: fixed;
     display: flex;
-    bottom: 0;
+    top: calc(100vh - 75px);
     left: 0;
     width: 100%;
     height: 75px;
     background-color: #fff;
-    z-index: 9999;
+    z-index: 1;
     box-shadow: 0 0px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `;
 //#endregion

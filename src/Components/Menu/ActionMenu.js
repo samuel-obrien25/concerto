@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 //#region styles
 const StyledActionMenuWrapper = styled.div`
-    z-index: 8998;
     height: 100px;
     width: 100px;
     position: absolute;
@@ -57,7 +56,7 @@ const Trigger = styled.div`
     position: absolute;
     bottom: -25px;
     right:-15px;
-    z-index: -1;
+    z-index: 12;
 `; 
 //#endregion
 

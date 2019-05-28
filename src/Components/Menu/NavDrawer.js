@@ -15,7 +15,7 @@ const StyledNavDrawer = styled.section`
     transform: ${props => props.isActive ? 'auto' : 'translateX(-100%)'};
     transition: .3s cubic-bezier(0.4,0.0,0.2,1);;
     overflow: hidden;
-    z-index: 9000;
+    z-index: 10;
     box-shadow: ${props => props.isActive ? '0px 0px 18px rgba(0, 0, 0, .15)' : 'auto'};
 `;
 
@@ -74,7 +74,7 @@ const StyledCloseTrigger = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 8999;
+    z-index: 9;
     transform: ${props => props.isVisible ? 'auto' : 'translateX(-100%)'};
     background-color: rgba(0,0,0,.2);
 `;
