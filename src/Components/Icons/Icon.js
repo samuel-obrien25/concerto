@@ -77,7 +77,7 @@ const MicIconFix = styled(Microphone)`
 
 //#endregion styles
 
-function Icon() {
+function Icon(props) {
     //Add any new icons to this array so they show up in loading animation
     const iconArray = [<Eguitar />, <Harp />, <MicIconFix />, <Panflute />, <Xylophone />];
     
@@ -85,9 +85,12 @@ function Icon() {
     //Function to change the icon every 3 seconds (in conjunction with the "Burst" animation timing)
     useEffect(() => {
         //I think this will need to be cleared. The <Icon /> is destroyed on fade-out, but still.
-        setInterval(() => {
+        const interval = setInterval(() => {
             setActiveIcon(iconArray[Math.floor(Math.random() * iconArray.length)]); 
         }, 3000);
+
+        return () => clearInterval(interval);
+
     },[]);
 
     return(

@@ -24,7 +24,7 @@ function ListContainer(props) {
     const [listsLoaded, setListsLoaded] = useState(false);
     const [activeRawLists, setActiveRawLists] = useState(props.rawLists);
 
-    const { activeUserData, snapshot } = props;
+    const { activeUserData } = props;
 
     //The issue is here. Why so many re-renders?
     let activeDatabase = firebase.database();
@@ -58,7 +58,7 @@ function ListContainer(props) {
 
     const mapCards = function () {
         if (listsLoaded) {
-            let mappedLists = activeRawLists.map((list, index) => {
+            let mappedLists = activeRawLists.map((list) => {
                 return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)}/>
             });
             return mappedLists;
@@ -69,29 +69,29 @@ function ListContainer(props) {
     
     //const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
 
-    setTimeout(() => {
-        setListsLoaded(true);
-    }, 2000);
+ 
 
     useEffect(() => {
         setActiveRawLists(activeRawLists);
-    }, [])
+
+        if(activeRawLists){
+            setListsLoaded(true);
+        }
+    }, [activeRawLists]);
 
 
     if (!listsLoaded) {
         return (
-            <StyledSection snapshot = {snapshot} rawLists = {activeRawLists}>
+            <StyledSection>
                 <Loading />
             </StyledSection>
         )
-
-    } else {
+    }
         return (
             <StyledSection>
                {mapCards()}
             </StyledSection>
         )
-    }
 }
 
 //#region PropTypes
@@ -99,7 +99,6 @@ ListContainer.propTypes = {
     activeList: PropTypes.object,
     activeUserData: PropTypes.object,
     rawLists: PropTypes.array,
-    snapshot: PropTypes.object
 }
 //#endregion
 

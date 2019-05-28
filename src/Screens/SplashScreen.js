@@ -9,7 +9,7 @@ const StyledSplashScreen = styled.section`
     left: 0;
     width: 100%;
     height: 100vh;
-    background: white;
+    background: gray;
     -background:linear-gradient(to top left, #FDC830, #F37335);
     display: flex;
     flex-direction: column;
@@ -19,13 +19,13 @@ const StyledSplashScreen = styled.section`
 // #endregion
 function SplashScreen(props) {
 
-    const {isSignedIn} = props;
+    const {isLoaded, isSignedIn} = props;
     
         return (
                 <StyledSplashScreen>
                     <AppTitle text='CONCERTO' slideInOut={isSignedIn ? 'out' : 'in'} />
                     {props.children}
-                <Icon />
+                <Icon isLoaded = {isLoaded}/>
 
                 </StyledSplashScreen>
         )

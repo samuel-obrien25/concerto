@@ -47,7 +47,7 @@ function ScreenHandler(props) {
                     setIsSplashActive(false);   
                 }, 2000);
             } else {
-                    signInScreen = <SignInScreen isSignedIn={false} />
+                    signInScreen = <SignInScreen isSignedIn={false} isLoaded = {isSplashActive}/>
             }
                 return signInScreen;
     };
