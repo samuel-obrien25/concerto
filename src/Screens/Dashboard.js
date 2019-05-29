@@ -34,7 +34,8 @@ function Dashboard(props) {
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [favoriteCard, setFavoriteCard] = useState(null);
-    const [allConcertsCard, setAllConcertsCard] = useState(null);
+    const [allConcertsCardData, setAllConcertsCardData] = useState(null);
+    const [killSwitch, setKillSwitch] = useState(false);
 
     const { activeUserData, activeDatabase } = props;
 
@@ -121,7 +122,7 @@ function Dashboard(props) {
             };
 
             updates['users/' + userId + '/lists/' + selection.value + '/concertList/concert' + concertKey] = concertData;
-            updates['users/' + userId + '/allConcerts/concert' + concertKey] = concertData;
+            updates['users/' + userId + '/allConcerts/concertList/concert' + concertKey] = concertData;
 
             return database.ref().update(updates);
         });
@@ -173,21 +174,20 @@ function Dashboard(props) {
 
     function showAllConcerts() {
         const db = firebase.database();
-        const user = firebase.auth().currentUser.uid;
+        const allConcerts = db.ref('users/' + activeUserData.uid + '/allConcerts');
 
-        const list = db.ref('/users/' + user + '/allConcerts').once('value');
-        const allConcertsCard = <Card permanent = {true} titleOverride='All Concerts' listData = {list}/>
-
-        console.log(list);
-        setAllConcertsCard(allConcertsCard);
+        allConcerts.on('value', function(snapshot) {
+            setAllConcertsCardData(snapshot.val());
+            });
     }
+        let allConcertsCard = allConcertsCardData ? <Card permanent = {true} titleOverride='All Concerts' activeList = {allConcertsCardData} removeCard={() => setAllConcertsCardData(null)}/> : null;
 
     useEffect(() => {
         setRawLists(updateRawLists());
         setTimeout(() => {
             setIsLoaded(true);
         }, 200);
-    }, [])
+    }, []);
         
     return (
         <StyledWrapper>

@@ -3,8 +3,7 @@ import MenuButton from '../Buttons/MenuButton';
 import styled from 'styled-components';
 import { ReactComponent as MusicNote } from '../Icons/assets/musicNote.svg';
 import PropTypes from 'prop-types';
-import firebase from 'firebase';
-import Card from '../Cards/Card';
+
 //#region STYLES
 const StyledNavDrawer = styled.section`
     background-color: #fff;

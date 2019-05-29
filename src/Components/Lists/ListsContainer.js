@@ -92,6 +92,7 @@ function ListContainer(props) {
         return (
             <StyledSection isLoaded = {listsLoaded}>
                {mapCards()}
+               {props.children}
             </StyledSection>
         )
 }
