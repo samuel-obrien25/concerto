@@ -17,6 +17,7 @@ const StyledSection = styled.section`
     height: auto;
     overflow: hidden;
     padding: 25px 0;
+    padding-bottom: 100px;
     transform: ${props=>props.isLoaded ? 'auto' : 'translateY(50px)'};
 `;
 

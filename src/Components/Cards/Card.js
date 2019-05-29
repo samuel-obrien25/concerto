@@ -129,12 +129,21 @@ function Card(props) {
         )
     }
 
+    function handleCardClick(e) {
+        //Prevent bubbling on threedotmenu and its closing trigger
+        if (e.target.classList.contains('sc-caSCKo') || e.target.classList.contains('sc-eqIVtm')){
+            return
+        } else {
+            setIsCardExpanded(true);
+        }
+    }
+
     return (
         <>
         <ExitButtonWrapper isCardExpanded={isCardExpanded}>
             <ExitButton handleClick={() => setIsCardExpanded(false)} />
         </ExitButtonWrapper>
-        <StyledCard id={id} activeList={activeList} isDeleted={isDeleted} onClick = {() => setIsCardExpanded(true)} isCardExpanded = {isCardExpanded}>
+        <StyledCard id={id} activeList={activeList} isDeleted={isDeleted} onClick = {handleCardClick} isCardExpanded = {isCardExpanded}>
             <StyledCardImage isCardExpanded={isCardExpanded}/>
             <StyledListTitleContainer isCardExpanded={isCardExpanded}>
                 <h2>{listTitle}</h2>
