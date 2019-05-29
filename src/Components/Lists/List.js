@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -62,76 +62,68 @@ const Column = styled.div`
 
 //#endregion Styles
 
-class List extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: this.props.listData
-        };
+const List = (props) => {
+
+    const [concerts, setConcerts] = useState(props.listData);
+    const {isVisible} = props;
+
+    function formatDate(concertDate){
+        let splitDate = concertDate.split('-');
+        let formattedDate = [];
+
+        formattedDate.push(splitDate[1]);
+        formattedDate.push(splitDate[2]);
+        formattedDate.push(splitDate[0]);
+
+        return formattedDate.join('-');
     }
 
+    function sortConcerts() {}
 
-    render() {
-        const concerts = this.state.items;
-        const {isVisible} = this.props;
-
-        function formatDate(concertDate){
-            let splitDate = concertDate.split('-');
-            let formattedDate = [];
-
-            formattedDate.push(splitDate[1]);
-            formattedDate.push(splitDate[2]);
-            formattedDate.push(splitDate[0]);
-
-            return formattedDate.join('-');
-        }
-        if (concerts.concertList) {
-            return (
-                <ListWrapper isVisible = {isVisible}>
-                    <Column>
-                        <h2>Artist</h2>
-                            <div>
-                            {Object.values(concerts.concertList).map((concert, index) => (
-                                <h3 key={concert.concertKey} index={index}>
-                                    {concert.bandName}
-                                </h3>
-                            )
-                            )}
-                            </div>
-                    </Column>
-                    <Column>
-                        <h2>Venue</h2>
-                        <div>
-                            {Object.values(concerts.concertList).map((concert, index) => (
-                                <h3 key={concert.concertKey} index={index}>
-                                    {concert.venueName}
-                                </h3>
-                            )
-                            )}
-                        </div>
-
-                    </Column>
-                    <Column>
-                        <h2>Date</h2>
-                        <div>
-                            {Object.values(concerts.concertList).map((concert, index) => (
-                                <h3 key={concert.concertKey} index={index}>
-                                    {formatDate(concert.concertDate)}
-                                </h3>
-                            )
-                            )}
-                        </div>
-
-                    </Column>
-                </ListWrapper>
-
-            );
-        } else {
-            return null
-        }
+    if (!concerts.concertList) {
+        return null;
     }
-}
+        return (
+            <ListWrapper isVisible = {isVisible}>
+                <Column>
+                    <h2>Artist</h2>
+                        <div>
+                        {Object.values(concerts.concertList).map((concert, index) => (
+                            <h3 key={concert.concertKey} index={index}>
+                                {concert.bandName}
+                            </h3>
+                        )
+                        )}
+                        </div>
+                </Column>
+                <Column>
+                    <h2>Venue</h2>
+                    <div>
+                        {Object.values(concerts.concertList).map((concert, index) => (
+                            <h3 key={concert.concertKey} index={index}>
+                                {concert.venueName}
+                            </h3>
+                        )
+                        )}
+                    </div>
 
+                </Column>
+                <Column>
+                    <h2>Date</h2>
+                    <div>
+                        {Object.values(concerts.concertList).map((concert, index) => (
+                            <h3 key={concert.concertKey} index={index}>
+                                {formatDate(concert.concertDate)}
+                            </h3>
+                        )
+                        )}
+                    </div>
+
+                </Column>
+            </ListWrapper>
+
+        );
+    }
 List.propTypes = {
     isVisible: PropTypes.bool
 }
