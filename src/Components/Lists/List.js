@@ -75,6 +75,16 @@ class List extends Component {
         const concerts = this.state.items;
         const {isVisible} = this.props;
 
+        function formatDate(concertDate){
+            let splitDate = concertDate.split('-');
+            let formattedDate = [];
+
+            formattedDate.push(splitDate[1]);
+            formattedDate.push(splitDate[2]);
+            formattedDate.push(splitDate[0]);
+
+            return formattedDate.join('-');
+        }
         if (concerts.concertList) {
             return (
                 <ListWrapper isVisible = {isVisible}>
@@ -106,7 +116,7 @@ class List extends Component {
                         <div>
                             {Object.values(concerts.concertList).map((concert, index) => (
                                 <h3 key={concert.concertKey} index={index}>
-                                    {concert.concertDate}
+                                    {formatDate(concert.concertDate)}
                                 </h3>
                             )
                             )}
