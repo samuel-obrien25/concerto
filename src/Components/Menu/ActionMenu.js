@@ -53,19 +53,30 @@ function ActionMenu(props) {
         setIsExpanded(!isExpanded);
     }
 
+    function handleWriteConcert() {
+        writeConcert();
+        setIsModalActive(!isModalActive);
+    }
+
+    function handleWriteList() {
+        writeList();
+        setIsModalActive(!isModalActive);
+    }
+
     useEffect(() => {
         if (didModalClose) {
             setIsModalActive(false);
-            console.log('asdf');
-            //const allInputs = document.querySelectorAll['input'];
-            
-            //Clear all inputs here
+            const allInputs = document.querySelectorAll['input'];
+
+            for(let i = 0; i < allInputs.length; i++){
+                allInputs[i].value = '';
+            }
         }
     }, [didModalClose])
 
     return (
         <StyledActionMenuWrapper isExpanded={isExpanded}>
-            <Modal rawLists = {rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={writeList} allLists={allLists} writeConcert={writeConcert} modalType={modalType} didModalClose = {didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
+            <Modal rawLists = {rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={handleWriteList} allLists={allLists} writeConcert={handleWriteConcert} modalType={modalType} didModalClose = {didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
                 <ExitButton handleClick={() => setIsModalActive(!isModalActive)}/>
             </Modal>
             <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
