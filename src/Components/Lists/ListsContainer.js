@@ -19,6 +19,11 @@ const StyledSection = styled.section`
     padding: 25px 0;
     padding-bottom: 100px;
     transform: ${props=>props.isLoaded ? 'auto' : 'translateY(50px)'};
+
+    @media(min-width: 700px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 `;
 
 //#endregion

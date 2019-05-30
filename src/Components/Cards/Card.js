@@ -23,8 +23,10 @@ const StyledCard = styled.div`
     display: flex;
 
     @media(min-width: 700px) {
-        height: 350px;
+        height: ${props => props.isCardExpanded ? '84vh' : '375px'};
+        width: ${props => props.isCardExpanded ? '96vw' : '325px'};
         flex-direction: column;
+        padding: 0px;
 
         :hover {
             box-shadow: 0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
@@ -57,6 +59,18 @@ const StyledListTitleContainer = styled.div`
         font-size: 14px;
         color: rgba(0,0,0,.4);
     }
+    @media(min-width: 700px) {
+        width: ${props => props.isCardExpanded ? '60%' : '100%'};
+        height: ${props => props.isCardExpanded ? '75px' : '125px'};
+        padding: ${props => props.isCardExpanded ? '10px 30px' : '15px'};
+        box-sizing:border-box;
+        position: ${props => props.isCardExpanded ? 'absolute' : 'relative'};
+        left: 0;
+        right: 0;
+        top: 15px;
+        margin: auto;
+    }
+    
 `;
 
 const StyledCardImage = styled.div`
@@ -70,11 +84,11 @@ const StyledCardImage = styled.div`
 
     @media(min-width: 700px) {
         height: 60%;
-        width: 90%;
+        width: 100%;
         border-radius: 6px;
-        margin: 2% auto;
-        background-color: purple;
-        box-sizing: border-box;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        margin: 0;
     }
 `;
 

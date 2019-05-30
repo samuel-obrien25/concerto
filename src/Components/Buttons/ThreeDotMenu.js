@@ -9,12 +9,17 @@ const StyledThreeDotWrapper = styled.div`
     top: ${props => props.isCardExpanded ? '0px' : '-12px'};
     right: 0;
     padding: 20px;
-    
-    :hover{
-        cursor: pointer;
-    }
-    :hover > .sc-dxgOiQ{
-        background-color: rgba(0,0,0,.85);
+
+    @media(min-width: 700px) {
+        :hover{
+            cursor: pointer;
+        }
+        :hover > .sc-dxgOiQ{
+            background-color: rgba(0,0,0,.85);
+        }
+
+        top: 0;
+
     }
 `;
 
@@ -35,6 +40,7 @@ function ThreeDotMenu(props) {
     const handleClick = function(){
         setIsActive(!isActive);
     }
+
     return (
         <StyledThreeDotWrapper onClick={handleClick} isCardExpanded = {isCardExpanded}>
             <Dot/>
