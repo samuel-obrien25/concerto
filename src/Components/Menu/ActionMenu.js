@@ -66,7 +66,7 @@ function ActionMenu(props) {
     return (
         <StyledActionMenuWrapper isExpanded={isExpanded}>
             <Modal rawLists = {rawLists} closeModal={() => setIsModalActive(!isModalActive)} writeList={writeList} allLists={allLists} writeConcert={writeConcert} modalType={modalType} didModalClose = {didModalClose} isModalExpanded={isModalActive} handleClick={() => setIsModalActive(!isModalActive)}>
-                <ExitButton onClick={() => setIsModalActive(!isModalActive)}/>
+                <ExitButton handleClick={() => setIsModalActive(!isModalActive)}/>
             </Modal>
             <Fab fabType='newConcert' handleClick={handleNewConcert} isExpanded={isExpanded} />
             <Fab fabType='newList' handleClick={handleNewList} isExpanded={isExpanded} />
