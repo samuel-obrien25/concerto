@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BottomNav from '../Components/Menu/BottomNav';
 import ProfileButton from '../Components/Buttons/ProfileButton';
-import DashboardWelcomeText from '../Components/Text/DashboardWelcomeText';
 import firebase from 'firebase';
 import ListContainer from '../Components/Lists/ListsContainer';
 import Card from '../Components/Cards/Card';
@@ -97,7 +96,10 @@ function Dashboard(props) {
 
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
-        updateDashboard();
+        //Lists will not update on dashboard until page refresh unless timeout is set
+        setTimeout(() => {
+            updateDashboard();
+        }, 200);
 
         return database.ref().update(updates);
     };
@@ -168,7 +170,7 @@ function Dashboard(props) {
 
         setInterval(() => {
             setShouldUpdate(false)
-        }, 0);
+        }, 50);
     }
 
     function showAllConcerts() {
@@ -195,7 +197,6 @@ function Dashboard(props) {
                     <Slide inOut='in' animDelay='.25s' animDuration='1s' animFillMode='forwards' >
                         <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
-                        <DashboardWelcomeText isLoaded={isLoaded} h2text='Wecome to Concerto!' h3text='Choose a list below:' />
                         <ListContainer rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase}>
                             {favoriteCard}
                             {allConcertsCard}

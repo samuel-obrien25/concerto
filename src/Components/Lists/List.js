@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 //#region Styles
 const ListWrapper = styled.section`
     display: grid;
-    grid-template-columns: 40% 35% 25%;
+    grid-template-columns: 40% 30% 30%;
     position: absolute;
     top: 100px;
     transition: ${props => props.isVisible ? '.2s ease-in-out' : '.0s ease-in-out'};

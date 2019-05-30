@@ -8,21 +8,20 @@ import PropTypes from 'prop-types';
 //#region styles
 const StyledSection = styled.section`
     position: relative;
-    transition: ${props => props.isLoaded ? '.3s ease-in-out;' : '1s ease-in-out;'};
-    transition-delay: ${props => props.isLoaded ? '2000ms' : '0ms'};
     margin: auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 96vw;
+    grid-column-gap: 25px;
+    grid-row-gap: 15px;
     width: 100%;
     height: auto;
     overflow: hidden;
     padding: 25px 0;
     padding-bottom: 100px;
-    transform: ${props=>props.isLoaded ? 'auto' : 'translateY(50px)'};
+    padding-left: 2vw;
 
     @media(min-width: 700px) {
-        flex-direction: row;
-        flex-wrap: wrap;
+        grid-template-columns: 30vw 30vw 30vw;
     }
 `;
 
@@ -67,22 +66,22 @@ function ListContainer(props) {
     const mapCards = function () {
         if (listsLoaded) {
             let mappedLists = activeRawLists.map((list) => {
-                return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)}/>
+                return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)} />
             });
             return mappedLists;
 
         } else { return; }
     }
 
-    
+
     //const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
 
- 
+
 
     useEffect(() => {
         setActiveRawLists(activeRawLists);
 
-        if(activeRawLists){
+        if (activeRawLists) {
             setListsLoaded(true);
         }
     }, [activeRawLists]);
@@ -95,12 +94,12 @@ function ListContainer(props) {
             </StyledSection>
         )
     }
-        return (
-            <StyledSection isLoaded = {listsLoaded}>
-               {mapCards()}
-               {props.children}
+    return (
+            <StyledSection isLoaded={listsLoaded}>
+                {mapCards()}
+                {props.children}
             </StyledSection>
-        )
+    )
 }
 
 //#region PropTypes
