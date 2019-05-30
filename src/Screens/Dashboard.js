@@ -35,7 +35,6 @@ function Dashboard(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [favoriteCard, setFavoriteCard] = useState(null);
     const [allConcertsCardData, setAllConcertsCardData] = useState(null);
-    const [killSwitch, setKillSwitch] = useState(false);
 
     const { activeUserData, activeDatabase } = props;
 

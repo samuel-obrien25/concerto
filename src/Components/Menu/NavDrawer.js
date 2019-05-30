@@ -84,6 +84,11 @@ function NavDrawer (props) {
     const [isVisible, setIsVisible] = useState(false);
     const { name, showAllConcerts } = props;
 
+    function handleListClick() {
+        showAllConcerts();
+        setIsVisible(!isVisible);
+    }
+
     return (
         <>
             <MenuButton isActive={isVisible}
@@ -95,7 +100,9 @@ function NavDrawer (props) {
                 </StyledNavHeader>
                 <hr />
                 <StyledNavMenu>
-                    <li data-value='allConcerts' onClick = {showAllConcerts}><MusicNote /><span>All Concerts</span></li>
+                    <li data-value='allConcerts' onClick = {handleListClick}>
+                        <MusicNote /><span>All Concerts</span>
+                    </li>
                 </StyledNavMenu>
             </StyledNavDrawer>
             <StyledCloseTrigger isVisible = { isVisible } onClick={() => setIsVisible(!isVisible)}/>
