@@ -3,6 +3,7 @@ import ListRow from './ListRow';
 import ListData from './ListData';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import firebase from 'firebase';
 
 //#region Styles
 const ListWrapper = styled.section`
@@ -25,7 +26,7 @@ const List = (props) => {
 
     //Storing props.listData in its own variable seems to prevent undefined errors
     const concerts = props.listData;
-    const {isVisible} = props;
+    const {activeUserData, isVisible} = props;
 
     function formatDate(concertDate){
         let splitDate = concertDate.split('-');
@@ -38,7 +39,20 @@ const List = (props) => {
         return formattedDate.join('-');
     }
 
-    function sortConcerts() {}
+    function deleteConcert(concert) {
+        const activeDatabase = firebase.database();
+        const activeList = props.activeList;
+        const concertKey = concert.concertKey;
+        const concertRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists/' + activeList.key + '/concertList/concert' + concertKey);
+        const targetRow = document.getElementById(concert.concertKey);
+        const result = window.confirm('Are you sure you would like to permanently delete this list?');
+
+        if(result){
+            concertRef.remove();
+            targetRow.nextElementSibling.remove();
+            return targetRow.remove();
+        }
+    }
 
     function setActiveRow(e) {
 
@@ -59,7 +73,7 @@ const List = (props) => {
         <ListWrapper isVisible = {isVisible}>
             <ListRow listHeader/>
             {Object.values(concerts.concertList).map((concert, index) => (
-                <ListRow className="concertRow" key={concert.concertKey} index={index} onClick={setActiveRow}>
+                <ListRow propsID={concert.concertKey} key={concert.concertKey} index={index} onClick={setActiveRow} deleteConcert={() => deleteConcert(concert)}>
                     <ListData>{concert.bandName}</ListData>
                     <ListData>{concert.venueName}</ListData>
                     <ListData>{formatDate(concert.concertDate)}</ListData>

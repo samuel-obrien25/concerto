@@ -74,8 +74,7 @@ const ListRow = (props) => {
         if(isActive){
             return (
                 <ActionRow>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={props.deleteConcert}>Delete</button>
                 </ActionRow>
             )
         } else {
@@ -95,7 +94,7 @@ const ListRow = (props) => {
 
     return (
         <>
-        <Row onClick = {() => setIsActive(!isActive)} isActive={isActive}>
+        <Row id={props.propsID} className="concertRow"onClick = {() => setIsActive(!isActive)} isActive={isActive}>
             {props.children}
         </Row>
         {actionMenu()}

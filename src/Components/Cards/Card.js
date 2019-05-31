@@ -1,11 +1,24 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import ThreeDotMenu from '../Buttons/ThreeDotMenu';
 import List from '../Lists/List';
 import ExitButton from '../Buttons/ExitButton';
 import PropTypes from 'prop-types';
 
 //#region Styles
+
+const animateCard = keyframes`
+    20%{
+        top: 2vh;
+        left: 2vw;
+    }
+
+    100%{
+        height: 84vh;
+        width: 96vw;
+    }
+`;
+
 const StyledCard = styled.div`
     background-color: #fff;
     height: ${props=>props.isCardExpanded ? '84vh' : 'auto'};
@@ -21,12 +34,16 @@ const StyledCard = styled.div`
     left: ${props => props.isCardExpanded ? '2vw' : 'auto'};
     z-index: ${props => props.isCardExpanded ? '1' : 'auto'};
     display: flex;
+    grid-column-start: auto;
 
     @media(min-width: 700px) {
-        height: ${props => props.isCardExpanded ? '84vh' : '375px'};
-        width: ${props => props.isCardExpanded ? '96vw' : '325px'};
+        height: 375px;
+        width: 100%;
         flex-direction: column;
         padding: 0px;
+        animation: ${props => props.isCardExpanded ? animateCard : 'auto'};
+        animation-duration: .25s;
+        animation-fill-mode: ${props => props.isCardExpanded ? 'forwards' : 'reverse'};
 
         :hover {
             box-shadow: 0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
@@ -107,7 +124,7 @@ const ExitButtonWrapper = styled.div`
 function Card(props) {
 
     const [isCardExpanded, setIsCardExpanded] = useState(false);
-    const { activeList, deleteList, favoriteList, id, isDeleted, listTitle } = props;
+    const { activeList, activeUserData, deleteList, favoriteList, id, isDeleted, listTitle } = props;
 
     function getNumberOfConcerts() {
         let count;
@@ -145,7 +162,8 @@ function Card(props) {
 
     function handleCardClick(e) {
         //Prevent bubbling on threedotmenu and its closing trigger
-        if (e.target.classList.contains('sc-caSCKo') || e.target.classList.contains('sc-eqIVtm')){
+        //Dont judge me
+        if (e.target.classList.contains('sc-TOsTZ') || e.target.classList.contains('sc-eqIVtm') || e.target.classList.contains('sc-dVhcbM') || e.target.classList.contains('sc-fBuWsC')){
             return
         } else {
             setIsCardExpanded(true);
@@ -164,7 +182,7 @@ function Card(props) {
                 <h3>{getNumberOfConcerts()}</h3>
                 <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} isCardExpanded = {isCardExpanded}/>
             </StyledListTitleContainer>
-            <List listData = {activeList} isVisible = {isCardExpanded}/>
+            <List activeUserData = {activeUserData} listData = {activeList} isVisible = {isCardExpanded} activeList = {activeList}/>
         </StyledCard>
         </>
     );

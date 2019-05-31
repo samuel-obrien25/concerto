@@ -72,7 +72,7 @@ function ListContainer(props) {
     const mapCards = function () {
         if (listsLoaded) {
             let mappedLists = activeRawLists.map((list) => {
-                return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)} />
+                return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} activeUserData = {activeUserData} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)} />
             });
             return mappedLists;
 
