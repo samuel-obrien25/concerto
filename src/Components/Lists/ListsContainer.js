@@ -23,6 +23,12 @@ const StyledSection = styled.section`
     @media(min-width: 700px) {
         grid-template-columns: 30vw 30vw 30vw;
     }
+    @media(min-width: 1150px) {
+        grid-template-columns: 22% 22% 22% 22%;
+        max-width: 1100px;
+    }
+
+
 `;
 
 //#endregion
