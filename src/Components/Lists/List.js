@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import ListRow from './ListRow';
+import ListData from './ListData';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 //#region Styles
 const ListWrapper = styled.section`
-    display: grid;
-    grid-template-columns: 40% 35% 25%;
     position: absolute;
     top: 100px;
     transition: ${props => props.isVisible ? '.2s ease-in-out' : '.0s ease-in-out'};
@@ -19,52 +19,12 @@ const ListWrapper = styled.section`
     box-sizing: border-box;
     z-index: 900;
 `;
-
-const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    h2{
-        font-size: 16px;
-        text-transform: uppercase;
-        text-align: left;
-        padding-left: 15px;
-    }
-    h3{
-        font-weight: 400;
-        font-size: 14px;
-        transition: .25s ease-in-out;
-        position: relative;
-        padding: 5px 15px;
-
-        :before{
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            height: 14px;
-            padding: 10px 0px;
-            width: 96vw;
-            background-color: #f0f0f0;
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: .2s ease-in-out;
-            z-index: -1;
-        }
-
-        &:hover{
-            &:before{
-                transform: scaleY(1);
-            }
-        } 
-    }
-`;
-
 //#endregion Styles
 
 const List = (props) => {
 
-    const [concerts, setConcerts] = useState(props.listData);
+    //Storing props.listData in its own variable seems to prevent undefined errors
+    const concerts = props.listData;
     const {isVisible} = props;
 
     function formatDate(concertDate){
@@ -80,49 +40,35 @@ const List = (props) => {
 
     function sortConcerts() {}
 
+    function setActiveRow(e) {
+
+        const rows = Array.from(e.target.parentElement.parentElement.children);
+            if(e.target.parentElement.classList.contains('concertRow')){
+                rows.forEach(function (row) {
+                    row.style.backgroundColor = '#fff';
+                })
+                e.target.parentElement.style.backgroundColor = '#f0f0f0';
+            }
+    }
+
     if (!concerts.concertList) {
         return null;
     }
-        return (
-            <ListWrapper isVisible = {isVisible}>
-                <Column>
-                    <h2>Artist</h2>
-                        <div>
-                        {Object.values(concerts.concertList).map((concert, index) => (
-                            <h3 key={concert.concertKey} index={index}>
-                                {concert.bandName}
-                            </h3>
-                        )
-                        )}
-                        </div>
-                </Column>
-                <Column>
-                    <h2>Venue</h2>
-                    <div>
-                        {Object.values(concerts.concertList).map((concert, index) => (
-                            <h3 key={concert.concertKey} index={index}>
-                                {concert.venueName}
-                            </h3>
-                        )
-                        )}
-                    </div>
 
-                </Column>
-                <Column>
-                    <h2>Date</h2>
-                    <div>
-                        {Object.values(concerts.concertList).map((concert, index) => (
-                            <h3 key={concert.concertKey} index={index}>
-                                {formatDate(concert.concertDate)}
-                            </h3>
-                        )
-                        )}
-                    </div>
+    return (
+        <ListWrapper isVisible = {isVisible}>
+            <ListRow listHeader/>
+            {Object.values(concerts.concertList).map((concert, index) => (
+                <ListRow className="concertRow" key={concert.concertKey} index={index} onClick={setActiveRow}>
+                    <ListData>{concert.bandName}</ListData>
+                    <ListData>{concert.venueName}</ListData>
+                    <ListData>{formatDate(concert.concertDate)}</ListData>
+                </ListRow>
+                )
+            )}
+        </ListWrapper>
+    )
 
-                </Column>
-            </ListWrapper>
-
-        );
     }
 List.propTypes = {
     isVisible: PropTypes.bool
