@@ -29,9 +29,8 @@ const StyledDashboard = styled.div`
 
 // #endregion
 function Dashboard(props) {
-    const [rawLists, setRawLists] = useState();
+    const [rawLists, setRawLists] = useState(null);
     const [shouldUpdate, setShouldUpdate] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
     const [favoriteCardData, setFavoriteCardData] = useState(null);
     const [allConcertsCardData, setAllConcertsCardData] = useState(null);
 
@@ -193,11 +192,9 @@ function Dashboard(props) {
     }
     let favConcertsCard = favoriteCardData ? <Card permanent={true} titleOverride='Favorite Concerts' activeList={favoriteCardData} removeCard={() => setFavoriteCardData(null)} /> : null;
 
-
     useEffect(() => {
-        setRawLists(updateRawLists());
         setTimeout(() => {
-            setIsLoaded(true);
+            setRawLists(updateRawLists());
         }, 200);
     }, []);
         
