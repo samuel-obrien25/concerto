@@ -58,27 +58,30 @@ const ActionRow = styled(Row)`
     animation-fill-mode: forwards;
     transform-origin: top;
     background-color: #077FDB;
+    display: block;
     :before{
         display: none;
     }
 `
+
+const ActionDeleteButton = styled.button`
+    border: none;
+    background: #fff;
+`;
 //#endregion Styles
 
 const ListRow = (props) => {
     const [isActive, setIsActive] = useState(false);
 
-    //Storing props.listData in its own variable seems to prevent undefined errors
-    const concerts = props.listData;
-
     const actionMenu = function() {
         if(isActive){
             return (
                 <ActionRow>
-                    <button onClick={props.deleteConcert}>Delete</button>
+                    <ActionDeleteButton onClick={props.deleteConcert}>Delete</ActionDeleteButton>
                 </ActionRow>
             )
         } else {
-                return null
+            return null
             }
         }
 
@@ -94,7 +97,7 @@ const ListRow = (props) => {
 
     return (
         <>
-        <Row id={props.propsID} className="concertRow"onClick = {() => setIsActive(!isActive)} isActive={isActive}>
+        <Row id={props.propsID} className="concertRow" onClick = {() => setIsActive(!isActive)} isActive={isActive}>
             {props.children}
         </Row>
         {actionMenu()}
