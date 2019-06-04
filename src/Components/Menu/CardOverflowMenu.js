@@ -60,14 +60,13 @@ const StyledOverflowList = styled.ul`
 //#endregion styles
 
 function CardOverflowMenu(props) {
-    const { deleteList, favoriteList, handleCloseTrigger, isActive } = props;
+    const { deleteList, handleCloseTrigger, isActive } = props;
 
     return (
         <React.Fragment>
             <StyledCardOverflowMenu isActive = {isActive} >
                 <StyledOverflowList > 
                     <li onClick = { deleteList }>Delete List</li>
-                    <li onClick = { favoriteList }>Add to Favorites</li>
                 </StyledOverflowList>
             </StyledCardOverflowMenu>
             <StyledTrigger onClick = { handleCloseTrigger } isActive = {isActive}/>
@@ -78,7 +77,6 @@ function CardOverflowMenu(props) {
 //#region proptypes
 CardOverflowMenu.propTypes = {
     deleteList: PropTypes.func,
-    favoriteList: PropTypes.func,
     handleCloseTrigger: PropTypes.func,
     isActive: PropTypes.bool
 }

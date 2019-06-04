@@ -44,14 +44,36 @@ const List = (props) => {
         const activeList = props.activeList;
         const concertKey = concert.concertKey;
         const concertRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists/' + activeList.key + '/concertList/concert' + concertKey);
+        const allConcertRef = activeDatabase.ref('users/' + activeUserData.uid + '/allConcerts/concertList/concert' + concertKey);
+        const favConcertRef = activeDatabase.ref('users/' + activeUserData.uid + '/favoriteConcerts/concertList/concert' + concertKey);
         const targetRow = document.getElementById(concert.concertKey);
         const result = window.confirm('Are you sure you would like to permanently delete this list?');
 
         if(result){
             concertRef.remove();
+            allConcertRef.remove();
+            favConcertRef.remove();
             targetRow.nextElementSibling.remove();
             return targetRow.remove();
         }
+    }
+
+    function favoriteConcert(concert) {
+        const activeDatabase = firebase.database();
+        const concertKey = concert.concertKey;
+
+
+        let concertData = {
+            venueName: concert.venueName,
+            concertKey: concert.concertKey,
+            bandName: concert.bandName,
+            concertDate: concert.concertDate
+        };
+        let updates = {};
+
+        updates['users/' + activeUserData.uid + '/favoriteConcerts/concertList/concert' + concertKey] = concertData;
+
+        return activeDatabase.ref().update(updates);
     }
 
     function setActiveRow(e) {
@@ -73,7 +95,7 @@ const List = (props) => {
         <ListWrapper isVisible = {isVisible}>
             <ListRow listHeader/>
             {Object.values(concerts.concertList).map((concert, index) => (
-                <ListRow propsID={concert.concertKey} key={concert.concertKey} index={index} onClick={setActiveRow} deleteConcert={() => deleteConcert(concert)}>
+                <ListRow propsID={concert.concertKey} key={concert.concertKey} index={index} onClick={setActiveRow} deleteConcert={() => deleteConcert(concert)} favoriteConcert={() => favoriteConcert(concert)}>
                     <ListData>{concert.bandName}</ListData>
                     <ListData>{concert.venueName}</ListData>
                     <ListData>{formatDate(concert.concertDate)}</ListData>

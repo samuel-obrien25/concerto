@@ -124,7 +124,7 @@ const ExitButtonWrapper = styled.div`
 function Card(props) {
 
     const [isCardExpanded, setIsCardExpanded] = useState(false);
-    const { activeList, activeUserData, deleteList, favoriteList, id, isDeleted, listTitle } = props;
+    const { activeList, activeUserData, deleteList, id, isDeleted, listTitle } = props;
 
     function getNumberOfConcerts() {
         let count;
@@ -180,7 +180,7 @@ function Card(props) {
             <StyledListTitleContainer isCardExpanded={isCardExpanded}>
                 <h2>{listTitle}</h2>
                 <h3>{getNumberOfConcerts()}</h3>
-                <ThreeDotMenu activeList={activeList} favoriteList={favoriteList} deleteList={deleteList} isCardExpanded = {isCardExpanded}/>
+                <ThreeDotMenu activeList={activeList} deleteList={deleteList} isCardExpanded = {isCardExpanded}/>
             </StyledListTitleContainer>
             <List activeUserData = {activeUserData} listData = {activeList} isVisible = {isCardExpanded} activeList = {activeList}/>
         </StyledCard>
@@ -192,7 +192,6 @@ function Card(props) {
 Card.propTypes = {
     activeList: PropTypes.object,
     deleteList: PropTypes.func,
-    favoriteList: PropTypes.func,
     id: PropTypes.string,
     isDeleted: PropTypes.func,
     listTitle: PropTypes.string,

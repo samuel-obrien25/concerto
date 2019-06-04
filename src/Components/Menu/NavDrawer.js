@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MenuButton from '../Buttons/MenuButton';
 import styled from 'styled-components';
 import { ReactComponent as MusicNote } from '../Icons/assets/musicNote.svg';
+import { ReactComponent as FavoriteIcon } from '../Icons/assets/favorite.svg';
 import PropTypes from 'prop-types';
 
 //#region STYLES
@@ -36,7 +37,6 @@ const StyledNavH2 = styled.h2`
 
 const StyledNavMenu = styled.ul`
     padding-left: 0px;
-    display: flex;
     width: 90%;
     height: 100%;
     margin-left: 5%;
@@ -82,10 +82,14 @@ const StyledCloseTrigger = styled.div`
 
 function NavDrawer (props) {
     const [isVisible, setIsVisible] = useState(false);
-    const { name, showAllConcerts } = props;
+    const { name, showAllConcerts, showFavConcerts } = props;
 
-    function handleListClick() {
+    function handleAllConcertsClick() {
         showAllConcerts();
+        setIsVisible(!isVisible);
+    }
+    function handleFavConcertsClick() {
+        showFavConcerts();
         setIsVisible(!isVisible);
     }
 
@@ -100,8 +104,11 @@ function NavDrawer (props) {
                 </StyledNavHeader>
                 <hr />
                 <StyledNavMenu>
-                    <li data-value='allConcerts' onClick = {handleListClick}>
+                    <li data-value='allConcerts' onClick={handleAllConcertsClick}>
                         <MusicNote /><span>All Concerts</span>
+                    </li>
+                    <li data-value='favConcerts' onClick={handleFavConcertsClick}>
+                        <FavoriteIcon /><span>Favorite Concerts</span>
                     </li>
                 </StyledNavMenu>
             </StyledNavDrawer>

@@ -58,15 +58,16 @@ const ActionRow = styled(Row)`
     animation-fill-mode: forwards;
     transform-origin: top;
     background-color: #077FDB;
-    display: block;
+    display: flex;
     :before{
         display: none;
     }
 `
 
-const ActionDeleteButton = styled.button`
+const ActionButton = styled.button`
     border: none;
     background: #fff;
+    margin: auto;
 `;
 //#endregion Styles
 
@@ -77,7 +78,8 @@ const ListRow = (props) => {
         if(isActive){
             return (
                 <ActionRow>
-                    <ActionDeleteButton onClick={props.deleteConcert}>Delete</ActionDeleteButton>
+                    <ActionButton onClick={props.deleteConcert}>Delete</ActionButton>
+                    <ActionButton onClick={props.favoriteConcert}>Favorite</ActionButton>
                 </ActionRow>
             )
         } else {

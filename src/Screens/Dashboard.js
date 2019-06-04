@@ -32,7 +32,7 @@ function Dashboard(props) {
     const [rawLists, setRawLists] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [favoriteCard, setFavoriteCard] = useState(null);
+    const [favoriteCardData, setFavoriteCardData] = useState(null);
     const [allConcertsCardData, setAllConcertsCardData] = useState(null);
 
     const { activeUserData, activeDatabase } = props;
@@ -183,6 +183,17 @@ function Dashboard(props) {
     }
         let allConcertsCard = allConcertsCardData ? <Card permanent = {true} titleOverride='All Concerts' activeList = {allConcertsCardData} removeCard={() => setAllConcertsCardData(null)}/> : null;
 
+    function showFavConcerts() {
+        const db = firebase.database();
+        const favConcerts = db.ref('users/' + activeUserData.uid + '/favoriteConcerts');
+
+        favConcerts.on('value', function (snapshot) {
+            setFavoriteCardData(snapshot.val());
+        });
+    }
+    let favConcertsCard = favoriteCardData ? <Card permanent={true} titleOverride='Favorite Concerts' activeList={favoriteCardData} removeCard={() => setFavoriteCardData(null)} /> : null;
+
+
     useEffect(() => {
         setRawLists(updateRawLists());
         setTimeout(() => {
@@ -198,12 +209,12 @@ function Dashboard(props) {
                         <ProfileButton userImage={activeUserData.photoURL} />
                     </Slide>
                         <ListContainer rawLists = {rawLists} activeUserData={activeUserData} activeDatabase={activeDatabase}>
-                            {favoriteCard}
+                            {favConcertsCard}
                             {allConcertsCard}
                         </ListContainer>
                 </StyledDashboard>
             </Slide>
-            <BottomNav showAllConcerts = {showAllConcerts} name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
+            <BottomNav showAllConcerts = {showAllConcerts} showFavConcerts = {showFavConcerts} name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
         </StyledWrapper>
     );
 }

@@ -56,23 +56,10 @@ function ListContainer(props) {
         }
     }
 
-    function favoriteList(activeList) {
-        const user = activeUserData.uid;
-        const listData = {
-            listName: activeList.listName
-        }
-        const newFavKey = firebase.database().ref().child('/users/' + user + '/lists/favorites/').push().key;
-        let updates = {};
-
-        updates['users/' + user + '/lists/favorites/list' + newFavKey] = listData;
-
-        return activeDatabase.ref().update(updates);
-    }
-
     const mapCards = function () {
         if (listsLoaded) {
             let mappedLists = activeRawLists.map((list) => {
-                return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} activeUserData = {activeUserData} favoriteList={() => favoriteList(list)} deleteList={() => deleteList(list)} />
+                return <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} activeUserData = {activeUserData} deleteList={() => deleteList(list)} />
             });
             return mappedLists;
 

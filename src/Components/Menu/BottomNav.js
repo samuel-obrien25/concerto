@@ -19,10 +19,10 @@ const StyledBottomNav = styled.nav`
 //#endregion
 
 function BottomNav(props) {
-    const { writeList, writeConcert, name, rawLists, shouldUpdate, showAllConcerts } = props;
+    const { writeList, writeConcert, name, rawLists, shouldUpdate, showAllConcerts, showFavConcerts } = props;
     return (
         <StyledBottomNav>
-            <NavDrawer showAllConcerts = {showAllConcerts} name={name} />
+            <NavDrawer showAllConcerts={showAllConcerts} showFavConcerts={showFavConcerts} name={name} />
             <ActionMenu rawLists={rawLists} writeList={writeList} writeConcert={writeConcert} didModalClose={shouldUpdate}/>
         </StyledBottomNav>
     )

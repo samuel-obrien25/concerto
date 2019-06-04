@@ -35,7 +35,7 @@ const Dot = styled.div`
 // #endregion
 function ThreeDotMenu(props) {
     const [isActive, setIsActive] = useState();
-    const { activeList, deleteList, favoriteList, isCardExpanded } = props;
+    const { activeList, deleteList, isCardExpanded } = props;
 
     const handleClick = function(){
         setIsActive(!isActive);
@@ -46,7 +46,7 @@ function ThreeDotMenu(props) {
             <Dot/>
             <Dot/>
             <Dot/>
-            <CardOverflowMenu isActive = {isActive} activeList = {activeList} favoriteList = {favoriteList} deleteList = {deleteList}/>
+            <CardOverflowMenu isActive = {isActive} activeList = {activeList} deleteList = {deleteList}/>
         </StyledThreeDotWrapper>
     );
 }
@@ -55,7 +55,6 @@ function ThreeDotMenu(props) {
 ThreeDotMenu.propTypes = {
     activeList: PropTypes.object,
     deleteList: PropTypes.func,
-    favoriteList: PropTypes.func,
     isCardExpanded: PropTypes.bool
 }
 //#endregion
