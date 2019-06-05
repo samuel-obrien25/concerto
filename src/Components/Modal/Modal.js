@@ -50,6 +50,8 @@ function Modal(props) {
         setModalType(props.modalType)
     },[props.modalType]);
 
+    if(isModalExpanded)
+
     return (
         <StyledModalWrapper isModalExpanded = {isModalExpanded} >
             <StyledModal>

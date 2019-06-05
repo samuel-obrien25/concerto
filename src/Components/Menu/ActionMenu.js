@@ -5,6 +5,20 @@ import Modal from '../Modal/Modal';
 import PropTypes from 'prop-types';
 import ExitButton from '../Buttons/ExitButton';
 
+/**
+ * It renders the Action Menu
+ * It renders the Fab
+ * --On Fab click
+ * ----It renders three fabs
+ * ------On Fab Click (except Close fab)
+ * --------It opens Concert creator modal
+ * --------OR
+ * --------It opens List creator modal
+ * ----It renders the Trigger
+ *
+ */
+
+
 //#region styles
 const StyledActionMenuWrapper = styled.div`
     height: 100px;

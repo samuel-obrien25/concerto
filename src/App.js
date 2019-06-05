@@ -14,12 +14,18 @@ const FlexWrapper = styled.div`
     margin: auto;
     display: flex;
 `;
+/**
+ * App.js gets the Auth state from firebase
+ * Then it sets the ActiveUser state
+ * And sets the isSignedIn State
+ * 
+ * If no user is signed in, return <SignInScreen>
+ * 
+ * If user is signed in, return <Dashboard> and pass activeUserData
+ */
 
 function App() {
-  //State placeholder for signed in user data
   const [activeUser, setActiveUser] = useState(null);
-
-  //State placeholder for logic that checks if the user is logged in
   const [isSignedIn, setIsSignedIn] = useState();
 
     //Observer that checks if user is signed in
