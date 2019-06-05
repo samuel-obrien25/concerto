@@ -34,6 +34,10 @@ function Dashboard(props) {
     const [favoriteCardData, setFavoriteCardData] = useState(null);
     const [allConcertsCardData, setAllConcertsCardData] = useState(null);
 
+    let allConcertsCard = allConcertsCardData ? <Card permanent={true} titleOverride='All Concerts' activeList={allConcertsCardData} removeCard={() => setAllConcertsCardData(null)} /> : null;
+    let favConcertsCard = favoriteCardData ? <Card permanent={true} titleOverride='Favorite Concerts' activeList={favoriteCardData} removeCard={() => setFavoriteCardData(null)} /> : null;
+
+
     const { activeUserData, activeDatabase } = props;
 
 // Modal Functions
@@ -180,7 +184,6 @@ function Dashboard(props) {
             setAllConcertsCardData(snapshot.val());
             });
     }
-        let allConcertsCard = allConcertsCardData ? <Card permanent = {true} titleOverride='All Concerts' activeList = {allConcertsCardData} removeCard={() => setAllConcertsCardData(null)}/> : null;
 
     function showFavConcerts() {
         const db = firebase.database();
@@ -190,12 +193,11 @@ function Dashboard(props) {
             setFavoriteCardData(snapshot.val());
         });
     }
-    let favConcertsCard = favoriteCardData ? <Card permanent={true} titleOverride='Favorite Concerts' activeList={favoriteCardData} removeCard={() => setFavoriteCardData(null)} /> : null;
 
     useEffect(() => {
         setTimeout(() => {
-            setRawLists(updateRawLists());
-        }, 200);
+            updateDashboard();
+        }, 250);
     }, []);
         
     return (

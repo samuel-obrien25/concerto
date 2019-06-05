@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import firebase from 'firebase';
-import ScreenHandler from './Screens/ScreenHandler';
+import Slide from './Utilities/Slide';
+import Dashboard from './Screens/Dashboard';
+import SignInScreen from './Screens/SignInScreen';
+import SplashScreen from './Screens/SplashScreen';
+import styled from 'styled-components';
 
-function App(props) {
+const FlexWrapper = styled.div`
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+`;
+
+function App() {
   //State placeholder for signed in user data
   const [activeUser, setActiveUser] = useState(null);
 
@@ -10,7 +23,7 @@ function App(props) {
   const [isSignedIn, setIsSignedIn] = useState();
 
   //State placeholder for Database reference
-  const [activeDatabase, setActiveDatabase] = useState(null);
+  const [activeDatabase, setActiveDatabase] = useState(false);
 
     //Observer that checks if user is signed in
     firebase.auth().onAuthStateChanged(function (user) {
@@ -25,8 +38,17 @@ function App(props) {
       } else { return }
     });
 
-    return (
-      <ScreenHandler activeDatabase = {activeDatabase} activeUser = {activeUser} isSignedIn = { isSignedIn }/>
-    )
+    if(!isSignedIn){
+      return (
+        <Slide inOut='in' animDelay='2s' animDuration='1s' animFillMode='forwards' isForText={false} fullscreen={true}>
+          <FlexWrapper>
+            <SignInScreen isSignedIn={false} />
+          </FlexWrapper>
+          <SplashScreen />
+        </Slide>
+      )
+    } else {
+      return <Dashboard activeUserData={activeUser} activeDatabase={activeDatabase} />;
+    }
 }
 export default App;

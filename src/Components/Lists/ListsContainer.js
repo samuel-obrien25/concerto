@@ -87,6 +87,11 @@ function ListContainer(props) {
             </StyledSection>
         )
     }
+    if(listsLoaded && activeRawLists.length < 1){
+        return(
+            <h2>Add your first list:</h2>
+        )
+    }
     return (
             <StyledSection isLoaded={listsLoaded}>
                 {mapCards()}
