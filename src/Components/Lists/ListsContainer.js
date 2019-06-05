@@ -8,17 +8,14 @@ import PropTypes from 'prop-types';
 //#region styles
 const StyledSection = styled.section`
     position: relative;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 96vw;
-    grid-column-gap: 25px;
-    grid-row-gap: 15px;
     width: 100%;
-    height: auto;
-    overflow: hidden;
+    height: 100%;
     padding: 25px 0;
-    padding-bottom: 100px;
-    padding-left: 2vw;
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-bottom: 75px;
+    padding-top: 75px;
 
     @media(min-width: 700px) {
         grid-template-columns: 30vw 30vw 30vw;
@@ -28,7 +25,16 @@ const StyledSection = styled.section`
         max-width: 1100px;
     }
 
+`;
 
+const LoadingWrapper = styled.section`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
+    & *{
+        margin: auto;
+    }
 `;
 
 //#endregion
@@ -82,9 +88,9 @@ function ListContainer(props) {
 
     if (!listsLoaded) {
         return (
-            <StyledSection>
+            <LoadingWrapper>
                 <Loading />
-            </StyledSection>
+            </LoadingWrapper>
         )
     }
     if(listsLoaded && activeRawLists.length < 1){

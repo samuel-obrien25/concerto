@@ -38,7 +38,8 @@ const StyledCard = styled.div`
 
     @media(min-width: 700px) {
         height: 375px;
-        width: 100%;
+        width: 300px;
+        display: inline-block;
         flex-direction: column;
         padding: 0px;
         animation: ${props => props.isCardExpanded ? animateCard : 'auto'};
