@@ -63,14 +63,14 @@ function CardOverflowMenu(props) {
     const { deleteList, handleCloseTrigger, isActive } = props;
 
     return (
-        <React.Fragment>
+        <>
             <StyledCardOverflowMenu isActive = {isActive} >
                 <StyledOverflowList > 
                     <li onClick = { deleteList }>Delete List</li>
                 </StyledOverflowList>
             </StyledCardOverflowMenu>
-            <StyledTrigger onClick = { handleCloseTrigger } isActive = {isActive}/>
-        </React.Fragment>
+            <StyledTrigger className="menu-trigger" onClick = { handleCloseTrigger } isActive = {isActive}/>
+        </>
     );
 }
 

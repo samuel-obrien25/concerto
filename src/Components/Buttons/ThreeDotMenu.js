@@ -42,7 +42,7 @@ function ThreeDotMenu(props) {
     }
 
     return (
-        <StyledThreeDotWrapper onClick={handleClick} isCardExpanded = {isCardExpanded}>
+        <StyledThreeDotWrapper onClick={handleClick} isCardExpanded = {isCardExpanded} className="three-dot-menu">
             <Dot/>
             <Dot/>
             <Dot/>

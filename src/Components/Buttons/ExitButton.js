@@ -40,7 +40,7 @@ const ExitButton = (props) => {
     const { handleClick } = props;
 
     return (
-        <StyledExitButton onClick={handleClick}>
+        <StyledExitButton onClick={handleClick} className="exit-button">
             <StyledAddIcon/>
         </StyledExitButton>
     );

@@ -10,7 +10,7 @@ const FlexWrapper = styled.div`
     position: absolute;
     z-index: 9999;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin: auto;
     display: flex;
 `;
@@ -22,9 +22,6 @@ function App() {
   //State placeholder for logic that checks if the user is logged in
   const [isSignedIn, setIsSignedIn] = useState();
 
-  //State placeholder for Database reference
-  const [activeDatabase, setActiveDatabase] = useState(false);
-
     //Observer that checks if user is signed in
     firebase.auth().onAuthStateChanged(function (user) {
       //if User is signed in...
@@ -33,8 +30,6 @@ function App() {
         setActiveUser(user);
         // Sets the isSignedIn state to true
         setIsSignedIn(true);
-        // Sets the activeDatabase to the database
-        setActiveDatabase(firebase.database());
       } else { return }
     });
 
@@ -48,7 +43,7 @@ function App() {
         </Slide>
       )
     } else {
-      return <Dashboard activeUserData={activeUser} activeDatabase={activeDatabase} />;
+      return <Dashboard activeUserData={activeUser} />;
     }
 }
 export default App;

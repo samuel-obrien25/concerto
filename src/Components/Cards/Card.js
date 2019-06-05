@@ -162,8 +162,7 @@ function Card(props) {
 
     function handleCardClick(e) {
         //Prevent bubbling on threedotmenu and its closing trigger
-        //Dont judge me
-        if (e.target.classList.contains('sc-TOsTZ') || e.target.classList.contains('sc-eqIVtm') || e.target.classList.contains('sc-dVhcbM') || e.target.classList.contains('sc-fBuWsC')){
+        if (e.target.classList.contains('three-dot-menu') || e.target.classList.contains('menu-trigger')){
             return
         } else {
             setIsCardExpanded(true);
@@ -175,11 +174,11 @@ function Card(props) {
         <ExitButtonWrapper isCardExpanded={isCardExpanded}>
             <ExitButton handleClick={() => setIsCardExpanded(false)} />
         </ExitButtonWrapper>
-        <StyledCard id={id} activeList={activeList} isDeleted={isDeleted} onClick = {handleCardClick} isCardExpanded = {isCardExpanded}>
+        <StyledCard id={id} className="listCard" activeList={activeList} isDeleted={isDeleted} onClick = {handleCardClick} isCardExpanded = {isCardExpanded}>
             <StyledCardImage isCardExpanded={isCardExpanded}/>
             <StyledListTitleContainer isCardExpanded={isCardExpanded}>
-                <h2>{listTitle}</h2>
-                <h3>{getNumberOfConcerts()}</h3>
+                <h2 className="listTitle">{listTitle}</h2>
+                <h3 className="listTitle">{getNumberOfConcerts()}</h3>
                 <ThreeDotMenu activeList={activeList} deleteList={deleteList} isCardExpanded = {isCardExpanded}/>
             </StyledListTitleContainer>
             <List activeUserData = {activeUserData} listData = {activeList} isVisible = {isCardExpanded} activeList = {activeList}/>

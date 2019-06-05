@@ -8,6 +8,19 @@ import firebase from 'firebase';
 import ListContainer from '../Components/Lists/ListsContainer';
 import Card from '../Components/Cards/Card';
 
+/**
+ * Things the Dashboard component does:
+ * -It takes the activeUserData and activeDataBase prop (maybe it should just get that data itself?);
+ * -It defines a function for sanitizing user input on the modal component;
+ * -It defines a function for writing user lists to the database;
+ * -It defines a function for writing user concerts to the database;
+ * -It defines a function for updating the Dashboard;
+ * -It defines a function for updating the raw lists for use in child components;
+ * -It defines a function for showing all concerts;
+ * -It defines a function for showing favorite concers;
+ * -It sets a 2 second timeout to let auth and data catch up
+ */
+
 //#region Styles
 const StyledWrapper = styled.section`
     position: fixed;
@@ -28,60 +41,52 @@ const StyledDashboard = styled.div`
 `;
 
 // #endregion
+
 function Dashboard(props) {
     const [rawLists, setRawLists] = useState(null);
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [favoriteCardData, setFavoriteCardData] = useState(null);
     const [allConcertsCardData, setAllConcertsCardData] = useState(null);
+    const [activeDatabase, setActiveDatabase] = useState(firebase.database());
 
     let allConcertsCard = allConcertsCardData ? <Card permanent={true} titleOverride='All Concerts' activeList={allConcertsCardData} removeCard={() => setAllConcertsCardData(null)} /> : null;
     let favConcertsCard = favoriteCardData ? <Card permanent={true} titleOverride='Favorite Concerts' activeList={favoriteCardData} removeCard={() => setFavoriteCardData(null)} /> : null;
 
 
-    const { activeUserData, activeDatabase } = props;
+    const { activeUserData } = props;
 
-// Modal Functions
-
-    // Sanitize Input Functions -- Need to refactor into one, reusable function
-
-    function handleListInput() {
-        //For reference: userData = firebase.auth().currentUser
-        const userData = activeUserData;
-        const listName = document.getElementById('listTitle').value;
-        let sanitizedListName;
-
-        if (!listName) {
-            return window.alert('Please enter a name for your list');
-        }
-
-        //Thank you Mozilla <3
-        sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-
-        writeUserLists(userData.uid, sanitizedListName);
-    }
-
-    function handleConcertInput() {
-        //For reference: userData = firebase.auth().currentUser
-        const userData = activeUserData;
-        const bandName = document.getElementById('bandName').value,
-              venueName = document.getElementById('venueName').value,
-              concertDate = document.getElementById('concertDate').value;
-
-        let sanitizedBandName,
+    // Sanitize Input from Modal
+    function handleModalInput(modalType) {
+        let sanitizedListName,
+            sanitizedBandName,
             sanitizedVenueName,
             sanitizedConcertDate;
 
-        if (!bandName) {
-            return window.alert('Please enter a name for your concert');
-        }
+            if(modalType === 'list'){
+                const listName = document.getElementById('listTitle').value;
 
-        //Thank you Mozilla <3
-        sanitizedBandName = bandName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        sanitizedVenueName = venueName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        sanitizedConcertDate = concertDate.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                if (listName) {
+                    sanitizedListName = listName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+                    writeUserLists(activeUserData.uid, sanitizedListName);
+                } else {
+                    window.alert('Please enter a name for your list');
+                }
+            }
 
+            if(modalType === 'concert'){
+                const bandName = document.getElementById('bandName').value,
+                      venueName = document.getElementById('venueName').value,
+                      concertDate = document.getElementById('concertDate').value;
 
-        writeUserConcert(userData.uid, sanitizedVenueName, sanitizedBandName, sanitizedConcertDate);
+                if(bandName){
+                    sanitizedBandName = bandName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    sanitizedVenueName = venueName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    sanitizedConcertDate = concertDate.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    writeUserConcert(activeUserData.uid, sanitizedVenueName, sanitizedBandName, sanitizedConcertDate);
+                } else {
+                    window.alert('Please enter a band name');
+                }
+            }
     }
 
     // Write user lists to database
@@ -96,7 +101,6 @@ function Dashboard(props) {
             key: newListKey
         }
         const updates = {};
-
         updates['users/' + userId + '/lists/list' + newListKey] = listData;
 
         //Lists will not update on dashboard until page refresh unless timeout is set
@@ -133,14 +137,8 @@ function Dashboard(props) {
         updateDashboard();
     };
 
-    /** Function for updating the raw lists from the database.
-     *  Gets the raw lists from props
-     *  Gets a snapshot of user lists from database
-     *  pushes each list into a returned array
-     */
-    
+    // Gets updated lists from database and returns as an array
     function updateRawLists(){
-        const activeDatabase = firebase.database();
         const userListsRef = activeDatabase.ref('users/' + activeUserData.uid + '/lists');
         let returnArr = [];
 
@@ -157,17 +155,15 @@ function Dashboard(props) {
             });
         });
 
-        userListsRef.on('child_removed', function(data) {
-            const processedData = 'list' + data.val().key;
-            const targetCard = document.getElementById(processedData);
-                
-            return targetCard.remove();
+        userListsRef.on('child_removed', function() {
+            updateDashboard();
         })
 
         return returnArr;
     }
 
     function updateDashboard() {
+        setActiveDatabase(firebase.database());
         setRawLists(updateRawLists());
         setShouldUpdate(true);
 
@@ -197,7 +193,7 @@ function Dashboard(props) {
     useEffect(() => {
         setTimeout(() => {
             updateDashboard();
-        }, 250);
+        }, 2000);
     }, []);
         
     return (
@@ -213,7 +209,7 @@ function Dashboard(props) {
                         </ListContainer>
                 </StyledDashboard>
             </Slide>
-            <BottomNav showAllConcerts = {showAllConcerts} showFavConcerts = {showFavConcerts} name={activeUserData.displayName} rawLists={rawLists} writeList={handleListInput} writeConcert={handleConcertInput} didModalClose={shouldUpdate} />
+            <BottomNav showAllConcerts={showAllConcerts} showFavConcerts={showFavConcerts} name={activeUserData.displayName} rawLists={rawLists} writeList={() => handleModalInput('list')} writeConcert={() => handleModalInput('concert')} didModalClose={shouldUpdate} />
         </StyledWrapper>
     );
 }
