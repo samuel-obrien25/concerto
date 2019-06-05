@@ -19,6 +19,12 @@ import Card from '../Components/Cards/Card';
  * -It defines a function for showing all concerts;
  * -It defines a function for showing favorite concers;
  * -It sets a 2 second timeout to let auth and data catch up
+ * 
+ * -It renders the Dashboard that takes two props -- active user data, and the active database data.
+ * --It also renders the <ProfileButton> component and feeds it the URL of the profile image from the activeUserData prop
+ * --It also renders the <ListContainer> component and feeds it the raw lists state, and the activeUserData/activeDatabase props
+ * --It also renders the "All concerts" card and "Favorite concerts" card.
+ * --It also renders the <BottomNav> component and feeds it the ShowAllConcerts func, ShowFavConcerts func, writeLists func, writeConcerts func, activeUserData.displayName, rawLists, and didModalClose state
  */
 
 //#region Styles
@@ -162,6 +168,7 @@ function Dashboard(props) {
         return returnArr;
     }
 
+    //Updates ActiveDatabase and RawLists state, then toggles ShouldUpdate state on and off
     function updateDashboard() {
         setActiveDatabase(firebase.database());
         setRawLists(updateRawLists());
@@ -172,6 +179,7 @@ function Dashboard(props) {
         }, 50);
     }
 
+    //Shows all Concerts card
     function showAllConcerts() {
         const db = firebase.database();
         const allConcerts = db.ref('users/' + activeUserData.uid + '/allConcerts');
@@ -180,7 +188,7 @@ function Dashboard(props) {
             setAllConcertsCardData(snapshot.val());
             });
     }
-
+    //Shows Favorite Concerts card
     function showFavConcerts() {
         const db = firebase.database();
         const favConcerts = db.ref('users/' + activeUserData.uid + '/favoriteConcerts');
@@ -190,6 +198,7 @@ function Dashboard(props) {
         });
     }
 
+    //Shows <Loading /> for two seconds while auth and data catch up
     useEffect(() => {
         setTimeout(() => {
             updateDashboard();
