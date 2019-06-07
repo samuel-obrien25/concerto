@@ -32,7 +32,7 @@ function Modal(props) {
     const [modalType, setModalType] = useState(props.modalType);
 
     const {closeModal, children, handleClick, isModalExpanded, rawLists, writeConcert, writeList} = props;
-    let modal;
+    let modal = null;
 
     if(modalType === 'newList'){
         modal = <ListCreator writeList={writeList} isActive={isModalExpanded} handleClick = {handleClick} closeModal = {closeModal}/>;
@@ -50,10 +50,8 @@ function Modal(props) {
         setModalType(props.modalType)
     },[props.modalType]);
 
-    if(isModalExpanded)
-
     return (
-        <StyledModalWrapper isModalExpanded = {isModalExpanded} >
+        <StyledModalWrapper isModalExpanded={isModalExpanded} >
             <StyledModal>
                 {children}
                 {modal}

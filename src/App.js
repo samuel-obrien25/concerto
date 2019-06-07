@@ -10,7 +10,7 @@ const FlexWrapper = styled.div`
     position: absolute;
     z-index: 9999;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin: auto;
     display: flex;
 `;
@@ -26,7 +26,7 @@ const FlexWrapper = styled.div`
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
-  const [isSignedIn, setIsSignedIn] = useState();
+  const [isSignedIn, setIsSignedIn] = useState(null);
 
     //Observer that checks if user is signed in
     firebase.auth().onAuthStateChanged(function (user) {
@@ -36,7 +36,7 @@ function App() {
         setActiveUser(user);
         // Sets the isSignedIn state to true
         setIsSignedIn(true);
-      } else { return }
+      }
     });
 
     if(!isSignedIn){
