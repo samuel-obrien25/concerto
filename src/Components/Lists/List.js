@@ -87,13 +87,25 @@ const List = (props) => {
             }
     }
 
+    function sortData(e) {
+        if(e.target.id === 'artist'){
+
+        }
+        if(e.target.id === 'venue'){
+
+        }
+        if(e.target.id === 'date'){
+            
+        }
+    }
+
     if (!concerts.concertList) {
         return null;
     }
 
     return (
         <ListWrapper isVisible = {isVisible}>
-            <ListRow listHeader/>
+            <ListRow listHeader handleClick = {sortData}/>
             {Object.values(concerts.concertList).map((concert, index) => (
                 <ListRow propsID={concert.concertKey} key={concert.concertKey} index={index} onClick={setActiveRow} deleteConcert={() => deleteConcert(concert)} favoriteConcert={() => favoriteConcert(concert)}>
                     <ListData>{concert.bandName}</ListData>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
+import Fab from '../Buttons/Fab';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -27,10 +28,21 @@ const StyledSection = styled.section`
 
 `;
 
-const LoadingWrapper = styled.section`
+const StyledFab = styled(Fab)`
+    color: #000;
+    border: 3px solid #000;
+    padding: 25px;
+    height: 75px;
+    width: 75px;
+    border-radius: 8px;
+    box-shadow: 0px;
+`
+
+const FlexWrapper = styled.section`
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
 
     & *{
         margin: auto;
@@ -88,14 +100,17 @@ function ListContainer(props) {
 
     if (!listsLoaded) {
         return (
-            <LoadingWrapper>
+            <FlexWrapper>
                 <Loading />
-            </LoadingWrapper>
+            </FlexWrapper>
         )
     }
     if(listsLoaded && activeRawLists.length < 1){
         return(
-            <h2>Add your first list:</h2>
+            <FlexWrapper>
+                <h2>Add your first list:</h2>
+                <StyledFab fabType="newList" isExpanded={true} />
+            </FlexWrapper>
         )
     }
     return (

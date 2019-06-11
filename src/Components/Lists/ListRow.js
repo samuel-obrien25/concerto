@@ -89,10 +89,10 @@ const ListRow = (props) => {
 
     if(props.listHeader){
         return (
-            <RowHeader>
-                <h2>Artist</h2>
-                <h2>Venue</h2>
-                <h2>Date</h2>
+            <RowHeader onClick = {props.handleClick}>
+                <h2 id="artist">Artist</h2>
+                <h2 id="venue">Venue</h2>
+                <h2 id="date">Date</h2>
             </RowHeader>
         )
     }
