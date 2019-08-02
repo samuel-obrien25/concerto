@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Card from '../Cards/Card';
 import Loading from '../../Utilities/Loading';
 import Fab from '../Buttons/Fab';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+const mapStateToProps = state => {
+    return { lists: state.lists}
+}
+
+const ConnectedList = ({ lists }) => (
+    lists.map(list => (
+        <Card id={list.key} key={list.key.toString()} listTitle={list.listName} activeList={list} activeUserData={activeUserData} deleteList={() => deleteList(list)} />
+    ))
+)
 
 //#region styles
 const StyledSection = styled.section`
@@ -83,11 +94,6 @@ function ListContainer(props) {
 
         } else { return; }
     }
-
-
-    //const allConcertsCard = <Card id='all-concerts' listTitle = 'All Concerts' type='permanent'/>
-
-
 
     useEffect(() => {
         setActiveRawLists(activeRawLists);
